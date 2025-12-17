@@ -467,8 +467,8 @@
             left: 0;
             right: 0;
             padding: 30px;
-            background: linear-gradient(transparent, rgba(255, 248, 243, 0.1), rgba(255, 248, 243, 0.9));
-            color: var(--gray-dark);
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.85));
+            color: white;
             z-index: 2;
             transform: translateY(20px);
             transition: var(--transition);
@@ -482,6 +482,7 @@
             font-size: 1.8rem;
             margin-bottom: 8px;
             font-weight: 700;
+            color: white;
         }
 
         .slide-subtitle {
@@ -491,30 +492,43 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .slide-content p {
+            color: rgba(255, 255, 255, 0.85);
+            margin: 10px 0;
         }
 
         .slide-rating {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.2);
             padding: 4px 12px;
             border-radius: 20px;
             margin-top: 10px;
             font-size: 0.9rem;
-            color: var(--gray-dark);
+            color: white;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .swiper-button-next,
         .swiper-button-prev {
-            color: var(--gray-dark);
-            background: rgba(255, 255, 255, 0.8);
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
             width: 50px;
             height: 50px;
             border-radius: 50%;
             backdrop-filter: blur(10px);
-            border: 1px solid var(--gray-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .swiper-button-next:after,
@@ -672,7 +686,7 @@
             box-shadow: var(--shadow-hover);
         }
 
-        /* 🎙️ TESTIMONIALS */
+        /* 🎙️ TESTIMONIALS - IMPROVED */
         .testimonials {
             padding: 100px 40px;
             background: var(--white);
@@ -691,15 +705,19 @@
         .testimonial-track {
             display: flex;
             transition: transform 0.5s ease;
+            gap: 0;
         }
 
         .testimonial-card {
-            min-width: 100%;
+            flex: 0 0 100%;
             padding: 40px;
             background: white;
             border-radius: 20px;
             box-shadow: var(--shadow);
-            margin: 0 10px;
+            border: 1px solid var(--gray-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 320px;
         }
 
         .testimonial-header {
@@ -714,21 +732,41 @@
             height: 60px;
             border-radius: 50%;
             object-fit: cover;
+            border: 3px solid var(--pink-soft);
+        }
+
+        .testimonial-info {
+            flex: 1;
         }
 
         .testimonial-info h4 {
             font-size: 1.2rem;
             margin-bottom: 5px;
+            color: var(--gray-dark);
         }
 
         .testimonial-info p {
             color: var(--gray-medium);
             font-size: 0.9rem;
+            margin-bottom: 8px;
         }
 
         .testimonial-rating {
             color: #FFD700;
-            margin: 10px 0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .testimonial-card p {
+            flex: 1;
+            color: var(--gray-medium);
+            font-style: italic;
+            line-height: 1.6;
+            padding: 15px 0;
+            margin: 0;
+            border-top: 1px solid var(--gray-light);
         }
 
         .testimonial-slider-nav {
@@ -806,6 +844,10 @@
             .swiper {
                 height: 400px;
             }
+            
+            .testimonial-card {
+                min-height: 340px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -871,6 +913,17 @@
             
             .carousel-title {
                 font-size: 2rem;
+            }
+            
+            .testimonial-card {
+                padding: 25px;
+                min-height: 360px;
+            }
+            
+            .testimonial-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
             }
         }
 
@@ -1050,64 +1103,20 @@
             border-left-color: #ffa502;
         }
 
-        /* FOOTER */
+        /* FOOTER - SIMPLIFIED */
         .footer {
             background: var(--gray-dark);
             color: white;
-            padding: 60px 40px 30px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .footer-logo img {
-            height: 40px;
-            filter: brightness(0) invert(1);
-        }
-
-        .footer-links h4 {
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
+            padding: 40px 20px;
+            text-align: center;
         }
 
         .copyright {
-            text-align: center;
-            padding-top: 40px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
@@ -1123,16 +1132,13 @@
             <nav class="nav-links">
                 <a href="#features">Fitur</a>
                 <a href="#how">Cara Booking</a>
-                <a href="cafe.html" id="find-space">Temukan Ruangmu</a>
                 <a href="#testimonials">Testimoni</a>
+                <a href="tentangruangtemu.html">Tentang</a>
             </nav>
             
             <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline">
-                    <i class="fas fa-sign-in-alt"></i> Masuk
-                </a>
-                <a href="register.html" class="btn btn-primary">
-                    <i class="fas fa-user-plus"></i> Daftar
+                <a href="cafe.html" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Cari Restoran
                 </a>
             </div>
             
@@ -1150,10 +1156,9 @@
         <div class="mobile-menu-links">
             <a href="#features">Fitur</a>
             <a href="#how">Cara Booking</a>
-            <a href="cafe.html" id="mobile-find-space">Temukan Ruangmu</a>
             <a href="#testimonials">Testimoni</a>
-            <a href="login.html">Masuk</a>
-            <a href="register.html">Daftar</a>
+            <a href="tentangruangtemu.html">Tentang</a>
+            <a href="cafe.html">Cari Restoran</a>
         </div>
     </div>
 
@@ -1301,76 +1306,76 @@
                     </div>
                 </div>
                 
-                <button class="btn btn-primary" id="search-btn" style="width: 100%; padding: 18px;">
+                <a href="cafe.html" class="btn btn-primary" id="search-btn" style="width: 100%; padding: 18px; text-align: center; text-decoration: none;">
                     <i class="fas fa-search"></i> Cari Meja Tersedia
-                </button>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- 🖼️ CAROUSEL RESTORAN JEPANG -->
+    <!-- 🖼️ CAROUSEL CAFE POPULER -->
     <section class="carousel-section" id="carousel">
         <div class="carousel-container">
             <div class="carousel-header">
-                <h2 class="carousel-title">Restoran <span class="gradient-text">Jepang</span> Populer</h2>
-                <p class="carousel-subtitle">Temukan suasana Jepang autentik dengan cita rasa terbaik</p>
+                <h2 class="carousel-title">Cafe <span class="gradient-text">Populer</span></h2>
+                <p class="carousel-subtitle">Temukan suasana cafe yang cozy dengan vibe terbaik</p>
             </div>
             
             <!-- Swiper -->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sushi Restaurant">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Coffee Shop">
                         <div class="slide-content">
-                            <h3 class="slide-title">Sakura Sushi</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Jakarta • <i class="fas fa-utensils"></i> Japanese</p>
-                            <p>Sushi segar dengan desain interior modern Jepang, perfect untuk date night.</p>
-                            <div class="slide-rating">
-                                <i class="fas fa-star"></i> 4.8 • 250+ reviews
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ramen Restaurant">
-                        <div class="slide-content">
-                            <h3 class="slide-title">Ramen Ichiban</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Bandung • <i class="fas fa-utensils"></i> Ramen</p>
-                            <p>Ramen autentik dengan kaldu 12 jam, suasana cozy ala Jepang tradisional.</p>
+                            <h3 class="slide-title">Morning Brew</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Jakarta • <i class="fas fa-coffee"></i> Cafe</p>
+                            <p>Coffee specialties dengan desain interior minimalis, perfect untuk work atau hangout.</p>
                             <div class="slide-rating">
                                 <i class="fas fa-star"></i> 4.7 • 180+ reviews
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Japanese Cafe">
+                        <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cafe Interior">
                         <div class="slide-content">
-                            <h3 class="slide-title">Matcha Garden</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Bali • <i class="fas fa-coffee"></i> Japanese Cafe</p>
-                            <p>Matcha specialties dengan taman Jepang mini, suasana tenang dan relaxing.</p>
+                            <h3 class="slide-title">Urban Cafe</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Bandung • <i class="fas fa-utensils"></i> Cafe & Eatery</p>
+                            <p>Cafe dengan konsep urban garden, menyajikan makanan sehat dan coffee artisan.</p>
                             <div class="slide-rating">
-                                <i class="fas fa-star"></i> 4.9 • 320+ reviews
+                                <i class="fas fa-star"></i> 4.6 • 150+ reviews
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-1.2.1&auto=format&fit=crop&w-1350&q=80" alt="Izakaya Restaurant">
+                        <img src="https://images.unsplash.com/photo-1464979681340-bdd28a61699e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Modern Cafe">
                         <div class="slide-content">
-                            <h3 class="slide-title">Izakaya Yuki</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Surabaya • <i class="fas fa-beer"></i> Izakaya</p>
-                            <p>Japanese pub dengan berbagai pilihan sake dan yakitori, perfect for groups.</p>
+                            <h3 class="slide-title">Bean Theory</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Bali • <i class="fas fa-coffee"></i> Specialty Coffee</p>
+                            <p>Single-origin coffee dengan roasting in-house, suasana tenang untuk membaca atau bekerja.</p>
                             <div class="slide-rating">
-                                <i class="fas fa-star"></i> 4.6 • 210+ reviews
+                                <i class="fas fa-star"></i> 4.8 • 220+ reviews
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Teppanyaki Restaurant">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Coffee Art">
                         <div class="slide-content">
-                            <h3 class="slide-title">Teppan Master</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Yogyakarta • <i class="fas fa-fire"></i> Teppanyaki</p>
-                            <p>Live teppanyaki cooking dengan chef profesional, experience yang unforgettable.</p>
+                            <h3 class="slide-title">Latte Art Lab</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Surabaya • <i class="fas fa-palette"></i> Art Cafe</p>
+                            <p>Kombinasi coffee dan art gallery, dengan barista champion dan latte art workshop.</p>
                             <div class="slide-rating">
-                                <i class="fas fa-star"></i> 4.5 • 190+ reviews
+                                <i class="fas fa-star"></i> 4.9 • 190+ reviews
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rooftop Cafe">
+                        <div class="slide-content">
+                            <h3 class="slide-title">Sky Cafe</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Yogyakarta • <i class="fas fa-cloud"></i> Rooftop</p>
+                            <p>Rooftop cafe dengan view kota, perfect untuk sunset coffee atau dinner date.</p>
+                            <div class="slide-rating">
+                                <i class="fas fa-star"></i> 4.5 • 170+ reviews
                             </div>
                         </div>
                     </div>
@@ -1531,11 +1536,11 @@
             <p>Bergabung dengan komunitas foodies yang sudah merasakan kemudahan booking meja tanpa telepon.</p>
             
             <div class="cta-buttons">
-                <a href="register.html" class="btn btn-primary" style="padding: 16px 32px;">
-                    <i class="fas fa-user-plus"></i> Daftar sebagai Customer
+                <a href="cafe.html" class="btn btn-primary" style="padding: 16px 32px;">
+                    <i class="fas fa-search"></i> Cari Restoran Sekarang
                 </a>
-                <a href="register.html" class="btn btn-secondary" style="padding: 16px 32px;">
-                    <i class="fas fa-store"></i> Daftarkan Restoran Anda
+                <a href="tentangruangtemu.html" class="btn btn-secondary" style="padding: 16px 32px;">
+                    <i class="fas fa-info-circle"></i> Pelajari Tentang Kami
                 </a>
             </div>
             
@@ -1547,52 +1552,6 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-about">
-                <div class="footer-logo">
-                    <img src="img/logo.png" alt="RuangTemu">
-                    <span class="logo-text" style="-webkit-text-fill-color: white;">RuangTemu</span>
-                </div>
-                <p>Platform reservasi restoran terdepan di Indonesia. Temukan vibe yang pas, booking dengan mudah.</p>
-                <div style="display: flex; gap: 15px; margin-top: 20px;">
-                    <a href="#" style="color: white;"><i class="fab fa-instagram fa-lg"></i></a>
-                    <a href="#" style="color: white;"><i class="fab fa-facebook fa-lg"></i></a>
-                    <a href="#" style="color: white;"><i class="fab fa-twitter fa-lg"></i></a>
-                    <a href="#" style="color: white;"><i class="fab fa-tiktok fa-lg"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Navigasi</h4>
-                <ul>
-                    <li><a href="#features">Fitur</a></li>
-                    <li><a href="#how">Cara Booking</a></li>
-                    <li><a href="cafe.html">Temukan Ruangmu</a></li>
-                    <li><a href="#testimonials">Testimoni</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Perusahaan</h4>
-                <ul>
-                    <li><a href="#">Tentang Kami</a></li>
-                    <li><a href="#">Karir</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Kontak</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Syarat & Ketentuan</a></li>
-                    <li><a href="#">Kebijakan Privasi</a></li>
-                    <li><a href="#">Kebijakan Cookie</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-        </div>
-        
         <div class="copyright">
             <p>&copy; 2024 RuangTemu. All rights reserved. Made with ❤️ in Indonesia.</p>
         </div>
@@ -1745,35 +1704,6 @@
             const searchBtn = document.getElementById('search-btn');
             const heroSearchBtn = document.getElementById('hero-search-btn');
             
-            // Handle search form submission
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const location = document.getElementById('location-input').value;
-                const date = document.getElementById('date-input').value;
-                const people = document.getElementById('people-select').value;
-                const category = document.getElementById('category-select').value;
-                
-                if (!location || !date || !people) {
-                    showNotification('Perhatian!', 'Harap lengkapi semua field yang wajib diisi!', 'error');
-                    return;
-                }
-                
-                loading.classList.add('active');
-                searchBtn.disabled = true;
-                const originalText = searchBtn.innerHTML;
-                searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengarahkan...';
-                
-                setTimeout(() => {
-                    loading.classList.remove('active');
-                    searchBtn.disabled = false;
-                    searchBtn.innerHTML = originalText;
-                    
-                    // Redirect to cafe.html with search parameters
-                    window.location.href = `cafe.html?location=${encodeURIComponent(location)}&date=${date}&people=${people}&category=${category}`;
-                }, 1500);
-            });
-
             // Hero search button - redirect to cafe.html
             heroSearchBtn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1783,20 +1713,6 @@
                     loading.classList.remove('active');
                     window.location.href = 'cafe.html';
                 }, 1000);
-            });
-
-            // Find space button in navigation
-            const findSpaceBtn = document.getElementById('find-space');
-            const mobileFindSpaceBtn = document.getElementById('mobile-find-space');
-            
-            findSpaceBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'cafe.html';
-            });
-            
-            mobileFindSpaceBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'cafe.html';
             });
 
             // Feature card hover animation

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Temu • Welcome Back</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 🎨 PALETTE CONSISTENCY */
+        :root {
+            --pink-vibrant:#F784C5;;
+            --pink-soft: #FF8AB5;
+            --green-vibrant: #1B602F;
+            --green-soft: #80FFD6;
+            --gray-dark: #2D2D3A;
+            --gray-medium: #5A5A72;
+            --gray-light: #F5F5FA;
+            --white: #FFFFFF;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(255, 77, 148, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--gray-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 🎀 CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink-vibrant);
+            border-radius: 10px;
+        }
+
+        /* 🌸 AUTH CONTAINER */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* 🖼️ LEFT PANEL - VISUAL */
+        .auth-visual {
+            flex: 1;
+            background: linear-gradient(135deg, #FFF5F9 0%, #F0FFFA 100%);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            margin-bottom: 60px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gray-dark), var(--pink-vibrant));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .visual-content {
+            max-width: 500px;
+        }
+
+        .visual-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--gray-dark);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .visual-content p {
+            font-size: 1.1rem;
+            color: var(--gray-medium);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* 🎪 VISUAL ELEMENTS */
+        .floating-elements {
+            position: relative;
+            height: 300px;
+            margin-top: 60px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .card-1 {
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            animation-delay: 0s;
+            width: 180px;
+        }
+
+        .card-2 {
+            top: 40px;
+            right: 0;
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            color: white;
+            animation-delay: 2s;
+            width: 200px;
+        }
+
+        .card-3 {
+            bottom: 0;
+            left: 20%;
+            animation-delay: 4s;
+            width: 160px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        /* 📱 RIGHT PANEL - FORM */
+        .auth-form {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .form-switcher {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .form-tab {
+            padding: 12px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gray-medium);
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .form-tab.active {
+            color: var(--pink-vibrant);
+        }
+
+        .form-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-vibrant), var(--green-vibrant));
+            border-radius: 3px;
+        }
+
+        /* 📝 FORM STYLES */
+        .form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gray-dark);
+        }
+
+        .form-subtitle {
+            color: var(--gray-medium);
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 16px 16px 50px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--pink-vibrant);
+            box-shadow: 0 0 0 3px rgba(255, 77, 148, 0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--pink-vibrant);
+            font-size: 1.2rem;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray-medium);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* 🔘 BUTTONS */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 224, 160, 0.15);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
+        }
+
+        /* 📱 SOCIAL LOGIN */
+        .social-divider {
+            display: flex;
+            align-items: center;
+            margin: 32px 0;
+            color: var(--gray-medium);
+        }
+
+        .social-divider::before,
+        .social-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-light);
+        }
+
+        .social-divider span {
+            padding: 0 16px;
+            font-size: 0.9rem;
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .social-btn {
+            padding: 14px;
+            border-radius: 12px;
+            border: 2px solid var(--gray-light);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .social-btn:hover {
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* 📝 FORM FOOTER */
+        .form-footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-light);
+            color: var(--gray-medium);
+        }
+
+        .form-footer a {
+            color: var(--pink-vibrant);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .form-footer a:hover {
+            color: var(--green-vibrant);
+        }
+
+        /* 🎨 DECORATIVE */
+        .gradient-bg {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 77, 148, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .bg-1 {
+            top: -100px;
+            right: -100px;
+        }
+
+        .bg-2 {
+            bottom: -100px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(0, 224, 160, 0.1) 0%, transparent 70%);
+        }
+
+        /* ⚡ ROLE SELECTION (Register) */
+        .role-selection {
+            margin-bottom: 32px;
+        }
+
+        .role-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .role-option {
+            padding: 20px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .role-option:hover {
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
+        }
+
+        .role-option.selected {
+            border-color: var(--pink-vibrant);
+            background: rgba(255, 77, 148, 0.1);
+            box-shadow: 0 5px 20px rgba(255, 77, 148, 0.1);
+        }
+
+        .role-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--pink-vibrant);
+        }
+
+        .role-option.selected .role-icon {
+            color: var(--green-vibrant);
+        }
+
+        /* 📱 RESPONSIVE */
+        @media (max-width: 1024px) {
+            .auth-container {
+                flex-direction: column;
+            }
+            
+            .auth-visual {
+                padding: 40px;
+                min-height: 50vh;
+            }
+            
+            .visual-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .floating-elements {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .auth-visual, .auth-form {
+                padding: 30px;
+            }
+            
+            .social-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .role-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-switcher {
+                justify-content: center;
+            }
+        }
+
+        /* 🎭 UTILITY */
+        .hidden {
+            display: none;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <!-- 🖼️ LEFT PANEL - VISUAL -->
+        <div class="auth-visual">
+            <div class="gradient-bg bg-1"></div>
+            <div class="gradient-bg bg-2"></div>
+            
+            <a href="landingpage.html" class="logo">
+                <div class="logo-text">RuangTemu</div>
+            </a>
+            
+            <div class="visual-content">
+                <span class="highlight">✨ Join the Vibe</span>
+                <h1>Find Your Perfect <span class="gradient-text">Dining Spot</span></h1>
+                <p>Reservasi meja favorit jadi lebih mudah dengan RuangTemu. Bergabung dengan komunitas foodies yang sudah merasakan kemudahan booking tanpa ribet.</p>
+                
+                <div class="floating-elements">
+                    <div class="floating-card card-1">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-bolt"></i>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">Instant Confirm</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">No waiting time</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-card card-2">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-star"></i>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">10K+ Reviews</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">Trusted by foodies</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-card card-3">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">Secure Booking</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">Payment protection</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📱 RIGHT PANEL - FORMS -->
+        <div class="auth-form">
+            <div class="form-container">
+                <!-- FORM SWITCHER -->
+                <div class="form-switcher">
+                    <button class="form-tab active" data-target="login-form">Masuk</button>
+                    <button class="form-tab" data-target="register-form">Daftar</button>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <form id="login-form" class="auth-form-content">
+                    <h2 class="form-title">Welcome Back 👋</h2>
+                    <p class="form-subtitle">Masuk untuk melanjutkan ke akunmu</p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email atau Username</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="text" class="form-input" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" class="form-input" id="login-password" placeholder="••••••••" required>
+                            <button type="button" class="password-toggle" data-target="login-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div style="text-align: right; margin-top: 8px;">
+                            <a href="#" style="color: var(--pink-vibrant); text-decoration: none; font-size: 0.9rem;">Lupa password?</a>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">
+                        <i class="fas fa-sign-in-alt"></i> Masuk ke Akun
+                    </button>
+                    
+                    <div class="social-divider">
+                        <span>Atau lanjutkan dengan</span>
+                    </div>
+                    
+                    <div class="social-buttons">
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-google" style="color: #DB4437;"></i> Google
+                        </button>
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook
+                        </button>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <p>Belum punya akun? <a href="#" class="switch-to-register">Daftar di sini</a></p>
+                    </div>
+                </form>
+
+                <!-- REGISTER FORM -->
+                <form id="register-form" class="auth-form-content hidden">
+                    <h2 class="form-title">Create Account 🎉</h2>
+                    <p class="form-subtitle">Bergabung dengan komunitas RuangTemu</p>
+                    
+                    <!-- ROLE SELECTION -->
+                    <div class="role-selection">
+                        <label class="form-label">Daftar sebagai:</label>
+                        <div class="role-options">
+                            <div class="role-option selected" data-role="customer">
+                                <div class="role-icon">👤</div>
+                                <div style="font-weight: 600;">Customer</div>
+                                <div style="font-size: 0.8rem; color: var(--gray-medium);">Cari & booking meja</div>
+                            </div>
+                            <div class="role-option" data-role="mitra">
+                                <div class="role-icon">🏪</div>
+                                <div style="font-weight: 600;">Mitra</div>
+                                <div style="font-size: 0.8rem; color: var(--gray-medium);">Kelola restoran</div>
+                            </div>
+                            <div class="role-option" data-role="admin">
+                                <div class="role-icon">⚙️</div>
+                                <div style="font-weight: 600;">Admin</div>
+                                <div style="font-size: 0.8rem; color: var(--gray-medium);">Verifikasi akun</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nama Lengkap</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" class="form-input" placeholder="Nama kamu" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" class="form-input" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nomor Telepon</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone input-icon"></i>
+                            <input type="tel" class="form-input" placeholder="0812-3456-7890" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" class="form-input" id="register-password" placeholder="••••••••" required>
+                            <button type="button" class="password-toggle" data-target="register-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--gray-medium); margin-top: 8px;">
+                            Minimal 8 karakter dengan huruf dan angka
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Konfirmasi Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" class="form-input" id="confirm-password" placeholder="••••••••" required>
+                            <button type="button" class="password-toggle" data-target="confirm-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; align-items: start; gap: 10px; margin-bottom: 24px;">
+                        <input type="checkbox" id="terms" style="margin-top: 4px;" required>
+                        <label for="terms" style="font-size: 0.9rem; color: var(--gray-medium);">
+                            Saya setuju dengan <a href="#" style="color: var(--pink-vibrant);">Syarat & Ketentuan</a> dan <a href="#" style="color: var(--pink-vibrant);">Kebijakan Privasi</a> RuangTemu
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-user-plus"></i> Buat Akun Baru
+                    </button>
+                    
+                    <div class="social-divider">
+                        <span>Atau daftar dengan</span>
+                    </div>
+                    
+                    <div class="social-buttons">
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-google" style="color: #DB4437;"></i> Google
+                        </button>
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook
+                        </button>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <p>Sudah punya akun? <a href="#" class="switch-to-login">Masuk di sini</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 🎭 FORM SWITCHING
+            const tabs = document.querySelectorAll('.form-tab');
+            const forms = document.querySelectorAll('.auth-form-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target form
+                    forms.forEach(form => {
+                        form.classList.add('hidden');
+                        if (form.id === targetId) {
+                            form.classList.remove('hidden');
+                        }
+                    });
+                });
+            });
+
+            // 🔄 SWITCH BETWEEN LOGIN/REGISTER
+            document.querySelectorAll('.switch-to-register').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector('[data-target="register-form"]').click();
+                });
+            });
+
+            document.querySelectorAll('.switch-to-login').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector('[data-target="login-form"]').click();
+                });
+            });
+
+            // 👁️ PASSWORD VISIBILITY TOGGLE
+            document.querySelectorAll('.password-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+                    const icon = this.querySelector('i');
+                    
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+
+            // 🎯 ROLE SELECTION
+            const roleOptions = document.querySelectorAll('.role-option');
+            roleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    roleOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // Update icon color
+                    const icon = this.querySelector('.role-icon');
+                    const role = this.getAttribute('data-role');
+                    
+                    // You can use this value in form submission
+                    console.log('Selected role:', role);
+                });
+            });
+
+            // 📝 FORM SUBMISSION
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Show success animation
+                    submitBtn.style.background = 'linear-gradient(135deg, var(--green-vibrant), var(--green-soft))';
+                    setTimeout(() => {
+                        submitBtn.style.background = 'linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft))';
+                        
+                        // In real app, redirect to dashboard
+                        alert('Login berhasil! Redirecting to dashboard...');
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                }, 1500);
+            });
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                // Check password match
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Password dan konfirmasi password tidak sama!');
+                    return;
+                }
+                
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Membuat akun...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Show success animation
+                    submitBtn.style.background = 'linear-gradient(135deg, var(--green-vibrant), var(--green-soft))';
+                    setTimeout(() => {
+                        submitBtn.style.background = 'linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft))';
+                        
+                        // In real app, might redirect to verification or dashboard
+                        alert('Akun berhasil dibuat! Silakan cek email untuk verifikasi.');
+                        
+                        // Switch to login form
+                        document.querySelector('[data-target="login-form"]').click();
+                    }, 1000);
+                }, 2000);
+            });
+
+            // 🔘 SOCIAL LOGIN BUTTONS
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const platform = this.textContent.trim();
+                    alert(`Login dengan ${platform} akan diimplementasikan nanti!`);
+                });
+            });
+
+            // ✨ ADD FLOATING PARTICLES
+            const visualPanel = document.querySelector('.auth-visual');
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 4 + 2;
+                const isPink = Math.random() > 0.5;
+                
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${isPink ? 'var(--pink-soft)' : 'var(--green-soft)'};
+                    border-radius: 50%;
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    opacity: ${Math.random() * 0.3 + 0.1};
+                    animation: float ${Math.random() * 8 + 6}s ease-in-out infinite;
+                    z-index: 1;
+                `;
+                visualPanel.appendChild(particle);
+            }
+
+            // 📱 AUTO-FOCUS ON INPUT
+            const activeForm = document.querySelector('.auth-form-content:not(.hidden)');
+            const firstInput = activeForm.querySelector('input');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>

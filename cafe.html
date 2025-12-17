@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temukan Ruangmu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 🎨 PALETTE CONSISTENCY */
+        :root {
+            --pink-vibrant: #F784C5;
+            --pink-soft: #FF8AB5;
+            --green-vibrant: #1B602F;
+            --green-soft: #80FFD6;
+            --gray-dark: #2D2D3A;
+            --gray-medium: #5A5A72;
+            --gray-light: #F5F5FA;
+            --white: #FFFFFF;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(255, 77, 148, 0.15);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--gray-dark);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 🎀 CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink-vibrant);
+            border-radius: 10px;
+        }
+
+        /* 🧭 NAVBAR COMPACT */
+        .main-nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-light);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gray-dark), var(--pink-vibrant));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 🔍 SEARCH BAR IN NAV */
+        .nav-search {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 40px;
+            position: relative;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--gray-light);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--pink-vibrant);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(255, 77, 148, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--pink-vibrant);
+            font-size: 1.1rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* 🎯 FILTER BAR */
+        .filter-bar {
+            position: sticky;
+            top: 73px;
+            background: var(--white);
+            z-index: 99;
+            border-bottom: 1px solid var(--gray-light);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .filter-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 10px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+
+        .filter-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
+        }
+
+        .filter-chip.active {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            border-color: var(--pink-vibrant);
+        }
+
+        /* 🏪 RESTAURANT LISTINGS */
+        .restaurants-container {
+            padding: 30px 40px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .results-count {
+            font-size: 1rem;
+            color: var(--gray-medium);
+        }
+
+        .sort-select {
+            padding: 10px 20px;
+            border: 2px solid var(--gray-light);
+            border-radius: 10px;
+            background: var(--white);
+            color: var(--gray-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* 🍽️ RESTAURANT GRID */
+        .restaurants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .restaurant-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--pink-vibrant);
+            text-decoration: none;
+        }
+
+        .restaurant-image {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        }
+
+        .restaurant-badges {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge.featured {
+            background: var(--green-vibrant);
+            color: white;
+        }
+
+        .badge.discount {
+            background: var(--pink-vibrant);
+            color: white;
+        }
+
+        .restaurant-rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .rating-star {
+            color: #FFB400;
+        }
+
+        .restaurant-content {
+            padding: 20px;
+        }
+
+        .restaurant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .restaurant-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-decoration: none;
+            color: var(--gray-dark);
+        }
+
+        .restaurant-cuisine {
+            color: var(--gray-medium);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .favorite-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--gray-medium);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 5px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .favorite-btn.active {
+            color: var(--pink-vibrant);
+        }
+
+        .restaurant-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+
+        .detail-icon {
+            color: var(--pink-vibrant);
+            width: 16px;
+            text-align: center;
+        }
+
+        .restaurant-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .price-range {
+            font-weight: 600;
+            color: var(--pink-vibrant);
+            font-size: 0.95rem;
+        }
+
+        .availability {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+        }
+
+        .availability-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green-vibrant);
+        }
+
+        .availability-dot.busy {
+            background: #FF6B6B;
+        }
+
+        /* Remove underline from all links inside restaurant card */
+        .restaurant-card a {
+            text-decoration: none;
+        }
+
+        .restaurant-card:hover a {
+            text-decoration: none;
+        }
+
+        /* 🎭 LOAD MORE */
+        .load-more {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            color: white;
+            box-shadow: var(--shadow);
+            padding: 14px 28px;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 224, 160, 0.2);
+        }
+
+        /* 🎨 DECORATIVE */
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* 📱 RESPONSIVE */
+        @media (max-width: 1024px) {
+            .main-nav {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .nav-search {
+                order: 3;
+                flex: 100%;
+                margin: 0;
+                max-width: none;
+            }
+            
+            .filter-bar {
+                padding: 15px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .restaurants-container {
+                padding: 20px;
+            }
+            
+            .restaurants-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .results-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .restaurants-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .nav-actions {
+                gap: 10px;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 🎪 LOADING SKELETON */
+        .skeleton {
+            background: linear-gradient(90deg, var(--gray-light) 25%, rgba(255,255,255,0.5) 50%, var(--gray-light) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: var(--radius);
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ✨ TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-hover);
+            border-left: 4px solid var(--pink-vibrant);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            color: var(--pink-vibrant);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 🧭 NAVBAR WITH SEARCH -->
+    <nav class="main-nav">
+        <a href="landingpage.html" class="logo">
+            <img src="img/logo.png" alt="Logo" class="logo-image">
+            <div class="logo-text">RuangTemu</div>
+        </a>
+        
+        <!-- 🔍 SEARCH BAR -->
+        <div class="nav-search">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Cari restoran, makanan, atau lokasi...">
+            </div>
+        </div>
+        
+        <div class="nav-actions">
+            <button class="btn btn-outline">
+                <i class="fas fa-map-marker-alt"></i> Bandung
+            </button>
+        </div>
+    </nav>
+
+    <!-- 🎯 FILTER BAR -->
+    <div class="filter-bar">
+        <!-- KATEGORI -->
+        <div class="filter-section">
+            <div class="filter-label">Kategori:</div>
+            <select class="sort-select">
+                <option>Semua</option>
+                <option>☕ Café</option>
+                <option>🍔 Casual</option>
+                <option>🎉 Party</option>
+                <option>💝 Romantic</option>
+            </select>
+        </div>
+
+        <!-- FILTER LANJUTAN -->
+        <div class="filter-section">
+            <div class="filter-label">Filter:</div>
+            <select class="sort-select">
+                <option>Semua</option>
+                <option>⭐ Rating 4+</option>
+                <option>🎵 Live Music</option>
+                <option>🌸 Garden</option>
+                <option>🐶 Pet Friendly</option>
+                <option>💝 Romantic</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 🏪 RESTAURANT LISTINGS -->
+    <section class="restaurants-container">
+        <div class="results-header">
+            <div>
+                <h2 class="section-title">Restoran di <span class="gradient-text">Bandung</span></h2>
+                <div class="results-count">6 restoran tersedia</div>
+            </div>
+            
+            <select class="sort-select">
+                <option>Rating Tertinggi</option>
+                <option>Rating Terendah</option>
+                <option>Harga Termurah</option>
+                <option>Harga Termahal</option>
+                <option>Jarak Terdekat</option>
+            </select>
+        </div>
+
+        <!-- 🍽️ RESTAURANT GRID -->
+        <div class="restaurants-grid">
+            <!-- Cafe 1 -->
+            <a href="haracafe.html" class="restaurant-card">
+                <div class="restaurant-image">
+                    <img src="img/hara.jpg" alt="Hara Cafe" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="image-gradient"></div>
+                    <div class="restaurant-badges">
+                        <span class="badge featured">⭐ Featured</span>
+                        <span class="badge discount">🎉 20% Off</span>
+                    </div>
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star rating-star"></i> 4.8
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Hara Cafe</div>
+                            <div class="restaurant-cuisine">Western • Coffee • Desserts</div>
+                        </div>
+                        <button class="favorite-btn active" onclick="event.preventDefault(); toggleFavorite(this);">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt detail-icon"></i>
+                            <span>Jl. Prof. Dr. Sutami</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock detail-icon"></i>
+                            <span>08:00 - 22:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair detail-icon"></i>
+                            <span>24 Meja</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-wifi detail-icon"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                    </div>
+                    
+                    <div class="restaurant-footer">
+                        <div class="price-range">Rp 75k - 250k</div>
+                        <div class="availability">
+                            <div class="availability-dot"></div>
+                            <span>12 tersedia</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cafe 2 -->
+            <a href="#" class="restaurant-card" onclick="event.preventDefault(); showToast('Fitur akan segera hadir!');">
+                <div class="restaurant-image">
+                    <img src="img/tsukuma.jpg" alt="Tsukuma Coffee Bar & Izakaya" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="image-gradient"></div>
+                    <div class="restaurant-badges">
+                        <span class="badge featured">⭐ Featured</span>
+                    </div>
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star rating-star"></i> 4.7
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Tsukuma Coffee Bar & Izakaya</div>
+                            <div class="restaurant-cuisine">Japanese • Sushi • Fine Dining</div>
+                        </div>
+                        <button class="favorite-btn" onclick="event.preventDefault(); toggleFavorite(this);">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt detail-icon"></i>
+                            <span>Jl. Begawan</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock detail-icon"></i>
+                            <span>11:00 - 23:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair detail-icon"></i>
+                            <span>18 Meja</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-music detail-icon"></i>
+                            <span>Live Music</span>
+                        </div>
+                    </div>
+                    
+                    <div class="restaurant-footer">
+                        <div class="price-range">Rp 150k - 500k</div>
+                        <div class="availability">
+                            <div class="availability-dot"></div>
+                            <span>8 tersedia</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cafe 3 -->
+            <a href="#" class="restaurant-card" onclick="event.preventDefault(); showToast('Fitur akan segera hadir!');">
+                <div class="restaurant-image">
+                    <img src="img/umanari.jpeg" alt="Umanari" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="image-gradient"></div>
+                    <div class="restaurant-badges">
+                        <span class="badge discount">🔥 Best Seller</span>
+                    </div>
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star rating-star"></i> 4.9
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Umanari</div>
+                            <div class="restaurant-cuisine">Indonesian • Fresh • Family</div>
+                        </div>
+                        <button class="favorite-btn active" onclick="event.preventDefault(); toggleFavorite(this);">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt detail-icon"></i>
+                            <span>Jl. Naripan</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock detail-icon"></i>
+                            <span>24 Jam</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair detail-icon"></i>
+                            <span>30 Meja</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-car detail-icon"></i>
+                            <span>Free Parking</span>
+                        </div>
+                    </div>
+                    
+                    <div class="restaurant-footer">
+                        <div class="price-range">Rp 50k - 150k</div>
+                        <div class="availability">
+                            <div class="availability-dot"></div>
+                            <span>15 tersedia</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cafe 4 -->
+            <a href="#" class="restaurant-card" onclick="event.preventDefault(); showToast('Fitur akan segera hadir!');">
+                <div class="restaurant-image">
+                    <img src="img/bodas.jpg" alt="Bodas Bistro" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="image-gradient"></div>
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star rating-star"></i> 4.6
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Bodas Bistro Paris</div>
+                            <div class="restaurant-cuisine">French • European • Fine Dining</div>
+                        </div>
+                        <button class="favorite-btn" onclick="event.preventDefault(); toggleFavorite(this);">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt detail-icon"></i>
+                            <span>Jl. Asia Afrika</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock detail-icon"></i>
+                            <span>10:00 - 00:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair detail-icon"></i>
+                            <span>16 Meja</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-wine-glass detail-icon"></i>
+                            <span>Wine Bar</span>
+                        </div>
+                    </div>
+                    
+                    <div class="restaurant-footer">
+                        <div class="price-range">Rp 200k - 800k</div>
+                        <div class="availability">
+                            <div class="availability-dot busy"></div>
+                            <span>Hampir penuh</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cafe 5 -->
+            <a href="#" class="restaurant-card" onclick="event.preventDefault(); showToast('Fitur akan segera hadir!');">
+                <div class="restaurant-image">
+                    <img src="img/goffee.webp" alt="Goffee" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="image-gradient"></div>
+                    <div class="restaurant-badges">
+                        <span class="badge discount">☕ Coffee Specialist</span>
+                    </div>
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star rating-star"></i> 4.5
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Goffee</div>
+                            <div class="restaurant-cuisine">Coffee • Brunch • Workspace</div>
+                        </div>
+                        <button class="favorite-btn" onclick="event.preventDefault(); toggleFavorite(this);">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt detail-icon"></i>
+                            <span>Jl. Cimanuk</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock detail-icon"></i>
+                            <span>06:00 - 22:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair detail-icon"></i>
+                            <span>20 Meja</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-plug detail-icon"></i>
+                            <span>Power Outlets</span>
+                        </div>
+                    </div>
+                    
+                    <div class="restaurant-footer">
+                        <div class="price-range">Rp 40k - 120k</div>
+                        <div class="availability">
+                            <div class="availability-dot"></div>
+                            <span>10 tersedia</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cafe 6 -->
+            <a href="#" class="restaurant-card" onclick="event.preventDefault(); showToast('Fitur akan segera hadir!');">
+                <div class="restaurant-image">
+                    <img src="img/kurokoffee.jpg" alt="Kurokoffee" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="image-gradient"></div>
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star rating-star"></i> 4.4
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Kurokoffee</div>
+                            <div class="restaurant-cuisine">Ghibli • Book • Casual</div>
+                        </div>
+                        <button class="favorite-btn active" onclick="event.preventDefault(); toggleFavorite(this);">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt detail-icon"></i>
+                            <span>Jl. Ciumbuleuit</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock detail-icon"></i>
+                            <span>11:00 - 23:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair detail-icon"></i>
+                            <span>22 Meja</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-cocktail detail-icon"></i>
+                            <span>Happy Hour</span>
+                        </div>
+                    </div>
+                    
+                    <div class="restaurant-footer">
+                        <div class="price-range">Rp 80k - 200k</div>
+                        <div class="availability">
+                            <div class="availability-dot"></div>
+                            <span>18 tersedia</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- 🎭 LOAD MORE -->
+        <div class="load-more">
+            <button class="btn btn-secondary" onclick="showToast('Lebih banyak restoran akan segera hadir!')">
+                <i class="fas fa-plus"></i> Tampilkan Lebih Banyak
+            </button>
+        </div>
+    </section>
+
+    <!-- ✨ TOAST -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Item berhasil ditambahkan ke favorit!</span>
+    </div>
+
+    <script>
+        // FAVORITE TOGGLE FUNCTION
+        function toggleFavorite(button) {
+            button.classList.toggle('active');
+            const icon = button.querySelector('i');
+            
+            if (button.classList.contains('active')) {
+                icon.className = 'fas fa-heart';
+                showToast('Ditambahkan ke favorit!');
+            } else {
+                icon.className = 'far fa-heart';
+                showToast('Dihapus dari favorit');
+            }
+            
+            // Prevent event bubbling
+            event.stopPropagation();
+        }
+
+        // TOAST FUNCTION
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // SEARCH FUNCTIONALITY
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                if (query) {
+                    showToast(`Mencari: ${query}`);
+                    // Implement actual search logic here
+                }
+            }
+        });
+
+        // LOCATION BUTTON
+        const locationBtn = document.querySelector('.btn-outline');
+        locationBtn.addEventListener('click', function() {
+            showToast('Mengubah lokasi...');
+            // Implement location change logic here
+        });
+
+        // FILTER SELECTS
+        const filterSelects = document.querySelectorAll('.sort-select');
+        filterSelects.forEach(select => {
+            select.addEventListener('change', function() {
+                showToast(`Filter diterapkan: ${this.value}`);
+                // Implement filter logic here
+            });
+        });
+    </script>
+</body>
+</html>

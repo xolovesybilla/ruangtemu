@@ -1118,6 +1118,28 @@
             margin-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* LOGIN BUTTON STYLE */
+        .login-btn {
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            color: white;
+            padding: 10px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 224, 160, 0.15);
+        }
     </style>
 </head>
 <body>
@@ -1137,6 +1159,9 @@
             </nav>
             
             <div class="nav-actions">
+                <a href="register.html" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
                 <a href="cafe.html" class="btn btn-primary">
                     <i class="fas fa-search"></i> Cari Restoran
                 </a>
@@ -1158,6 +1183,7 @@
             <a href="#how">Cara Booking</a>
             <a href="#testimonials">Testimoni</a>
             <a href="tentangruangtemu.html">Tentang</a>
+            <a href="register.html">Login</a>
             <a href="cafe.html">Cari Restoran</a>
         </div>
     </div>
@@ -1539,8 +1565,8 @@
                 <a href="cafe.html" class="btn btn-primary" style="padding: 16px 32px;">
                     <i class="fas fa-search"></i> Cari Restoran Sekarang
                 </a>
-                <a href="tentangruangtemu.html" class="btn btn-secondary" style="padding: 16px 32px;">
-                    <i class="fas fa-info-circle"></i> Pelajari Tentang Kami
+                <a href="register.html" class="btn btn-secondary" style="padding: 16px 32px;">
+                    <i class="fas fa-user-plus"></i> Daftar Sekarang
                 </a>
             </div>
             

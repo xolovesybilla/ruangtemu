@@ -509,6 +509,30 @@
             border-radius: 6px;
             font-weight: 600;
         }
+        
+        /* 🚨 ERROR MESSAGE */
+        .error-message {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -564,6 +588,12 @@
         <!-- 📱 RIGHT PANEL - FORMS -->
         <div class="auth-form">
             <div class="form-container">
+                <!-- ERROR MESSAGE -->
+                <div id="error-message" class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="error-text">Username atau password salah!</span>
+                </div>
+                
                 <!-- FORM SWITCHER -->
                 <div class="form-switcher">
                     <button class="form-tab active" data-target="login-form">Masuk</button>
@@ -578,8 +608,8 @@
                     <div class="form-group">
                         <label class="form-label">Email atau Username</label>
                         <div class="input-with-icon">
-                            <i class="fas fa-envelope input-icon"></i>
-                            <input type="text" class="form-input" placeholder="you@example.com" required>
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" class="form-input" id="username" placeholder="rin, caca, atau rey" required>
                         </div>
                     </div>
                     
@@ -587,8 +617,8 @@
                         <label class="form-label">Password</label>
                         <div class="input-with-icon">
                             <i class="fas fa-lock input-icon"></i>
-                            <input type="password" class="form-input" id="login-password" placeholder="••••••••" required>
-                            <button type="button" class="password-toggle" data-target="login-password">
+                            <input type="password" class="form-input" id="password" placeholder="1245" required>
+                            <button type="button" class="password-toggle" data-target="password">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
@@ -597,7 +627,7 @@
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">
+                    <button type="submit" class="btn btn-primary" id="login-btn">
                         <i class="fas fa-sign-in-alt"></i> Masuk ke Akun
                     </button>
                     
@@ -748,6 +778,9 @@
                             form.classList.remove('hidden');
                         }
                     });
+                    
+                    // Sembunyikan error message saat pindah tab
+                    document.getElementById('error-message').style.display = 'none';
                 });
             });
 
@@ -791,46 +824,98 @@
                 option.addEventListener('click', function() {
                     roleOptions.forEach(opt => opt.classList.remove('selected'));
                     this.classList.add('selected');
-                    
-                    // Update icon color
-                    const icon = this.querySelector('.role-icon');
-                    const role = this.getAttribute('data-role');
-                    
-                    // You can use this value in form submission
-                    console.log('Selected role:', role);
                 });
             });
 
-            // 📝 FORM SUBMISSION
+            // 📝 LOGIN FORM SUBMISSION
             const loginForm = document.getElementById('login-form');
-            const registerForm = document.getElementById('register-form');
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
             
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                const submitBtn = this.querySelector('button[type="submit"]');
-                const originalText = submitBtn.innerHTML;
+                const username = document.getElementById('username').value.trim().toLowerCase();
+                const password = document.getElementById('password').value;
+                const loginBtn = document.getElementById('login-btn');
+                
+                // Validasi kredensial
+                const validCredentials = {
+                    'ririn': { password: '1245', redirect: 'dashboardcustomers.html', role: 'Customer' },
+                    'caca': { password: '1245', redirect: 'dashboardmitra.html', role: 'Mitra' },
+                    'rey': { password: '1245', redirect: 'dashboardadmin.html', role: 'Admin' }
+                };
+                
+                // Sembunyikan error message
+                errorMessage.style.display = 'none';
+                
+                // Validasi input kosong
+                if (!username || !password) {
+                    showError('Username dan password harus diisi!');
+                    return;
+                }
+                
+                // Cek apakah username valid
+                if (!validCredentials[username]) {
+                    showError('Username tidak ditemukan!');
+                    return;
+                }
+                
+                // Cek password
+                if (password !== validCredentials[username].password) {
+                    showError('Password salah!');
+                    return;
+                }
+                
+                // Simpan data user ke localStorage
+                localStorage.setItem('currentUser', JSON.stringify({
+                    username: username,
+                    role: validCredentials[username].role,
+                    timestamp: new Date().toISOString()
+                }));
                 
                 // Show loading state
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
-                submitBtn.disabled = true;
+                const originalText = loginBtn.innerHTML;
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+                loginBtn.disabled = true;
                 
-                // Simulate API call
+                // Simulate API call delay
                 setTimeout(() => {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    
                     // Show success animation
-                    submitBtn.style.background = 'linear-gradient(135deg, var(--green-vibrant), var(--green-soft))';
+                    loginBtn.style.background = 'linear-gradient(135deg, var(--green-vibrant), var(--green-soft))';
+                    loginBtn.innerHTML = '<i class="fas fa-check"></i> Login Berhasil!';
+                    
+                    // Redirect ke dashboard sesuai role
                     setTimeout(() => {
-                        submitBtn.style.background = 'linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft))';
-                        
-                        // In real app, redirect to dashboard
-                        alert('Login berhasil! Redirecting to dashboard...');
-                        window.location.href = 'dashboard.html';
-                    }, 1000);
-                }, 1500);
+                        window.location.href = validCredentials[username].redirect;
+                    }, 800);
+                }, 1000);
             });
+            
+            function showError(message) {
+                errorText.textContent = message;
+                errorMessage.style.display = 'flex';
+                
+                // Shake animation untuk form
+                loginForm.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    loginForm.style.animation = '';
+                }, 500);
+            }
+            
+            // Tambahkan CSS untuk shake animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // 📝 REGISTER FORM SUBMISSION
+            const registerForm = document.getElementById('register-form');
             
             registerForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -858,15 +943,20 @@
                     
                     // Show success animation
                     submitBtn.style.background = 'linear-gradient(135deg, var(--green-vibrant), var(--green-soft))';
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Akun Berhasil Dibuat!';
+                    
                     setTimeout(() => {
-                        submitBtn.style.background = 'linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft))';
-                        
-                        // In real app, might redirect to verification or dashboard
-                        alert('Akun berhasil dibuat! Silakan cek email untuk verifikasi.');
+                        submitBtn.style.background = 'linear-gradient(135deg, var(--green-vibrant), var(--green-soft))';
+                        submitBtn.innerHTML = originalText;
                         
                         // Switch to login form
                         document.querySelector('[data-target="login-form"]').click();
-                    }, 1000);
+                        
+                        // Reset form
+                        registerForm.reset();
+                        roleOptions.forEach(opt => opt.classList.remove('selected'));
+                        document.querySelector('.role-option[data-role="customer"]').classList.add('selected');
+                    }, 1500);
                 }, 2000);
             });
 
@@ -906,8 +996,13 @@
             if (firstInput) {
                 firstInput.focus();
             }
+            
+            // 💡 DEMO CREDENTIALS HINT
+            const usernameInput = document.getElementById('username');
+            usernameInput.addEventListener('focus', function() {
+                this.setAttribute('title', 'Demo: ririn, caca, atau rey\nPassword: 1245');
+            });
         });
     </script>
 </body>
-
 </html>

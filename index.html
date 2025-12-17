@@ -17,6 +17,8 @@
             --gray-medium: #5A5A72;
             --gray-light: #F5F5FA;
             --white: #FFFFFF;
+            --beige-light: #FFF8F3;
+            --beige-medium: #F5E6D6;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             --shadow-hover: 0 15px 40px rgba(255, 77, 148, 0.15);
@@ -83,7 +85,7 @@
         }
 
         .logo-image {
-            height: 40px; 
+            height: 45px; 
             width: auto;
             object-fit: contain;
         }
@@ -157,6 +159,7 @@
         .btn-outline:hover {
             border-color: var(--pink-soft);
             background: rgba(255, 77, 148, 0.05);
+            transform: translateY(-2px);
         }
 
         .btn-primary {
@@ -184,7 +187,7 @@
         /* 🌸 HERO SECTION */
         .hero {
             padding: 160px 40px 100px;
-            background: linear-gradient(135deg, #FFF5F9 0%, #F0FFFA 100%);
+            background: linear-gradient(135deg, var(--beige-light) 0%, #F0FFFA 100%);
             position: relative;
             overflow: hidden;
         }
@@ -227,7 +230,13 @@
 
         .stat {
             text-align: center;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
         }
+
+        .stat:nth-child(1) { animation-delay: 0.2s; }
+        .stat:nth-child(2) { animation-delay: 0.4s; }
+        .stat:nth-child(3) { animation-delay: 0.6s; }
 
         .stat-number {
             font-size: 2.5rem;
@@ -247,6 +256,7 @@
         /* 🎪 HERO VISUAL */
         .hero-visual {
             position: relative;
+            animation: floatVisual 6s ease-in-out infinite;
         }
 
         .main-card {
@@ -257,6 +267,7 @@
             transform: rotate(-3deg);
             z-index: 2;
             position: relative;
+            animation: cardGlow 3s ease-in-out infinite;
         }
 
         .floating-card {
@@ -267,6 +278,7 @@
             box-shadow: var(--shadow);
             animation: float 6s ease-in-out infinite;
             z-index: 3;
+            backdrop-filter: blur(10px);
         }
 
         .card-1 {
@@ -285,15 +297,30 @@
             animation-delay: 2s;
         }
 
-        .card-3 {
-            top: 40%;
-            right: -50px;
-            animation-delay: 4s;
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        @keyframes floatVisual {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: var(--shadow); }
+            50% { box-shadow: 0 15px 40px rgba(255, 77, 148, 0.2); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* 🔍 SEARCH */
@@ -310,6 +337,13 @@
             padding: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-light);
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .search-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
 
         .search-header {
@@ -379,7 +413,7 @@
         /* 🖼️ CAROUSEL SECTION */
         .carousel-section {
             padding: 80px 40px;
-            background: var(--gray-light);
+            background: var(--beige-light);
         }
 
         .carousel-container {
@@ -420,11 +454,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s ease;
         }
 
         .swiper-slide:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .slide-content {
@@ -433,9 +467,15 @@
             left: 0;
             right: 0;
             padding: 30px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
+            background: linear-gradient(transparent, rgba(255, 248, 243, 0.1), rgba(255, 248, 243, 0.9));
+            color: var(--gray-dark);
             z-index: 2;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .swiper-slide:hover .slide-content {
+            transform: translateY(0);
         }
 
         .slide-title {
@@ -457,21 +497,24 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.9);
             padding: 4px 12px;
             border-radius: 20px;
             margin-top: 10px;
             font-size: 0.9rem;
+            color: var(--gray-dark);
+            backdrop-filter: blur(10px);
         }
 
         .swiper-button-next,
         .swiper-button-prev {
-            color: white;
-            background: rgba(0,0,0,0.3);
+            color: var(--gray-dark);
+            background: rgba(255, 255, 255, 0.8);
             width: 50px;
             height: 50px;
             border-radius: 50%;
             backdrop-filter: blur(10px);
+            border: 1px solid var(--gray-light);
         }
 
         .swiper-button-next:after,
@@ -483,6 +526,11 @@
             background: var(--pink-vibrant);
             width: 12px;
             height: 12px;
+            opacity: 0.5;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
         }
 
         /* ✨ FEATURES */
@@ -524,7 +572,13 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
         }
+
+        .feature-card:nth-child(1) { animation-delay: 0.2s; }
+        .feature-card:nth-child(2) { animation-delay: 0.4s; }
+        .feature-card:nth-child(3) { animation-delay: 0.6s; }
 
         .feature-card:hover {
             transform: translateY(-10px);
@@ -572,7 +626,7 @@
         /* 🎭 STEPS */
         .steps {
             padding: 100px 40px;
-            background: var(--gray-light);
+            background: var(--beige-light);
         }
 
         .steps-container {
@@ -588,7 +642,14 @@
             text-align: center;
             max-width: 250px;
             position: relative;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
         }
+
+        .step-card:nth-child(1) { animation-delay: 0.1s; }
+        .step-card:nth-child(2) { animation-delay: 0.3s; }
+        .step-card:nth-child(3) { animation-delay: 0.5s; }
+        .step-card:nth-child(4) { animation-delay: 0.7s; }
 
         .step-number {
             width: 60px;
@@ -603,12 +664,98 @@
             font-weight: 700;
             margin: 0 auto 24px;
             box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .step-card:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* 🎙️ TESTIMONIALS */
+        .testimonials {
+            padding: 100px 40px;
+            background: var(--white);
+        }
+
+        .testimonial-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            min-width: 100%;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin: 0 10px;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-info p {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            color: #FFD700;
+            margin: 10px 0;
+        }
+
+        .testimonial-slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-dot.active {
+            background: var(--pink-vibrant);
+            transform: scale(1.2);
         }
 
         /* 🎀 CTA */
         .cta {
             padding: 100px 40px;
-            background: linear-gradient(135deg, #FFF5F9 0%, #F0FFFA 100%);
+            background: linear-gradient(135deg, var(--beige-light) 0%, #F0FFFA 100%);
             text-align: center;
         }
 
@@ -655,6 +802,10 @@
             .nav-links {
                 gap: 25px;
             }
+            
+            .swiper {
+                height: 400px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -693,7 +844,7 @@
             }
             
             .swiper {
-                height: 350px;
+                height: 300px;
             }
             
             .search-container {
@@ -713,6 +864,14 @@
                 flex-direction: column;
                 gap: 20px;
             }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .carousel-title {
+                font-size: 2rem;
+            }
         }
 
         /* 🎨 DECORATIVE */
@@ -723,6 +882,7 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(255, 77, 148, 0.1) 0%, transparent 70%);
             z-index: 0;
+            animation: float 8s ease-in-out infinite;
         }
 
         .bg-1 {
@@ -734,21 +894,40 @@
             bottom: -200px;
             left: -200px;
             background: radial-gradient(circle, rgba(0, 224, 160, 0.1) 0%, transparent 70%);
+            animation-delay: 2s;
         }
 
         /* 🎯 HIGHLIGHT */
         .highlight {
             background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
-            padding: 4px 12px;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-weight: 600;
             display: inline-block;
             margin-bottom: 16px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         /* 📱 MOBILE MENU */
         .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-dark);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--gray-light);
         }
 
         .mobile-menu {
@@ -781,6 +960,12 @@
             font-size: 1.2rem;
             padding: 12px 0;
             border-bottom: 1px solid var(--gray-light);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--pink-vibrant);
+            padding-left: 10px;
         }
 
         .close-menu {
@@ -792,6 +977,13 @@
             font-size: 1.5rem;
             color: var(--gray-dark);
             cursor: pointer;
+            padding: 5px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .close-menu:hover {
+            background: var(--gray-light);
         }
 
         /* 💫 LOADING */
@@ -808,6 +1000,7 @@
             align-items: center;
             flex-direction: column;
             gap: 20px;
+            backdrop-filter: blur(10px);
         }
 
         .loading.active {
@@ -841,6 +1034,8 @@
             z-index: 1001;
             transform: translateX(400px);
             transition: transform 0.3s ease;
+            max-width: 350px;
+            backdrop-filter: blur(10px);
         }
 
         .notification.show {
@@ -850,6 +1045,70 @@
         .notification.error {
             border-left-color: #ff4757;
         }
+
+        .notification.warning {
+            border-left-color: #ffa502;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--gray-dark);
+            color: white;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -857,14 +1116,14 @@
     <header class="header">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="https://via.placeholder.com/150x50/1B602F/FFFFFF?text=RuangTemu" alt="Logo" class="logo-image">
+                <img src="img/logo.png" alt="Logo RuangTemu" class="logo-image">
                 <div class="logo-text">RuangTemu</div>
             </a>
             
             <nav class="nav-links">
                 <a href="#features">Fitur</a>
                 <a href="#how">Cara Booking</a>
-                <a href="#carousel">Restoran</a>
+                <a href="cafe.html" id="find-space">Temukan Ruangmu</a>
                 <a href="#testimonials">Testimoni</a>
             </nav>
             
@@ -891,7 +1150,7 @@
         <div class="mobile-menu-links">
             <a href="#features">Fitur</a>
             <a href="#how">Cara Booking</a>
-            <a href="#carousel">Restoran</a>
+            <a href="cafe.html" id="mobile-find-space">Temukan Ruangmu</a>
             <a href="#testimonials">Testimoni</a>
             <a href="login.html">Masuk</a>
             <a href="register.html">Daftar</a>
@@ -925,7 +1184,7 @@
                 </div>
                 
                 <div style="display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap;">
-                    <a href="#search" class="btn btn-primary">
+                    <a href="cafe.html" class="btn btn-primary" id="hero-search-btn">
                         <i class="fas fa-search"></i> Cari Restoran
                     </a>
                     <a href="#" class="btn btn-secondary" id="demo-btn">
@@ -939,8 +1198,8 @@
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
                         <div style="width: 50px; height: 50px; border-radius: 12px; background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));"></div>
                         <div>
-                            <h4 style="margin: 0; color: var(--gray-dark);">Hara Cafe</h4>
-                            <p style="margin: 4px 0 0; color: var(--gray-medium); font-size: 0.9rem;">📍 Bandung • ⭐ 4.8</p>
+                            <h4 style="margin: 0; color: var(--gray-dark);">Sakura Sushi</h4>
+                            <p style="margin: 4px 0 0; color: var(--gray-medium); font-size: 0.9rem;">📍 Jakarta • ⭐ 4.8</p>
                         </div>
                     </div>
                     
@@ -1033,10 +1292,10 @@
                             <i class="fas fa-utensils input-icon"></i>
                             <select id="category-select">
                                 <option value="">Semua Kategori</option>
-                                <option value="date">Date Night 💝</option>
-                                <option value="family">Family Meal 👨‍👩‍👧‍👦</option>
-                                <option value="business">Business Lunch 💼</option>
-                                <option value="group">Group Hang 🎉</option>
+                                <option value="japanese">Japanese 🍣</option>
+                                <option value="cafe">Cafe & Coffee ☕</option>
+                                <option value="fine-dining">Fine Dining ⭐</option>
+                                <option value="family">Family Restaurant 👨‍👩‍👧‍👦</option>
                             </select>
                         </div>
                     </div>
@@ -1049,67 +1308,67 @@
         </div>
     </section>
 
-    <!-- 🖼️ CAROUSEL -->
+    <!-- 🖼️ CAROUSEL RESTORAN JEPANG -->
     <section class="carousel-section" id="carousel">
         <div class="carousel-container">
             <div class="carousel-header">
-                <h2 class="carousel-title">Restoran <span class="gradient-text">Populer</span> Minggu Ini</h2>
-                <p class="carousel-subtitle">Temukan tempat makan terbaik dengan suasana yang sempurna</p>
+                <h2 class="carousel-title">Restoran <span class="gradient-text">Jepang</span> Populer</h2>
+                <p class="carousel-subtitle">Temukan suasana Jepang autentik dengan cita rasa terbaik</p>
             </div>
             
             <!-- Swiper -->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Restoran Modern">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sushi Restaurant">
                         <div class="slide-content">
-                            <h3 class="slide-title">Hara Cafe</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Bandung • <i class="fas fa-utensils"></i> Western & Local</p>
-                            <p>Suasana cozy dengan desain industrial, cocok untuk kerja atau nongkrip santai.</p>
+                            <h3 class="slide-title">Sakura Sushi</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Jakarta • <i class="fas fa-utensils"></i> Japanese</p>
+                            <p>Sushi segar dengan desain interior modern Jepang, perfect untuk date night.</p>
                             <div class="slide-rating">
                                 <i class="fas fa-star"></i> 4.8 • 250+ reviews
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Restoran Tradisional">
+                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ramen Restaurant">
                         <div class="slide-content">
-                            <h3 class="slide-title">Sari Bundo</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Jakarta • <i class="fas fa-utensils"></i> Padang</p>
-                            <p>Masakan Padang autentik dengan suasana rumah makan tradisional yang hangat.</p>
+                            <h3 class="slide-title">Ramen Ichiban</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Bandung • <i class="fas fa-utensils"></i> Ramen</p>
+                            <p>Ramen autentik dengan kaldu 12 jam, suasana cozy ala Jepang tradisional.</p>
                             <div class="slide-rating">
                                 <i class="fas fa-star"></i> 4.7 • 180+ reviews
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Restoran Fine Dining">
+                        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Japanese Cafe">
                         <div class="slide-content">
-                            <h3 class="slide-title">Sky Garden</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Bali • <i class="fas fa-utensils"></i> Fine Dining</p>
-                            <p>Fine dining dengan pemandangan sunset dan menu fusion Asia-Eropa.</p>
+                            <h3 class="slide-title">Matcha Garden</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Bali • <i class="fas fa-coffee"></i> Japanese Cafe</p>
+                            <p>Matcha specialties dengan taman Jepang mini, suasana tenang dan relaxing.</p>
                             <div class="slide-rating">
                                 <i class="fas fa-star"></i> 4.9 • 320+ reviews
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cafe Santai">
+                        <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-1.2.1&auto=format&fit=crop&w-1350&q=80" alt="Izakaya Restaurant">
                         <div class="slide-content">
-                            <h3 class="slide-title">Kopi Kenangan</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Surabaya • <i class="fas fa-coffee"></i> Cafe & Snacks</p>
-                            <p>Tempat nongkrip dengan kopi spesial dan makanan ringan yang menggugah selera.</p>
+                            <h3 class="slide-title">Izakaya Yuki</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Surabaya • <i class="fas fa-beer"></i> Izakaya</p>
+                            <p>Japanese pub dengan berbagai pilihan sake dan yakitori, perfect for groups.</p>
                             <div class="slide-rating">
                                 <i class="fas fa-star"></i> 4.6 • 210+ reviews
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Restoran Keluarga">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Teppanyaki Restaurant">
                         <div class="slide-content">
-                            <h3 class="slide-title">Family Garden</h3>
-                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Yogyakarta • <i class="fas fa-utensils"></i> Family Restaurant</p>
-                            <p>Area bermain anak dan menu keluarga yang lengkap, cocok untuk weekend gathering.</p>
+                            <h3 class="slide-title">Teppan Master</h3>
+                            <p class="slide-subtitle"><i class="fas fa-map-marker-alt"></i> Yogyakarta • <i class="fas fa-fire"></i> Teppanyaki</p>
+                            <p>Live teppanyaki cooking dengan chef profesional, experience yang unforgettable.</p>
                             <div class="slide-rating">
                                 <i class="fas fa-star"></i> 4.5 • 190+ reviews
                             </div>
@@ -1191,6 +1450,80 @@
         </div>
     </section>
 
+    <!-- 🎙️ TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2 class="section-title">Kata <span class="gradient-text">Mereka</span></h2>
+            <p class="section-subtitle">Dengar pengalaman langsung dari pengguna RuangTemu</p>
+        </div>
+        
+        <div class="testimonial-container">
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonial-track">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>Sarah Wijaya</h4>
+                                <p>Food Blogger • 25 Bookings</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"Sebagai food blogger yang sering coba restoran baru, RuangTemu sangat membantu! Bisa lihat meja yang tersedia secara real-time dan pre-order menu sebelum datang. No more waiting!"</p>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="User" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>Budi Santoso</h4>
+                                <p>Business Executive • 18 Bookings</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"Untuk meeting bisnis, waktu adalah segalanya. Dengan RuangTemu, saya bisa booking meja di restoran yang tepat, bahkan pesan menu untuk client sebelum meeting dimulai. Very professional!"</p>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="User" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>Maya Putri</h4>
+                                <p>Young Professional • 32 Bookings</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"Date night jadi lebih mudah dengan RuangTemu! Bisa pilih meja romantis, pesan menu spesial, dan dapatkan rewards points. Sudah dapat 3 voucher makan gratis dari points yang terkumpul!"</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-slider-nav" id="testimonial-dots">
+                    <span class="testimonial-dot active" data-index="0"></span>
+                    <span class="testimonial-dot" data-index="1"></span>
+                    <span class="testimonial-dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 🎀 CTA -->
     <section class="cta">
         <div class="cta-container">
@@ -1212,6 +1545,59 @@
         </div>
     </section>
 
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="RuangTemu">
+                    <span class="logo-text" style="-webkit-text-fill-color: white;">RuangTemu</span>
+                </div>
+                <p>Platform reservasi restoran terdepan di Indonesia. Temukan vibe yang pas, booking dengan mudah.</p>
+                <div style="display: flex; gap: 15px; margin-top: 20px;">
+                    <a href="#" style="color: white;"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" style="color: white;"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" style="color: white;"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" style="color: white;"><i class="fab fa-tiktok fa-lg"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="#features">Fitur</a></li>
+                    <li><a href="#how">Cara Booking</a></li>
+                    <li><a href="cafe.html">Temukan Ruangmu</a></li>
+                    <li><a href="#testimonials">Testimoni</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Perusahaan</h4>
+                <ul>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Karir</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Kontak</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Kebijakan Cookie</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2024 RuangTemu. All rights reserved. Made with ❤️ in Indonesia.</p>
+        </div>
+    </footer>
+
     <!-- 💫 LOADING -->
     <div class="loading" id="loading">
         <div class="spinner"></div>
@@ -1221,9 +1607,9 @@
     <!-- 🔔 NOTIFICATION -->
     <div class="notification" id="notification">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <i class="fas fa-check-circle" style="color: var(--green-vibrant);"></i>
+            <i class="fas fa-check-circle" id="notification-icon" style="color: var(--green-vibrant);"></i>
             <div>
-                <strong>Berhasil!</strong>
+                <strong id="notification-title">Berhasil!</strong>
                 <p id="notification-message">Permintaan berhasil diproses</p>
             </div>
         </div>
@@ -1271,15 +1657,18 @@
 
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
 
             closeMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             });
 
             mobileMenuLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
                 });
             });
 
@@ -1302,13 +1691,31 @@
             // Loading and notification elements
             const loading = document.getElementById('loading');
             const notification = document.getElementById('notification');
+            const notificationTitle = document.getElementById('notification-title');
             const notificationMessage = document.getElementById('notification-message');
+            const notificationIcon = document.getElementById('notification-icon');
 
             // Show notification
-            function showNotification(message, isError = false) {
+            function showNotification(title, message, type = 'success') {
+                notificationTitle.textContent = title;
                 notificationMessage.textContent = message;
-                notification.classList.toggle('error', isError);
+                
+                notification.className = 'notification';
                 notification.classList.add('show');
+                
+                if (type === 'success') {
+                    notificationIcon.className = 'fas fa-check-circle';
+                    notificationIcon.style.color = 'var(--green-vibrant)';
+                    notification.style.borderLeftColor = 'var(--green-vibrant)';
+                } else if (type === 'warning') {
+                    notificationIcon.className = 'fas fa-exclamation-triangle';
+                    notificationIcon.style.color = '#ffa502';
+                    notification.classList.add('warning');
+                } else if (type === 'error') {
+                    notificationIcon.className = 'fas fa-times-circle';
+                    notificationIcon.style.color = '#ff4757';
+                    notification.classList.add('error');
+                }
                 
                 setTimeout(() => {
                     notification.classList.remove('show');
@@ -1319,15 +1726,7 @@
             const demoBtn = document.getElementById('demo-btn');
             demoBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                loading.classList.add('active');
-                
-                setTimeout(() => {
-                    loading.classList.remove('active');
-                    showNotification('Demo akan dimulai! Video demonstrasi akan ditampilkan.');
-                    
-                    // In real implementation, this would open a video modal
-                    alert('Fitur demo: Video demonstrasi penggunaan aplikasi akan ditampilkan di sini.');
-                }, 1500);
+                showNotification('Coming Soon!', 'Fitur demo masih dalam proses pengembangan. Stay tuned!', 'warning');
             });
 
             // Book now button functionality
@@ -1337,14 +1736,16 @@
                 
                 setTimeout(() => {
                     loading.classList.remove('active');
-                    showNotification('Booking berhasil! Meja #12 di Hara Cafe telah dipesan untuk jam 19:00.');
-                }, 2000);
+                    showNotification('Booking Berhasil!', 'Meja #12 di Sakura Sushi telah dipesan untuk jam 19:00. Lihat detail di email Anda.');
+                }, 1500);
             });
 
-            // Search form functionality
+            // Search form functionality - redirect to cafe.html
             const searchForm = document.querySelector('.search-form');
             const searchBtn = document.getElementById('search-btn');
+            const heroSearchBtn = document.getElementById('hero-search-btn');
             
+            // Handle search form submission
             searchForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -1354,29 +1755,48 @@
                 const category = document.getElementById('category-select').value;
                 
                 if (!location || !date || !people) {
-                    showNotification('Harap lengkapi semua field yang wajib diisi!', true);
+                    showNotification('Perhatian!', 'Harap lengkapi semua field yang wajib diisi!', 'error');
                     return;
                 }
                 
                 loading.classList.add('active');
                 searchBtn.disabled = true;
                 const originalText = searchBtn.innerHTML;
-                searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencari...';
+                searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengarahkan...';
                 
                 setTimeout(() => {
                     loading.classList.remove('active');
                     searchBtn.disabled = false;
                     searchBtn.innerHTML = originalText;
                     
-                    // In real implementation, this would redirect to search results
-                    showNotification(`Menemukan 15 restoran di ${location} untuk ${people} orang pada ${date}`);
-                    
-                    // Simulate successful search
-                    searchBtn.style.background = 'linear-gradient(135deg, var(--green-vibrant), var(--green-soft))';
-                    setTimeout(() => {
-                        searchBtn.style.background = 'linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft))';
-                    }, 1000);
-                }, 2000);
+                    // Redirect to cafe.html with search parameters
+                    window.location.href = `cafe.html?location=${encodeURIComponent(location)}&date=${date}&people=${people}&category=${category}`;
+                }, 1500);
+            });
+
+            // Hero search button - redirect to cafe.html
+            heroSearchBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                loading.classList.add('active');
+                
+                setTimeout(() => {
+                    loading.classList.remove('active');
+                    window.location.href = 'cafe.html';
+                }, 1000);
+            });
+
+            // Find space button in navigation
+            const findSpaceBtn = document.getElementById('find-space');
+            const mobileFindSpaceBtn = document.getElementById('mobile-find-space');
+            
+            findSpaceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'cafe.html';
+            });
+            
+            mobileFindSpaceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'cafe.html';
             });
 
             // Feature card hover animation
@@ -1393,30 +1813,62 @@
                 });
             });
 
+            // Testimonial slider
+            const testimonialTrack = document.getElementById('testimonial-track');
+            const testimonialDots = document.querySelectorAll('.testimonial-dot');
+            let currentTestimonial = 0;
+            const testimonialCount = testimonialDots.length;
+
+            function showTestimonial(index) {
+                testimonialTrack.style.transform = `translateX(-${index * 100}%)`;
+                
+                testimonialDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                currentTestimonial = index;
+            }
+
+            testimonialDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    showTestimonial(index);
+                });
+            });
+
+            // Auto slide testimonials
+            setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonialCount;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+
             // Smooth scroll for navigation
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
+                    if (this.getAttribute('href') === '#') return;
                     
                     const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
+                    if (targetId.startsWith('#')) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
                     }
                 });
             });
 
             // Add floating particles to hero section
             const hero = document.querySelector('.hero');
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 20; i++) {
                 const particle = document.createElement('div');
-                const size = Math.random() * 4 + 2;
+                const size = Math.random() * 6 + 3;
                 const isPink = Math.random() > 0.5;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 8 + 6;
                 
                 particle.style.cssText = `
                     position: absolute;
@@ -1426,9 +1878,11 @@
                     border-radius: 50%;
                     top: ${Math.random() * 100}%;
                     left: ${Math.random() * 100}%;
-                    opacity: ${Math.random() * 0.3 + 0.1};
-                    animation: float ${Math.random() * 8 + 6}s ease-in-out infinite;
+                    opacity: ${Math.random() * 0.4 + 0.1};
+                    animation: float ${duration}s ease-in-out infinite;
+                    animation-delay: ${delay}s;
                     z-index: 1;
+                    filter: blur(${Math.random() * 2}px);
                 `;
                 hero.appendChild(particle);
             }
@@ -1445,11 +1899,32 @@
                     navLinks.style.display = 'flex';
                     mobileMenuBtn.style.display = 'none';
                     mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
                 }
             }
 
             window.addEventListener('resize', handleResize);
             handleResize(); // Initial check
+
+            // Add animation to elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe animated elements
+            document.querySelectorAll('.feature-card, .step-card, .stat').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
         });
     </script>
 </body>

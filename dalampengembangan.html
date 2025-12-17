@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Temu • Dalam Pengembangan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* 🎨 PALETTE CONSISTENCY */
+        :root {
+            --pink-vibrant: #F784C5;
+            --pink-soft: #FF8AB5;
+            --green-vibrant: #1B602F;
+            --green-soft: #80FFD6;
+            --gray-dark: #2D2D3A;
+            --gray-medium: #5A5A72;
+            --gray-light: #F5F5FA;
+            --white: #FFFFFF;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(255, 77, 148, 0.15);
+            --radius: 16px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #FFF5F9 0%, #F0FFFA 100%);
+            color: var(--gray-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* 🎀 CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink-vibrant);
+            border-radius: 10px;
+        }
+
+        /* 🎪 MAIN CONTAINER */
+        .development-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-hover);
+            overflow: hidden;
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 🚧 HEADER SECTION */
+        .dev-header {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dev-header::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+        }
+
+        .dev-header::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .dev-icon {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 3.5rem;
+            color: var(--pink-vibrant);
+            position: relative;
+            z-index: 2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        .dev-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .dev-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* 🛠️ CONTENT SECTION */
+        .dev-content {
+            padding: 50px 40px;
+        }
+
+        .feature-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--gray-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            color: var(--pink-vibrant);
+        }
+
+        /* 📊 PROGRESS SECTION */
+        .progress-container {
+            background: var(--gray-light);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-title {
+            font-weight: 700;
+            color: var(--gray-dark);
+            font-size: 1.2rem;
+        }
+
+        .progress-percentage {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink-vibrant), var(--green-vibrant));
+            border-radius: 6px;
+            width: 75%;
+            position: relative;
+            animation: progressFill 1.5s ease-out;
+        }
+
+        @keyframes progressFill {
+            from { width: 0; }
+            to { width: 75%; }
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* 📅 TIMELINE SECTION */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--pink-vibrant), var(--green-vibrant));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -36px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--pink-vibrant);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--pink-vibrant);
+        }
+
+        .timeline-content {
+            margin-left: 10px;
+        }
+
+        .timeline-date {
+            background: rgba(255, 77, 148, 0.1);
+            color: var(--pink-vibrant);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--gray-dark);
+        }
+
+        .timeline-desc {
+            color: var(--gray-medium);
+            line-height: 1.6;
+        }
+
+        /* 🎯 COMING SOON FEATURES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--gray-light);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--pink-vibrant);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .feature-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--gray-dark);
+        }
+
+        .feature-desc {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* 📱 NOTIFICATION SECTION */
+        .notification-card {
+            background: linear-gradient(135deg, rgba(255, 77, 148, 0.05), rgba(0, 224, 160, 0.05));
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-top: 30px;
+            border-left: 4px solid var(--pink-vibrant);
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .notification-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .notification-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--gray-dark);
+        }
+
+        .notification-content {
+            color: var(--gray-medium);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .notification-list {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        .notification-list li {
+            margin-bottom: 10px;
+            color: var(--gray-medium);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .notification-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--pink-vibrant);
+            font-weight: bold;
+        }
+
+        /* 🔘 ACTION BUTTONS */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--pink-vibrant);
+            color: var(--pink-vibrant);
+        }
+
+        .btn-outline:hover {
+            background: var(--pink-vibrant);
+            color: white;
+        }
+
+        /* 🎨 DECORATIVE ELEMENTS */
+        .floating-element {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            opacity: 0.2;
+            animation: floatAround 20s linear infinite;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, -50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(50px, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-100px, 50px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 15%;
+            left: 15%;
+            animation-delay: -10s;
+        }
+
+        .floating-element:nth-child(4) {
+            bottom: 25%;
+            right: 5%;
+            animation-delay: -15s;
+        }
+
+        /* 🏠 BACK TO HOME */
+        .back-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .back-link {
+            color: var(--pink-vibrant);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            background: rgba(255, 77, 148, 0.1);
+        }
+
+        .back-link:hover {
+            gap: 15px;
+            background: rgba(255, 77, 148, 0.2);
+        }
+
+        /* 🎪 FOOTER */
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .footer a {
+            color: var(--pink-vibrant);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 🏗️ CONSTRUCTION ANIMATION */
+        .construction-icon {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+
+        .construction-gear {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--pink-vibrant);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            animation: spin 4s linear infinite;
+        }
+
+        .construction-gear::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 8px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .construction-gear:nth-child(2) {
+            top: 20px;
+            left: 40px;
+            background: var(--green-vibrant);
+            animation-direction: reverse;
+            animation-duration: 3s;
+        }
+
+        /* 📱 RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .development-container {
+                max-width: 100%;
+            }
+            
+            .dev-header {
+                padding: 40px 20px;
+            }
+            
+            .dev-content {
+                padding: 40px 20px;
+            }
+            
+            .dev-title {
+                font-size: 2.2rem;
+            }
+            
+            .dev-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                min-width: 100%;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dev-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .progress-container,
+            .notification-card {
+                padding: 20px;
+            }
+            
+            .floating-element {
+                display: none;
+            }
+        }
+
+        /* 🎨 UTILITY CLASSES */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* 🚀 COUNTDOWN TIMER (OPTIONAL) */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            min-width: 80px;
+            box-shadow: var(--shadow);
+        }
+
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--pink-vibrant);
+            margin-bottom: 5px;
+        }
+
+        .countdown-label {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 🎨 DECORATIVE FLOATING ELEMENTS -->
+    <div class="floating-element">
+        <i class="fas fa-cog"></i>
+    </div>
+    <div class="floating-element">
+        <i class="fas fa-tools"></i>
+    </div>
+    <div class="floating-element">
+        <i class="fas fa-code"></i>
+    </div>
+    <div class="floating-element">
+        <i class="fas fa-rocket"></i>
+    </div>
+
+    <!-- 🎪 MAIN CONTAINER -->
+    <div class="development-container">
+        <!-- 🚧 HEADER SECTION -->
+        <div class="dev-header">
+            <div class="construction-icon">
+                <div class="construction-gear">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="construction-gear">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+            
+            <h1 class="dev-title">Dalam Pengembangan</h1>
+            <p class="dev-subtitle">
+                Kami sedang bekerja keras untuk menghadirkan fitur ini dengan pengalaman terbaik untuk Anda!
+            </p>
+        </div>
+
+        <!-- 🛠️ CONTENT SECTION -->
+        <div class="dev-content">
+            <!-- 📊 PROGRESS SECTION -->
+            <div class="feature-section">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    Status Pengembangan
+                </h2>
+                
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <div class="progress-title">Progress Pengerjaan</div>
+                        <div class="progress-percentage">75%</div>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    
+                    <div class="progress-label">
+                        <span>Mulai: 1 Des 2024</span>
+                        <span>Target: 1 Feb 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 📅 TIMELINE SECTION -->
+            <div class="feature-section">
+                <h2 class="section-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Timeline Pengembangan
+                </h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1 Des 2024</div>
+                            <h3 class="timeline-title">Perencanaan & Desain</h3>
+                            <p class="timeline-desc">
+                                Research, wireframing, dan desain UI/UX untuk memastikan pengalaman pengguna yang optimal.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">15 Des 2024</div>
+                            <h3 class="timeline-title">Pengembangan Backend</h3>
+                            <p class="timeline-desc">
+                                Pembangunan sistem, database, dan API untuk mendukung fitur yang akan datang.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Saat Ini</div>
+                            <h3 class="timeline-title">Pengembangan Frontend</h3>
+                            <p class="timeline-desc">
+                                Implementasi antarmuka pengguna dan integrasi dengan sistem backend.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1 Feb 2025</div>
+                            <h3 class="timeline-title">Launch & Testing</h3>
+                            <p class="timeline-desc">
+                                Peluncuran fitur baru dan pengujian menyeluruh untuk memastikan kualitas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🎯 COMING SOON FEATURES -->
+            <div class="feature-section">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Fitur yang Akan Datang
+                </h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="feature-name">AI Recommendations</h3>
+                        <p class="feature-desc">
+                            Rekomendasi pintar berdasarkan preferensi dan riwayat pemesanan Anda.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3 class="feature-name">Analytics Dashboard</h3>
+                        <p class="feature-desc">
+                            Dashboard analitik lengkap untuk melihat performa bisnis secara real-time.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="feature-name">Mobile App</h3>
+                        <p class="feature-desc">
+                            Aplikasi mobile native untuk pengalaman yang lebih smooth di smartphone.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="feature-name">Live Chat 24/7</h3>
+                        <p class="feature-desc">
+                            Dukungan live chat real-time untuk mitra dan pelanggan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 📱 NOTIFICATION SECTION -->
+            <div class="notification-card">
+                <div class="notification-header">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="notification-title">Tetap Terhubung!</div>
+                </div>
+                
+                <div class="notification-content">
+                    Kami akan mengirimkan notifikasi ketika fitur ini sudah siap digunakan. Berikut beberapa cara untuk tetap mendapatkan update:
+                </div>
+                
+                <ul class="notification-list">
+                    <li>Cek email Anda untuk newsletter terbaru</li>
+                    <li>Follow media sosial RuangTemu untuk update</li>
+                    <li>Kunjungi halaman ini secara berkala</li>
+                    <li>Aktifkan notifikasi di akun Anda</li>
+                </ul>
+            </div>
+
+            <!-- 🔘 ACTION BUTTONS -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="notifyMe">
+                    <i class="fas fa-bell"></i> Beritahu Saya
+                </button>
+                
+                <button class="btn btn-secondary" id="contactSupport">
+                    <i class="fas fa-headset"></i> Hubungi Support
+                </button>
+                
+                <button class="btn btn-outline" id="viewRoadmap">
+                    <i class="fas fa-map"></i> Lihat Roadmap
+                </button>
+            </div>
+
+            <!-- 🏠 BACK TO HOME -->
+            <div class="back-section">
+                <a href="dashboardmitra.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard Mitra
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🎪 FOOTER -->
+    <div class="footer">
+        <p>© 2024 RuangTemu • Fitur dalam pengembangan • Semua hak dilindungi undang-undang</p>
+        <p class="mt-30">
+            Butuh bantuan? 
+            <a href="mailto:support@ruangtemu.com">Hubungi Tim Support</a> • 
+            <a href="tel:+6281234567890">+62 812 3456 7890</a>
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 🚀 COUNTDOWN TIMER
+            function updateCountdown() {
+                const targetDate = new Date('2025-02-01T00:00:00').getTime();
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+                
+                if (difference > 0) {
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                    
+                    // Update countdown display if container exists
+                    const countdownContainer = document.querySelector('.countdown');
+                    if (countdownContainer) {
+                        countdownContainer.innerHTML = `
+                            <div class="countdown-item">
+                                <div class="countdown-value">${days}</div>
+                                <div class="countdown-label">Hari</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-value">${hours}</div>
+                                <div class="countdown-label">Jam</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-value">${minutes}</div>
+                                <div class="countdown-label">Menit</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-value">${seconds}</div>
+                                <div class="countdown-label">Detik</div>
+                            </div>
+                        `;
+                    }
+                }
+            }
+            
+            // Create countdown container after progress section
+            const progressContainer = document.querySelector('.progress-container');
+            if (progressContainer) {
+                const countdownContainer = document.createElement('div');
+                countdownContainer.className = 'countdown';
+                progressContainer.parentNode.insertBefore(countdownContainer, progressContainer.nextSibling);
+                
+                // Update countdown every second
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            }
+
+            // 🔔 NOTIFY ME BUTTON
+            document.getElementById('notifyMe').addEventListener('click', function() {
+                const button = this;
+                const originalText = button.innerHTML;
+                
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-check"></i> Berhasil Didaftarkan!';
+                    button.style.background = 'linear-gradient(135deg, var(--green-vibrant), var(--green-soft))';
+                    
+                    // Show success message
+                    showToast('Anda akan mendapatkan notifikasi ketika fitur ini siap!', 'green');
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                        button.style.background = 'linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft))';
+                    }, 3000);
+                }, 1500);
+            });
+
+            // 📞 CONTACT SUPPORT BUTTON
+            document.getElementById('contactSupport').addEventListener('click', function() {
+                showToast('Mengarahkan ke halaman support...', 'pink');
+                
+                setTimeout(() => {
+                    // In real app, this would redirect to support page
+                    window.open('mailto:support@ruangtemu.com', '_blank');
+                }, 500);
+            });
+
+            // 🗺️ VIEW ROADMAP BUTTON
+            document.getElementById('viewRoadmap').addEventListener('click', function() {
+                showToast('Membuka roadmap pengembangan...', 'green');
+                
+                // Create roadmap modal
+                createRoadmapModal();
+            });
+
+            // 🎭 TOAST FUNCTION
+            function showToast(message, type = 'green') {
+                const toast = document.createElement('div');
+                toast.className = 'toast-message';
+                toast.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        bottom: 30px;
+                        right: 30px;
+                        background: ${type === 'green' ? 'var(--green-vibrant)' : 'var(--pink-vibrant)'};
+                        color: white;
+                        padding: 15px 20px;
+                        border-radius: var(--radius);
+                        box-shadow: var(--shadow-hover);
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        transform: translateY(100px);
+                        opacity: 0;
+                        transition: transform 0.3s ease, opacity 0.3s ease;
+                        z-index: 9999;
+                        max-width: 350px;
+                    ">
+                        <div style="
+                            width: 36px;
+                            height: 36px;
+                            border-radius: 50%;
+                            background: rgba(255, 255, 255, 0.2);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1rem;
+                        ">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 2px;">
+                                ${type === 'green' ? 'Berhasil!' : 'Informasi'}
+                            </div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">
+                                ${message}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(toast);
+                
+                // Show toast
+                setTimeout(() => {
+                    toast.querySelector('div').style.transform = 'translateY(0)';
+                    toast.querySelector('div').style.opacity = '1';
+                }, 10);
+                
+                // Hide toast after 3 seconds
+                setTimeout(() => {
+                    toast.querySelector('div').style.transform = 'translateY(100px)';
+                    toast.querySelector('div').style.opacity = '0';
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                }, 3000);
+            }
+
+            // 🗺️ ROADMAP MODAL
+            function createRoadmapModal() {
+                const modal = document.createElement('div');
+                modal.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: rgba(0, 0, 0, 0.8);
+                        z-index: 10000;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 20px;
+                        backdrop-filter: blur(5px);
+                        animation: fadeIn 0.3s ease;
+                    ">
+                        <div style="
+                            background: var(--white);
+                            border-radius: var(--radius-lg);
+                            padding: 40px;
+                            max-width: 800px;
+                            width: 100%;
+                            max-height: 80vh;
+                            overflow-y: auto;
+                            box-shadow: var(--shadow-hover);
+                            position: relative;
+                        ">
+                            <button style="
+                                position: absolute;
+                                top: 20px;
+                                right: 20px;
+                                background: none;
+                                border: none;
+                                font-size: 1.5rem;
+                                color: var(--gray-medium);
+                                cursor: pointer;
+                            " id="closeModal">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                            <h2 style="
+                                font-size: 2rem;
+                                font-weight: 800;
+                                margin-bottom: 20px;
+                                color: var(--gray-dark);
+                                text-align: center;
+                            ">
+                                <i class="fas fa-map" style="color: var(--pink-vibrant);"></i>
+                                Roadmap Pengembangan 2025
+                            </h2>
+                            
+                            <div style="
+                                background: linear-gradient(135deg, var(--gray-light), #f0f0fa);
+                                border-radius: var(--radius);
+                                padding: 30px;
+                                margin-bottom: 20px;
+                            ">
+                                <h3 style="
+                                    font-size: 1.5rem;
+                                    font-weight: 700;
+                                    margin-bottom: 15px;
+                                    color: var(--gray-dark);
+                                ">Q1 2025</h3>
+                                <ul style="
+                                    list-style: none;
+                                    color: var(--gray-medium);
+                                    line-height: 1.7;
+                                ">
+                                    <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
+                                        <span style="
+                                            position: absolute;
+                                            left: 0;
+                                            color: var(--pink-vibrant);
+                                            font-weight: bold;
+                                        ">✓</span>
+                                        AI Recommendations & Personalization
+                                    </li>
+                                    <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
+                                        <span style="
+                                            position: absolute;
+                                            left: 0;
+                                            color: var(--pink-vibrant);
+                                            font-weight: bold;
+                                        ">✓</span>
+                                        Advanced Analytics Dashboard
+                                    </li>
+                                    <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
+                                        <span style="
+                                            position: absolute;
+                                            left: 0;
+                                            color: var(--pink-vibrant);
+                                            font-weight: bold;
+                                        ">⌛</span>
+                                        Mobile App Launch (iOS & Android)
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div style="
+                                background: linear-gradient(135deg, var(--gray-light), #f0f0fa);
+                                border-radius: var(--radius);
+                                padding: 30px;
+                                margin-bottom: 20px;
+                            ">
+                                <h3 style="
+                                    font-size: 1.5rem;
+                                    font-weight: 700;
+                                    margin-bottom: 15px;
+                                    color: var(--gray-dark);
+                                ">Q2 2025</h3>
+                                <ul style="
+                                    list-style: none;
+                                    color: var(--gray-medium);
+                                    line-height: 1.7;
+                                ">
+                                    <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
+                                        <span style="
+                                            position: absolute;
+                                            left: 0;
+                                            color: var(--pink-vibrant);
+                                            font-weight: bold;
+                                        ">⌛</span>
+                                        Live Chat 24/7 Support
+                                    </li>
+                                    <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
+                                        <span style="
+                                            position: absolute;
+                                            left: 0;
+                                            color: var(--pink-vibrant);
+                                            font-weight: bold;
+                                        ">⌛</span>
+                                        Multi-language Support
+                                    </li>
+                                    <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
+                                        <span style="
+                                            position: absolute;
+                                            left: 0;
+                                            color: var(--pink-vibrant);
+                                            font-weight: bold;
+                                        ">⌛</span>
+                                        Advanced Reporting System
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div style="
+                                text-align: center;
+                                margin-top: 30px;
+                                padding-top: 20px;
+                                border-top: 2px solid var(--gray-light);
+                            ">
+                                <p style="color: var(--gray-medium); margin-bottom: 20px;">
+                                    Roadmap dapat berubah sesuai perkembangan teknologi dan kebutuhan pengguna.
+                                </p>
+                                <button style="
+                                    background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+                                    color: white;
+                                    padding: 12px 24px;
+                                    border-radius: var(--radius);
+                                    border: none;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                " id="subscribeRoadmap">
+                                    <i class="fas fa-envelope"></i> Subscribe Roadmap Updates
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Close modal function
+                document.getElementById('closeModal').addEventListener('click', function() {
+                    modal.remove();
+                });
+                
+                // Subscribe button
+                document.getElementById('subscribeRoadmap').addEventListener('click', function() {
+                    showToast('Terima kasih telah berlangganan update roadmap!', 'green');
+                    modal.remove();
+                });
+                
+                // Close on background click
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal.firstChild) {
+                        modal.remove();
+                    }
+                });
+            }
+
+            // 🎨 ADD PROGRESS ANIMATION
+            const progressFill = document.querySelector('.progress-fill');
+            if (progressFill) {
+                // Animate progress bar on scroll
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            progressFill.style.width = '75%';
+                        }
+                    });
+                });
+                
+                observer.observe(progressFill);
+            }
+
+            // 🚀 ADD VISUAL EFFECTS
+            const gearIcons = document.querySelectorAll('.construction-gear');
+            gearIcons.forEach((gear, index) => {
+                gear.style.animationDelay = `${index * 0.5}s`;
+            });
+
+            // 📊 SIMULATE LIVE PROGRESS
+            let simulatedProgress = 75;
+            const progressPercentage = document.querySelector('.progress-percentage');
+            const progressFillElement = document.querySelector('.progress-fill');
+            
+            // Simulate random progress updates
+            setInterval(() => {
+                if (simulatedProgress < 100) {
+                    simulatedProgress += Math.random() * 0.1;
+                    if (simulatedProgress > 100) simulatedProgress = 100;
+                    
+                    if (progressPercentage && progressFillElement) {
+                        progressPercentage.textContent = `${Math.floor(simulatedProgress)}%`;
+                        progressFillElement.style.width = `${simulatedProgress}%`;
+                    }
+                }
+            }, 5000);
+
+            // 📱 RESPONSIVE ADJUSTMENTS
+            function adjustForMobile() {
+                const actionButtons = document.querySelector('.action-buttons');
+                if (window.innerWidth <= 768 && actionButtons) {
+                    actionButtons.style.flexDirection = 'column';
+                }
+            }
+
+            window.addEventListener('resize', adjustForMobile);
+            adjustForMobile();
+
+            // 🎵 ADD AMBIENT SOUND (OPTIONAL)
+            function playAmbientSound() {
+                // In real app, you could play gentle ambient sound
+                console.log('🔊 Ambient development sound would play here');
+            }
+
+            // Play sound after delay
+            setTimeout(playAmbientSound, 1000);
+
+            // 📈 TRACK PAGE VIEW
+            function trackPageView() {
+                // In real app, you would send this to analytics service
+                console.log('📊 Development page viewed');
+            }
+
+            trackPageView();
+        });
+    </script>
+</body>
+</html>

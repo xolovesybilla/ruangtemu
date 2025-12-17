@@ -53,7 +53,7 @@
         ::-webkit-scrollbar-track {
             background: var(--gray-light);
         }
-        ::webkit-scrollbar-thumb {
+        ::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
             border-radius: 10px;
         }
@@ -99,11 +99,11 @@
             height: 40px;
             width: auto;
             object-fit: contain;
-            animation: logoSpin 20s linear infinite paused;
+            transition: var(--transition);
         }
 
         .logo:hover .logo-image {
-            animation-play-state: running;
+            transform: rotate(5deg);
         }
 
         .logo-text {
@@ -136,21 +136,6 @@
             overflow: hidden;
         }
 
-        .login-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .login-btn:hover::before {
-            left: 100%;
-        }
-
         .login-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
@@ -169,7 +154,6 @@
 
         .mobile-menu-btn:hover {
             color: var(--pink-vibrant);
-            transform: rotate(90deg);
         }
 
         /* 📱 RESPONSIVE NAVBAR */
@@ -222,22 +206,8 @@
             border-radius: 30px;
             font-weight: 600;
             margin-bottom: 15px;
-            animation: pulse 2s infinite, float 3s ease-in-out infinite;
+            animation: pulse 2s infinite;
             font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-badge::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(30deg);
-            animation: shimmer 3s infinite;
         }
 
         .hero-title {
@@ -249,7 +219,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: fadeInUp 1s ease 0.2s both, textGlow 3s ease-in-out infinite alternate;
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
         @media (max-width: 768px) {
@@ -315,7 +285,6 @@
             height: 4px;
             background: linear-gradient(90deg, var(--pink-vibrant), var(--green-vibrant));
             border-radius: 2px;
-            animation: expandWidth 2s ease-in-out infinite alternate;
         }
 
         .section-subtitle {
@@ -382,11 +351,6 @@
             line-height: 1.7;
             color: var(--gray-medium);
             margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .about-description:hover {
-            transform: translateX(5px);
         }
 
         .about-image {
@@ -396,23 +360,6 @@
             transition: var(--transition);
             height: 350px;
             position: relative;
-        }
-
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(247, 132, 197, 0.1), rgba(27, 96, 47, 0.1));
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .about-image:hover::before {
-            opacity: 1;
         }
 
         .about-image:hover {
@@ -448,12 +395,10 @@
             position: relative;
             overflow: hidden;
             height: 100%;
-            transform-style: preserve-3d;
-            perspective: 1000px;
         }
 
         .vm-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-hover);
         }
 
@@ -465,7 +410,6 @@
             width: 5px;
             height: 100%;
             background: linear-gradient(to bottom, var(--pink-vibrant), var(--green-vibrant));
-            animation: gradientFlow 3s ease-in-out infinite alternate;
         }
 
         .vm-icon {
@@ -480,11 +424,10 @@
             background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
             color: white;
             transition: var(--transition);
-            transform: translateZ(20px);
         }
 
         .vm-card:hover .vm-icon {
-            transform: scale(1.1) rotate(10deg) translateZ(30px);
+            transform: scale(1.1) rotate(10deg);
         }
 
         .vm-card:nth-child(2) .vm-icon {
@@ -500,14 +443,12 @@
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--gray-dark);
-            transform: translateZ(10px);
         }
 
         .vm-content {
             color: var(--gray-medium);
             line-height: 1.6;
             font-size: 0.95rem;
-            transform: translateZ(5px);
         }
 
         /* 🎭 PHILOSOPHY - COMPACT */
@@ -518,7 +459,6 @@
             margin-bottom: 60px;
             position: relative;
             overflow: hidden;
-            animation: gradientShift 10s ease-in-out infinite alternate;
         }
 
         @media (max-width: 768px) {
@@ -537,7 +477,6 @@
             max-width: 800px;
             margin: 0 auto;
             font-style: italic;
-            animation: fadeIn 2s ease;
         }
 
         /* 🎨 LOGO & IDENTITY - IMPROVED */
@@ -571,37 +510,15 @@
             justify-content: center;
             box-shadow: var(--shadow-hover);
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-large::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(transparent, var(--pink-soft), transparent 30%);
-            animation: rotate 4s linear infinite;
-        }
-
-        .logo-large::after {
-            content: '';
-            position: absolute;
-            inset: 8px;
-            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
-            border-radius: 20px;
         }
 
         .logo-large:hover {
-            transform: rotate(5deg) scale(1.1);
-            box-shadow: 0 20px 50px rgba(255, 77, 148, 0.3);
+            transform: rotate(5deg) scale(1.05);
         }
 
         .logo-large img {
             width: 160px;
             height: auto;
-            z-index: 1;
-            position: relative;
             transition: var(--transition);
         }
 
@@ -625,23 +542,12 @@
             background: var(--white);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .logo-meaning:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
         }
 
         .meaning-item {
             margin-bottom: 20px;
             padding-bottom: 20px;
             border-bottom: 1px solid var(--gray-light);
-            transition: var(--transition);
-        }
-
-        .meaning-item:hover {
-            transform: translateX(10px);
         }
 
         .meaning-item:last-child {
@@ -662,11 +568,6 @@
 
         .meaning-title i {
             font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .meaning-item:hover .meaning-title i {
-            transform: rotate(15deg) scale(1.2);
         }
 
         .meaning-content {
@@ -675,7 +576,7 @@
             font-size: 0.95rem;
         }
 
-        /* 👥 FOUNDERS SECTION - IMPROVED WITH SINGLE IMAGE */
+        /* 👥 FOUNDERS SECTION - IMPROVED */
         .founders-section {
             margin-bottom: 60px;
         }
@@ -715,33 +616,12 @@
             padding: 30px 30px 20px;
             background: linear-gradient(135deg, rgba(255, 77, 148, 0.05), rgba(0, 224, 160, 0.05));
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .founder-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: rotate(30deg);
-            animation: shimmer 3s infinite;
         }
 
         @media (max-width: 768px) {
             .founder-header {
                 padding: 25px 25px 15px;
             }
-        }
-
-        .founder-image-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
         }
 
         .founder-image {
@@ -752,21 +632,6 @@
             margin: 0 auto 20px;
             border: 5px solid var(--white);
             box-shadow: var(--shadow);
-            position: relative;
-            z-index: 2;
-        }
-
-        .founder-image::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, var(--pink-vibrant), var(--green-vibrant));
-            border-radius: 50%;
-            z-index: -1;
-            animation: rotate 3s linear infinite;
         }
 
         .founder-image img {
@@ -774,8 +639,6 @@
             height: 100%;
             object-fit: cover;
             transition: var(--transition);
-            position: relative;
-            z-index: 1;
         }
 
         .founder-card:hover .founder-image img {
@@ -787,24 +650,18 @@
             font-weight: 700;
             margin-bottom: 5px;
             color: var(--gray-dark);
-            position: relative;
-            z-index: 2;
         }
 
         .founder-role {
             font-size: 1rem;
             margin-bottom: 10px;
             font-weight: 600;
-            position: relative;
-            z-index: 2;
         }
 
         .founder-education {
             font-size: 0.9rem;
             color: var(--gray-medium);
             margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
         }
 
         .founder-quote {
@@ -815,8 +672,6 @@
             padding: 10px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: var(--radius-sm);
-            position: relative;
-            z-index: 2;
         }
 
         .founder-details {
@@ -848,11 +703,6 @@
 
         .detail-group h4 i {
             font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .detail-group:hover h4 i {
-            transform: rotate(15deg);
         }
 
         .detail-content {
@@ -882,27 +732,12 @@
             font-size: 0.85rem;
             text-align: center;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skills-list li::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-        }
-
-        .skills-list li:hover::before {
-            left: 100%;
         }
 
         .skills-list li:hover {
-            transform: translateY(-3px);
+            background: var(--pink-vibrant);
+            color: white;
+            transform: translateY(-2px);
         }
 
         /* SPECIALIZATION colors for founder cards */
@@ -922,12 +757,10 @@
 
         .founder-card:nth-child(1) .skills-list li:hover {
             background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
-            color: white;
         }
 
         .founder-card:nth-child(2) .skills-list li:hover {
             background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
-            color: white;
         }
 
         .founder-card:nth-child(1) .detail-group h4 {
@@ -945,20 +778,6 @@
             border-radius: var(--radius);
             margin-bottom: 60px;
             color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: rotate(30deg);
-            animation: shimmer 4s infinite;
         }
 
         .stats-grid {
@@ -966,17 +785,10 @@
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 25px;
             text-align: center;
-            position: relative;
-            z-index: 1;
         }
 
         .stat-item {
             padding: 15px;
-            transition: var(--transition);
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
         }
 
         .stat-number {
@@ -984,7 +796,6 @@
             font-weight: 800;
             margin-bottom: 8px;
             display: block;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .stat-label {
@@ -1008,19 +819,6 @@
             padding: 40px 0 20px;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
             margin-top: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--pink-vibrant), var(--green-vibrant));
-            animation: gradientFlow 3s ease-in-out infinite alternate;
         }
 
         .footer-content {
@@ -1052,7 +850,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -1069,87 +867,12 @@
             }
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes textGlow {
-            0% {
-                filter: drop-shadow(0 0 5px rgba(247, 132, 197, 0.3));
-            }
-            100% {
-                filter: drop-shadow(0 0 10px rgba(27, 96, 47, 0.3));
-            }
-        }
-
         @keyframes slideDown {
             from {
                 transform: translateY(-100%);
             }
             to {
                 transform: translateY(0);
-            }
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes gradientFlow {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 100% 50%;
-            }
-        }
-
-        @keyframes expandWidth {
-            0% {
-                width: 60px;
-            }
-            100% {
-                width: 120px;
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) rotate(30deg);
-            }
-            100% {
-                transform: translateX(100%) rotate(30deg);
-            }
-        }
-
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        @keyframes logoSpin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
             }
         }
 
@@ -1173,7 +896,6 @@
             visibility: hidden;
             transition: var(--transition);
             z-index: 100;
-            animation: float 2s ease-in-out infinite;
         }
 
         .back-to-top.visible {
@@ -1182,7 +904,7 @@
         }
 
         .back-to-top:hover {
-            transform: translateY(-5px) scale(1.1);
+            transform: translateY(-3px);
         }
 
         /* 🎪 BUTTONS */
@@ -1199,8 +921,6 @@
             border: none;
             cursor: pointer;
             font-size: 0.95rem;
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-primary {
@@ -1208,41 +928,9 @@
             color: white;
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
-        }
-
-        /* 🎪 UTILITY CLASSES */
-        .highlight {
-            background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-weight: 600;
-            display: inline-block;
-            color: var(--pink-vibrant);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .highlight:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
         }
 
         /* Founder story section */
@@ -1252,19 +940,6 @@
             border-radius: var(--radius);
             margin-top: 40px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .founder-story::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--pink-vibrant), var(--green-vibrant));
-            animation: gradientFlow 3s ease-in-out infinite alternate;
         }
 
         @media (max-width: 768px) {
@@ -1279,17 +954,10 @@
             color: var(--gray-medium);
             line-height: 1.7;
             font-size: 1.05rem;
-            position: relative;
-            z-index: 1;
         }
 
         .founder-story-content p {
             margin-bottom: 20px;
-            transition: var(--transition);
-        }
-
-        .founder-story-content p:hover {
-            transform: translateX(5px);
         }
 
         .founder-story-content p:last-child {
@@ -1303,36 +971,6 @@
             line-height: 1;
             display: block;
             margin-bottom: 10px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Floating elements */
-        .floating-element {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, var(--pink-vibrant), var(--green-vibrant));
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        .floating-element:nth-child(odd) {
-            animation-delay: -3s;
-        }
-
-        /* Parallax effect */
-        .parallax-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            opacity: 0.05;
         }
 
         /* Loading animation */
@@ -1365,6 +1003,15 @@
             font-weight: 600;
         }
 
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         /* 🎯 RESPONSIVE IMPROVEMENTS */
         @media (max-width: 480px) {
             .hero-title {
@@ -1389,32 +1036,45 @@
             }
         }
 
-        /* 🎯 INTERACTIVE ELEMENTS */
-        .interactive-card {
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Mobile menu styles */
+        .mobile-menu {
+            display: none;
         }
 
-        .interactive-card:active {
-            transform: scale(0.98);
+        .mobile-menu.active {
+            display: block;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 999;
+            padding: 20px;
+            animation: slideDown 0.3s ease;
         }
 
-        /* Hover effects for images */
-        .zoom-on-hover {
-            transition: transform 0.5s ease;
+        .mobile-menu-item {
+            display: block;
+            padding: 15px 20px;
+            color: var(--gray-dark);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray-light);
+            transition: var(--transition);
         }
 
-        .zoom-on-hover:hover {
-            transform: scale(1.05);
+        .mobile-menu-item:hover {
+            color: var(--pink-vibrant);
+            padding-left: 25px;
+        }
+
+        .mobile-menu-item:last-child {
+            border-bottom: none;
         }
     </style>
 </head>
 <body>
-    <!-- 🎪 LOADING SPINNER -->
-    <div class="loading-spinner" id="loadingSpinner">
-        <div class="spinner"></div>
-        <div class="loading-text">Memuat Ruang Temu...</div>
-    </div>
+    <!-- 🎪 LOADING SPINNER (DISABLED FOR NOW) -->
 
     <!-- 🎪 NAVBAR - SIMPLIFIED -->
     <nav class="navbar">
@@ -1434,6 +1094,19 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="mobile-menu-item">
+            <i class="fas fa-home"></i> Beranda
+        </a>
+        <a href="#about" class="mobile-menu-item">
+            <i class="fas fa-info-circle"></i> Tentang Kami
+        </a>
+        <a href="register.html" class="mobile-menu-item">
+            <i class="fas fa-sign-in-alt"></i> Masuk
+        </a>
+    </div>
 
     <!-- 🎯 BACK TO TOP -->
     <a href="#" class="back-to-top" id="backToTop">
@@ -1500,7 +1173,7 @@
             </div>
             
             <div class="vision-mission-grid">
-                <div class="vm-card interactive-card">
+                <div class="vm-card">
                     <div class="vm-icon">
                         <i class="fas fa-eye"></i>
                     </div>
@@ -1511,7 +1184,7 @@
                     </p>
                 </div>
                 
-                <div class="vm-card interactive-card">
+                <div class="vm-card">
                     <div class="vm-icon">
                         <i class="fas fa-bullseye"></i>
                     </div>
@@ -1525,7 +1198,7 @@
                     </p>
                 </div>
                 
-                <div class="vm-card interactive-card">
+                <div class="vm-card">
                     <div class="vm-icon">
                         <i class="fas fa-handshake"></i>
                     </div>
@@ -1572,7 +1245,7 @@
             <div class="logo-identity">
                 <div class="logo-display">
                     <div class="logo-large">
-                        <img src="img/logo.png" alt="Ruang Temu Logo" class="zoom-on-hover" onerror="this.onerror=null; this.style.display='none'; this.parentNode.innerHTML='<span style=\"color:white;font-size:2.5rem;font-weight:bold;z-index:2;position:relative\">RT</span>';">
+                        <img src="img/logo.png" alt="Ruang Temu Logo" onerror="this.onerror=null; this.style.display='none'; this.parentNode.innerHTML='<span style=\"color:white;font-size:2.5rem;font-weight:bold\">RT</span>';">
                     </div>
                     <p style="color: var(--gray-medium); margin-top: 10px; font-size: 0.95rem;">Simbol inovasi dan koneksi</p>
                 </div>
@@ -1597,7 +1270,7 @@
             </div>
         </section>
 
-        <!-- 👥 FOUNDERS SECTION - TWO FOUNDERS -->
+        <!-- 👥 FOUNDERS SECTION -->
         <section class="section founders-section">
             <div class="section-header">
                 <h2 class="section-title">Founders Ruang Temu</h2>
@@ -1608,12 +1281,10 @@
             
             <div class="founders-grid">
                 <!-- Founder 1: Andarini Cahyani -->
-                <div class="founder-card interactive-card">
+                <div class="founder-card">
                     <div class="founder-header">
-                        <div class="founder-image-container">
-                            <div class="founder-image">
-                                <img src="img/founder.HEIC" alt="Andarini Cahyani" onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1361&q=80'">
-                            </div>
+                        <div class="founder-image">
+                            <img src="img/founder.HEIC" alt="Andarini Cahyani" onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1361&q=80'">
                         </div>
                         <div class="founder-name">Andarini Cahyani</div>
                         <div class="founder-role">Co-Founder & CEO</div>
@@ -1649,12 +1320,10 @@
                 </div>
                 
                 <!-- Founder 2: Syauqina Salsabila -->
-                <div class="founder-card interactive-card">
+                <div class="founder-card">
                     <div class="founder-header">
-                        <div class="founder-image-container">
-                            <div class="founder-image">
-                                <img src="img/founder.HEIC" alt="Syauqina Salsabila" onerror="this.src='https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80'">
-                            </div>
+                        <div class="founder-image">
+                            <img src="img/founder.HEIC" alt="Syauqina Salsabila" onerror="this.src='https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80'">
                         </div>
                         <div class="founder-name">Syauqina Salsabila</div>
                         <div class="founder-role">Co-Founder & CTO</div>
@@ -1753,146 +1422,29 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Show loading spinner
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            loadingSpinner.style.display = 'flex';
-            
-            // Hide loading spinner after page loads
-            window.addEventListener('load', function() {
-                setTimeout(() => {
-                    loadingSpinner.style.display = 'none';
-                }, 500);
-            });
-
-            // Create floating elements
-            function createFloatingElements() {
-                const colors = ['#F784C5', '#FF8AB5', '#1B602F', '#80FFD6'];
-                for (let i = 0; i < 10; i++) {
-                    const element = document.createElement('div');
-                    element.classList.add('floating-element');
-                    element.style.left = Math.random() * 100 + '%';
-                    element.style.top = Math.random() * 100 + '%';
-                    element.style.width = Math.random() * 40 + 20 + 'px';
-                    element.style.height = element.style.width;
-                    element.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
-                    element.style.opacity = Math.random() * 0.1 + 0.05;
-                    element.style.animationDelay = Math.random() * 5 + 's';
-                    element.style.animationDuration = Math.random() * 5 + 5 + 's';
-                    document.body.appendChild(element);
-                }
-            }
-            
-            createFloatingElements();
+            console.log('DOM loaded');
 
             // 📱 MOBILE MENU
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            if (mobileMenuBtn) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
                 mobileMenuBtn.addEventListener('click', function() {
-                    // Create mobile menu if it doesn't exist
-                    if (!document.querySelector('.mobile-menu')) {
-                        const mobileMenu = document.createElement('div');
-                        mobileMenu.className = 'mobile-menu';
-                        mobileMenu.innerHTML = `
-                            <div class="mobile-menu-overlay"></div>
-                            <div class="mobile-menu-content">
-                                <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
-                                <a href="index.html" class="mobile-menu-item"><i class="fas fa-home"></i> Beranda</a>
-                                <a href="#about" class="mobile-menu-item"><i class="fas fa-info-circle"></i> Tentang Kami</a>
-                                <a href="register.html" class="mobile-menu-item"><i class="fas fa-sign-in-alt"></i> Masuk</a>
-                            </div>
-                        `;
-                        
-                        // Add styles for mobile menu
-                        const style = document.createElement('style');
-                        style.textContent = `
-                            .mobile-menu {
-                                position: fixed;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                z-index: 2000;
-                            }
-                            .mobile-menu-overlay {
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                background: rgba(0,0,0,0.5);
-                                animation: fadeIn 0.3s ease;
-                            }
-                            .mobile-menu-content {
-                                position: absolute;
-                                top: 0;
-                                right: 0;
-                                width: 80%;
-                                max-width: 300px;
-                                height: 100%;
-                                background: white;
-                                padding: 70px 20px 20px;
-                                animation: slideInRight 0.3s ease;
-                            }
-                            .mobile-menu-close {
-                                position: absolute;
-                                top: 20px;
-                                right: 20px;
-                                background: none;
-                                border: none;
-                                font-size: 1.5rem;
-                                color: var(--gray-dark);
-                                cursor: pointer;
-                            }
-                            .mobile-menu-item {
-                                display: flex;
-                                align-items: center;
-                                gap: 10px;
-                                padding: 15px;
-                                color: var(--gray-dark);
-                                text-decoration: none;
-                                border-bottom: 1px solid var(--gray-light);
-                                transition: var(--transition);
-                            }
-                            .mobile-menu-item:hover {
-                                color: var(--pink-vibrant);
-                                transform: translateX(10px);
-                            }
-                            @keyframes slideInRight {
-                                from { transform: translateX(100%); }
-                                to { transform: translateX(0); }
-                            }
-                        `;
-                        document.head.appendChild(style);
-                        document.body.appendChild(mobileMenu);
-                        
-                        // Add close functionality
-                        document.querySelector('.mobile-menu-close').addEventListener('click', function() {
-                            mobileMenu.remove();
-                        });
-                        
-                        // Close menu when clicking overlay
-                        document.querySelector('.mobile-menu-overlay').addEventListener('click', function() {
-                            mobileMenu.remove();
-                        });
-                        
-                        // Smooth scroll for menu items
-                        document.querySelectorAll('.mobile-menu-item[href^="#"]').forEach(item => {
-                            item.addEventListener('click', function(e) {
-                                e.preventDefault();
-                                const targetId = this.getAttribute('href');
-                                if (targetId === '#') return;
-                                
-                                const targetElement = document.querySelector(targetId);
-                                if (targetElement) {
-                                    window.scrollTo({
-                                        top: targetElement.offsetTop - 80,
-                                        behavior: 'smooth'
-                                    });
-                                    mobileMenu.remove();
-                                }
-                            });
-                        });
+                    mobileMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                        mobileMenu.classList.remove('active');
                     }
+                });
+                
+                // Close menu when clicking menu items
+                mobileMenu.querySelectorAll('.mobile-menu-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                    });
                 });
             }
 
@@ -2008,21 +1560,14 @@
                 };
             });
 
-            // 🎯 ADDITIONAL INTERACTIVITY
-            // Add click effect to interactive cards
-            document.querySelectorAll('.interactive-card').forEach(card => {
-                card.addEventListener('mousedown', function() {
-                    this.style.transform = 'scale(0.98)';
+            // Prevent default behavior for login button
+            const loginBtn = document.querySelector('.login-btn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'register.html';
                 });
-                
-                card.addEventListener('mouseup', function() {
-                    this.style.transform = '';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                });
-            });
+            }
 
             // Add hover effect to skills items
             document.querySelectorAll('.skills-list li').forEach(item => {
@@ -2033,12 +1578,6 @@
                 item.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0)';
                 });
-            });
-
-            // Prevent default behavior for login button
-            document.querySelector('.login-btn').addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'register.html';
             });
 
             // Add typing effect for hero subtitle (optional)
@@ -2058,33 +1597,12 @@
                 setTimeout(typeWriter, 1000);
             }
 
-            // 🎪 PARALLAX EFFECT
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const parallaxElements = document.querySelectorAll('.parallax-bg');
-                
-                parallaxElements.forEach(element => {
-                    const speed = element.dataset.speed || 0.5;
-                    element.style.transform = `translateY(${scrolled * speed}px)`;
-                });
-            });
+            console.log('All JavaScript loaded successfully');
+        });
 
-            // 🎪 RANDOM COLOR GENERATION FOR FLOATING ELEMENTS
-            function getRandomColor() {
-                const colors = [var(--pink-vibrant), var(--pink-soft), var(--green-vibrant), var(--green-soft)];
-                return colors[Math.floor(Math.random() * colors.length)];
-            }
-
-            // 🎪 ADD PULSE ANIMATION TO INTERACTIVE ELEMENTS
-            setInterval(() => {
-                const randomElement = document.querySelectorAll('.interactive-card')[Math.floor(Math.random() * document.querySelectorAll('.interactive-card').length)];
-                if (randomElement) {
-                    randomElement.style.boxShadow = '0 0 0 5px rgba(247, 132, 197, 0.3)';
-                    setTimeout(() => {
-                        randomElement.style.boxShadow = '';
-                    }, 500);
-                }
-            }, 3000);
+        // Handle window load
+        window.addEventListener('load', function() {
+            console.log('Page fully loaded');
         });
     </script>
 </body>

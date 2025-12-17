@@ -6,7 +6,6 @@
     <title>Tentang Kami • Ruang Temu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
         /* 🎨 PALETTE CONSISTENCY */
         :root {
@@ -44,6 +43,7 @@
             color: var(--gray-dark);
             min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* 🎀 CUSTOM SCROLLBAR */
@@ -58,7 +58,7 @@
             border-radius: 10px;
         }
 
-        /* 🎪 NAVBAR */
+        /* 🎪 NAVBAR - SIMPLIFIED */
         .navbar {
             background: var(--white);
             box-shadow: var(--shadow);
@@ -68,15 +68,18 @@
             right: 0;
             z-index: 1000;
             padding: 0 30px;
+            height: 70px;
+            display: flex;
+            align-items: center;
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
         }
 
         .logo {
@@ -106,47 +109,28 @@
             background-clip: text;
         }
 
-        .nav-links {
+        .nav-actions {
             display: flex;
-            gap: 30px;
             align-items: center;
+            gap: 20px;
         }
 
-        .nav-link {
+        .login-btn {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            padding: 10px 24px;
+            border-radius: var(--radius);
             text-decoration: none;
-            color: var(--gray-medium);
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 8px 0;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--pink-vibrant);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--pink-vibrant), var(--green-vibrant));
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link.active {
-            color: var(--pink-vibrant);
             font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .nav-link.active::after {
-            width: 100%;
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
 
         .mobile-menu-btn {
@@ -159,18 +143,45 @@
             padding: 8px;
         }
 
-        /* 🎯 MAIN CONTENT */
-        .main-content {
-            padding-top: 100px;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 120px 30px 60px;
+        /* 📱 RESPONSIVE NAVBAR */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+                height: 60px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .login-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
         }
 
-        /* 🏆 HERO SECTION */
+        /* 🎯 MAIN CONTENT - IMPROVED SPACING */
+        .main-content {
+            padding-top: 70px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 90px 30px 40px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 80px 20px 30px;
+            }
+        }
+
+        /* 🏆 HERO SECTION - COMPACT */
         .hero-section {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
             animation: fadeInUp 1s ease;
         }
 
@@ -178,17 +189,18 @@
             display: inline-block;
             background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
             color: white;
-            padding: 10px 24px;
+            padding: 8px 20px;
             border-radius: 30px;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             animation: pulse 2s infinite;
+            font-size: 0.9rem;
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.2;
             background: linear-gradient(135deg, var(--gray-dark), var(--pink-vibrant), var(--green-vibrant));
             -webkit-background-clip: text;
@@ -199,81 +211,46 @@
 
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
             }
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--gray-medium);
-            max-width: 800px;
-            margin: 0 auto 40px;
+            max-width: 700px;
+            margin: 0 auto 30px;
             line-height: 1.6;
             animation: fadeInUp 1s ease 0.4s both;
         }
 
-        /* 📱 RESPONSIVE NAVBAR */
-        @media (max-width: 1024px) {
-            .nav-links {
-                gap: 20px;
-            }
+        /* 🎭 CONTENT SECTIONS - TIGHTER SPACING */
+        .section {
+            margin-bottom: 70px;
+            animation: fadeInUp 1s ease;
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 0 20px;
+            .section {
+                margin-bottom: 50px;
             }
-            
-            .nav-container {
-                padding: 15px 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                right: 0;
-                background: var(--white);
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                box-shadow: var(--shadow);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: var(--transition);
-            }
-            
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .main-content {
-                padding: 100px 20px 40px;
-            }
-        }
-
-        /* 🎭 CONTENT SECTIONS */
-        .section {
-            margin-bottom: 100px;
-            animation: fadeInUp 1s ease;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             position: relative;
             display: inline-block;
         }
@@ -281,71 +258,79 @@
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 60px;
             height: 4px;
             background: linear-gradient(90deg, var(--pink-vibrant), var(--green-vibrant));
             border-radius: 2px;
         }
 
         .section-subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--gray-medium);
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
-        /* 🎯 WHAT IS RUANG TEMU */
+        /* 🎯 WHAT IS RUANG TEMU - IMPROVED */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 40px;
             align-items: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         @media (max-width: 1024px) {
             .about-content {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 30px;
             }
         }
 
         .about-text {
-            padding-right: 30px;
+            padding-right: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .about-text {
+                padding-right: 0;
+            }
         }
 
         .about-title {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--gray-dark);
         }
 
         .about-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1.05rem;
+            line-height: 1.7;
             color: var(--gray-medium);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .about-image {
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow-hover);
             transition: var(--transition);
+            height: 350px;
         }
 
         .about-image:hover {
-            transform: translateY(-10px) rotate(2deg);
+            transform: translateY(-5px);
         }
 
         .about-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
             transition: var(--transition);
         }
@@ -354,17 +339,17 @@
             transform: scale(1.05);
         }
 
-        /* 🎯 VISION MISSION */
+        /* 🎯 VISION MISSION - COMPACT */
         .vision-mission-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
         }
 
         .vm-card {
             background: var(--white);
-            padding: 40px;
+            padding: 30px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -374,7 +359,7 @@
         }
 
         .vm-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
 
@@ -383,20 +368,20 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 6px;
+            width: 5px;
             height: 100%;
             background: linear-gradient(to bottom, var(--pink-vibrant), var(--green-vibrant));
         }
 
         .vm-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 25px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
             background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
             color: white;
         }
@@ -410,76 +395,59 @@
         }
 
         .vm-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: var(--gray-dark);
         }
 
         .vm-content {
             color: var(--gray-medium);
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        /* 🎭 PHILOSOPHY */
+        /* 🎭 PHILOSOPHY - COMPACT */
         .philosophy-content {
             background: linear-gradient(135deg, rgba(255, 77, 148, 0.05), rgba(0, 224, 160, 0.05));
-            padding: 60px;
-            border-radius: var(--radius-lg);
-            margin-bottom: 80px;
+            padding: 40px;
+            border-radius: var(--radius);
+            margin-bottom: 60px;
             position: relative;
             overflow: hidden;
         }
 
-        .philosophy-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, var(--pink-vibrant), transparent 70%);
-            border-radius: 50%;
-            opacity: 0.1;
-        }
-
-        .philosophy-content::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--green-vibrant), transparent 70%);
-            border-radius: 50%;
-            opacity: 0.1;
+        @media (max-width: 768px) {
+            .philosophy-content {
+                padding: 30px 20px;
+            }
         }
 
         .philosophy-text {
             position: relative;
             z-index: 1;
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.7;
             color: var(--gray-dark);
             text-align: center;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             font-style: italic;
         }
 
-        /* 🎨 LOGO & IDENTITY */
+        /* 🎨 LOGO & IDENTITY - IMPROVED */
         .logo-identity {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 40px;
             align-items: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         @media (max-width: 1024px) {
             .logo-identity {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 30px;
             }
         }
 
@@ -488,11 +456,11 @@
         }
 
         .logo-large {
-            width: 300px;
-            height: 300px;
-            margin: 0 auto 30px;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 20px;
             background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
-            border-radius: 30px;
+            border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -501,24 +469,35 @@
         }
 
         .logo-large:hover {
-            transform: rotate(5deg) scale(1.05);
+            transform: rotate(5deg) scale(1.03);
         }
 
         .logo-large img {
-            width: 200px;
+            width: 160px;
             height: auto;
         }
 
+        @media (max-width: 768px) {
+            .logo-large {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .logo-large img {
+                width: 130px;
+            }
+        }
+
         .logo-meaning {
-            padding: 30px;
+            padding: 25px;
             background: var(--white);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
         }
 
         .meaning-item {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
             border-bottom: 1px solid var(--gray-light);
         }
 
@@ -529,34 +508,42 @@
         }
 
         .meaning-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--pink-vibrant);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .meaning-title i {
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .meaning-content {
             color: var(--gray-medium);
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        /* 👥 FOUNDERS SECTION */
+        /* 👥 FOUNDERS SECTION - TWO FOUNDERS */
         .founders-section {
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         .founders-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .founders-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
         }
 
         .founder-card {
@@ -569,15 +556,30 @@
         }
 
         .founder-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
 
+        .founder-header {
+            padding: 30px 30px 20px;
+            background: linear-gradient(135deg, rgba(255, 77, 148, 0.05), rgba(0, 224, 160, 0.05));
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .founder-header {
+                padding: 25px 25px 15px;
+            }
+        }
+
         .founder-image {
-            width: 100%;
-            height: 300px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             overflow: hidden;
-            position: relative;
+            margin: 0 auto 20px;
+            border: 5px solid var(--white);
+            box-shadow: var(--shadow);
         }
 
         .founder-image img {
@@ -588,243 +590,208 @@
         }
 
         .founder-card:hover .founder-image img {
-            transform: scale(1.1);
-        }
-
-        .founder-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px;
-            color: white;
+            transform: scale(1.05);
         }
 
         .founder-name {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 5px;
+            color: var(--gray-dark);
         }
 
         .founder-role {
             font-size: 1rem;
-            opacity: 0.9;
+            color: var(--pink-vibrant);
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
-        .founder-info {
-            padding: 25px;
-        }
-
-        .founder-bio {
+        .founder-education {
+            font-size: 0.9rem;
             color: var(--gray-medium);
-            line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        .founder-quote {
+            font-style: italic;
+            color: var(--gray-medium);
+            line-height: 1.5;
+            font-size: 0.9rem;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--radius-sm);
         }
 
         .founder-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+            padding: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .founder-details {
+                padding: 20px;
+            }
+        }
+
+        .detail-group {
             margin-bottom: 20px;
         }
 
-        .detail-item {
+        .detail-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-group h4 {
+            font-size: 1rem;
+            color: var(--pink-vibrant);
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .detail-group h4 i {
             font-size: 0.9rem;
+        }
+
+        .detail-content {
             color: var(--gray-medium);
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        .detail-item i {
-            color: var(--pink-vibrant);
+        .skills-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .founder-social {
-            display: flex;
-            gap: 15px;
+        @media (max-width: 480px) {
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .skills-list li {
+            padding: 8px 12px;
             background: var(--gray-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray-dark);
-            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            text-align: center;
             transition: var(--transition);
         }
 
-        .social-link:hover {
+        .skills-list li:hover {
             background: var(--pink-vibrant);
             color: white;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
-        /* 🎪 CAROUSEL SECTION */
-        .carousel-section {
-            margin-bottom: 80px;
+        /* SPECIALIZATION colors for founder cards */
+        .founder-card:nth-child(1) .founder-role {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .swiper {
-            width: 100%;
-            height: 500px;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-hover);
+        .founder-card:nth-child(2) .founder-role {
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .swiper-slide {
-            position: relative;
-            overflow: hidden;
+        .founder-card:nth-child(1) .skills-list li:hover {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
         }
 
-        .swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .founder-card:nth-child(2) .skills-list li:hover {
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
         }
 
-        .slide-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 30px;
-            color: white;
-        }
-
-        .slide-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .slide-desc {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .swiper-button-next,
-        .swiper-button-prev {
-            color: white;
-            background: rgba(255, 255, 255, 0.2);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            backdrop-filter: blur(10px);
-        }
-
-        .swiper-button-next:after,
-        .swiper-button-prev:after {
-            font-size: 1.2rem;
-        }
-
-        /* 🎯 STATS SECTION */
+        /* 🎯 STATS SECTION - COMPACT */
         .stats-section {
             background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
-            padding: 80px 0;
-            border-radius: var(--radius-lg);
-            margin-bottom: 80px;
+            padding: 50px 0;
+            border-radius: var(--radius);
+            margin-bottom: 60px;
             color: white;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
             text-align: center;
         }
 
         .stat-item {
-            padding: 20px;
+            padding: 15px;
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: block;
         }
 
         .stat-label {
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
 
-        /* 🎭 FOOTER */
+        @media (max-width: 768px) {
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .stat-label {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 🎭 FOOTER - SIMPLIFIED */
         .footer {
             background: var(--white);
-            padding: 60px 0 30px;
+            padding: 40px 0 20px;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            margin-top: 40px;
         }
 
         .footer-content {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            text-align: center;
         }
 
-        .footer-section h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--gray-dark);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--gray-medium);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--pink-vibrant);
-            padding-left: 5px;
-        }
-
-        .footer-contact p {
-            color: var(--gray-medium);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-contact i {
-            color: var(--pink-vibrant);
+        @media (max-width: 768px) {
+            .footer {
+                padding: 30px 0 15px;
+            }
+            
+            .footer-content {
+                padding: 0 20px;
+            }
         }
 
         .copyright {
-            text-align: center;
-            padding-top: 30px;
+            padding-top: 20px;
             border-top: 1px solid var(--gray-light);
             color: var(--gray-medium);
             font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         /* 🎯 ANIMATIONS */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -837,17 +804,17 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.03);
             }
         }
 
         /* 🎪 BACK TO TOP */
         .back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
             border-radius: 50%;
             display: flex;
@@ -855,7 +822,7 @@
             justify-content: center;
             color: white;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1rem;
             box-shadow: var(--shadow-hover);
             opacity: 0;
             visibility: hidden;
@@ -869,7 +836,7 @@
         }
 
         .back-to-top:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         /* 🎪 BUTTONS */
@@ -877,15 +844,15 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 15px 30px;
+            gap: 8px;
+            padding: 12px 24px;
             border-radius: var(--radius);
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .btn-primary {
@@ -894,170 +861,78 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--pink-vibrant);
-            color: var(--pink-vibrant);
-        }
-
-        .btn-secondary:hover {
-            background: var(--pink-vibrant);
-            color: white;
-            transform: translateY(-3px);
         }
 
         /* 🎪 UTILITY CLASSES */
         .highlight {
             background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 6px;
             font-weight: 600;
             display: inline-block;
             color: var(--pink-vibrant);
+            font-size: 0.9rem;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Founder story section */
+        .founder-story {
+            background: linear-gradient(135deg, rgba(255, 77, 148, 0.03), rgba(0, 224, 160, 0.03));
+            padding: 40px;
+            border-radius: var(--radius);
+            margin-top: 40px;
+            text-align: center;
         }
 
-        /* 🎪 RESPONSIVE ADJUSTMENTS */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .about-title {
-                font-size: 1.8rem;
-            }
-            
-            .philosophy-content {
-                padding: 40px 20px;
-            }
-            
-            .logo-large {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .logo-large img {
-                width: 140px;
-            }
-            
-            .swiper {
-                height: 400px;
-            }
-            
-            .stat-number {
-                font-size: 2.5rem;
-            }
-            
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .section-title {
-                font-size: 1.6rem;
-            }
-            
-            .vm-card {
+            .founder-story {
                 padding: 30px 20px;
             }
-            
-            .founder-image {
-                height: 250px;
-            }
-            
-            .swiper {
-                height: 300px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
         }
 
-        /* 🎪 LOADING ANIMATION */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
+        .founder-story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray-medium);
+            line-height: 1.7;
+            font-size: 1.05rem;
         }
 
-        .loading.hidden {
-            opacity: 0;
-            visibility: hidden;
+        .founder-story-content p {
+            margin-bottom: 20px;
         }
 
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid var(--gray-light);
-            border-top-color: var(--pink-vibrant);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .founder-story-content p:last-child {
+            margin-bottom: 0;
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+        .quote-mark {
+            font-size: 3rem;
+            color: var(--pink-soft);
+            opacity: 0.3;
+            line-height: 1;
+            display: block;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- 🎪 LOADING SCREEN -->
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- 🎪 NAVBAR -->
+    <!-- 🎪 NAVBAR - SIMPLIFIED -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="dashboard.html" class="logo">
+            <a href="index.html" class="logo">
                 <img src="img/logo.png" alt="Ruang Temu Logo" class="logo-image" onerror="this.onerror=null; this.style.display='none';">
                 <div class="logo-text">RuangTemu</div>
             </a>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <div class="nav-links" id="navLinks">
-                <a href="dashboard.html" class="nav-link">Dashboard</a>
-                <a href="about.html" class="nav-link active">Tentang Kami</a>
-                <a href="services.html" class="nav-link">Layanan</a>
-                <a href="contact.html" class="nav-link">Kontak</a>
-                <a href="login.html" class="btn btn-primary">
+            <div class="nav-actions">
+                <a href="register.html" class="login-btn">
                     <i class="fas fa-sign-in-alt"></i> Masuk
                 </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -1067,13 +942,14 @@
         <i class="fas fa-chevron-up"></i>
     </a>
 
-    <!-- 🏆 HERO SECTION -->
+    <!-- 🏆 MAIN CONTENT -->
     <main class="main-content">
+        <!-- HERO SECTION -->
         <section class="hero-section">
             <span class="hero-badge">🎉 Platform Inovasi Indonesia</span>
             <h1 class="hero-title">Menyatukan Kelezatan dan Teknologi</h1>
             <p class="hero-subtitle">
-                Ruang Temu merupkan ekosistem digital revolusioner yang menghubungkan pecinta kuliner dengan cafe dan restoran terbaik, 
+                Ruang Temu adalah ekosistem digital revolusioner yang menghubungkan pecinta kuliner dengan cafe dan restoran terbaik, 
                 menciptakan pengalaman reservasi yang seamless dan menguntungkan bagi semua pihak.
             </p>
             <a href="#about" class="btn btn-primary">
@@ -1095,11 +971,11 @@
                 <div class="about-text">
                     <h3 class="about-title">Melampaui Sekadar Reservasi</h3>
                     <p class="about-description">
-                        Ruang Temu lahir dari visi untuk merevolusi industri kuliner Indonesia.  Ruang Temu sekadar platform reservasi, 
+                        Ruang Temu lahir dari visi untuk merevolusi industri kuliner Indonesia. Kami bukan sekadar platform reservasi, 
                         tetapi sebuah ekosistem lengkap yang menghubungkan pecinta kuliner dengan cafe dan restoran terbaik.
                     </p>
                     <p class="about-description">
-                        Dengan teknologi mutakhir, Ruang Temu menyediakan solusi end-to-end mulai dari reservasi online, manajemen meja, 
+                        Dengan teknologi mutakhir, kami menyediakan solusi end-to-end mulai dari reservasi online, manajemen meja, 
                         sistem pembayaran terintegrasi, hingga analitik data yang membantu mitra kami berkembang.
                     </p>
                     <p class="about-description">
@@ -1157,11 +1033,11 @@
                     </div>
                     <h3 class="vm-title">Nilai Utama</h3>
                     <p class="vm-content">
-                        <strong>Innovation</strong> - Terus berinovasi dalam teknologi<br>
-                        <strong>Integrity</strong> - Transparansi dalam setiap transaksi<br>
-                        <strong>Community</strong> - Membangun jaringan yang kuat<br>
-                        <strong>Sustainability</strong> - Pertumbuhan yang berkelanjutan<br>
-                        <strong>Excellence</strong> - Kualitas layanan terbaik
+                        <strong>Inovasi</strong> - Terus berinovasi dalam teknologi<br>
+                        <strong>Integritas</strong> - Transparansi dalam setiap transaksi<br>
+                        <strong>Komunitas</strong> - Membangun jaringan yang kuat<br>
+                        <strong>Keberlanjutan</strong> - Pertumbuhan yang berkelanjutan<br>
+                        <strong>Keunggulan</strong> - Kualitas layanan terbaik
                     </p>
                 </div>
             </div>
@@ -1198,9 +1074,9 @@
             <div class="logo-identity">
                 <div class="logo-display">
                     <div class="logo-large">
-                        <img src="img/logo.png" alt="Ruang Temu Logo" onerror="this.onerror=null; this.style.display='none'; this.parentNode.innerHTML='<span style=\"color:white;font-size:3rem;font-weight:bold\">RT</span>';">
+                        <img src="img/logo.png" alt="Ruang Temu Logo" onerror="this.onerror=null; this.style.display='none'; this.parentNode.innerHTML='<span style=\"color:white;font-size:2.5rem;font-weight:bold\"></span>';">
                     </div>
-                    <p style="color: var(--gray-medium); margin-top: 15px;">Simbol inovasi dan koneksi</p>
+                    <p style="color: var(--gray-medium); margin-top: 10px; font-size: 0.95rem;">Simbol inovasi dan koneksi</p>
                 </div>
                 
                 <div class="logo-meaning">
@@ -1209,14 +1085,6 @@
                         <p class="meaning-content">
                             <strong>Pink</strong> merepresentasikan inovasi, semangat, dan kreativitas.<br>
                             <strong>Hijau</strong> melambangkan pertumbuhan, keberlanjutan, dan harmoni alam.
-                        </p>
-                    </div>
-                    
-                    <div class="meaning-item">
-                        <h4 class="meaning-title"><i class="fas fa-shapes"></i> Bentuk</h4>
-                        <p class="meaning-content">
-                            Lingkaran yang menyatu melambangkan komunitas yang terhubung tanpa batas. 
-                            Garis-garis yang bertemu di tengah merepresentasikan pertemuan antara pelanggan dan mitra.
                         </p>
                     </div>
                     
@@ -1231,7 +1099,7 @@
             </div>
         </section>
 
-        <!-- 👥 FOUNDERS SECTION -->
+        <!-- 👥 FOUNDERS SECTION - TWO FOUNDERS -->
         <section class="section founders-section">
             <div class="section-header">
                 <h2 class="section-title">Founders Ruang Temu</h2>
@@ -1241,86 +1109,107 @@
             </div>
             
             <div class="founders-grid">
+                <!-- Founder 1: Andarini Cahyani -->
                 <div class="founder-card">
-                    <div class="founder-image">
-                        <img src="img/founder.jpg" alt="Andarini Cahyani" onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1361&q=80'">
-                        <div class="founder-overlay">
-                            <div class="founder-name">Andarini Cahyani</div>
-                            <div class="founder-role">Co-Founder & CEO</div>
+                    <div class="founder-header">
+                        <div class="founder-image">
+                            <img src="img/founder.HEIC" alt="Andarini Cahyani" onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1361&q=80'">
+                        </div>
+                        <div class="founder-name">Andarini Cahyani</div>
+                        <div class="founder-role">Co-Founder & CEO</div>
+                        <div class="founder-education">
+                            <i class="fas fa-graduation-cap"></i> Administrasi Bisnis - Telkom University
+                        </div>
+                        <div class="founder-quote">
+                            "Melihat peluang besar dalam digitalisasi industri F&B Indonesia."
                         </div>
                     </div>
-                    <div class="founder-info">
-                        <p class="founder-bio">
-                            Mahasiswa Administrasi Bisnis Telkom University Bandung. Andarini memiliki passion 
-                            mendalam dalam teknologi dan bisnis. Pengalamannya dalam beberapa kegiatan partnership dan internship selama kuliah 
-                            memberikannya insight berharga tentang industri F&B.
-                        </p>
-                        <div class="founder-details">
-                            <div class="detail-item">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span>Administrasi Bisnis - Telkom University</span>
-                            </div>
-                           <div class="detail-item">
-                                <i class="fas fa-award"></i>
-                                <span>Business Analys</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Bandung, Indonesia</span>
+                    
+                    <div class="founder-details">
+                        <div class="detail-group">
+                            <h4><i class="fas fa-user-tie"></i> Profil</h4>
+                            <div class="detail-content">
+                                Mahasiswa Administrasi Bisnis Telkom University. 
+                                Memiliki passion dalam analisis bisnis dan pengembangan startup.
                             </div>
                         </div>
-                        <div class="founder-social">
-                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        
+                        <div class="detail-group">
+                            <h4><i class="fas fa-briefcase"></i> Keahlian Utama</h4>
+                            <div class="detail-content">
+                                <ul class="skills-list">
+                                    <li>Business Analysis</li>
+                                    <li>Market Research</li>
+                                    <li>Partnership</li>
+                                    <li>Strategic Planning</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Founder 2: Syauqina Salsabila -->
                 <div class="founder-card">
-                    <div class="founder-image">
-                        <img src="img/founder2.jpg" alt="Syauqina Salsabila" onerror="this.src='https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80'">
-                        <div class="founder-overlay">
-                            <div class="founder-name">Syauqina Salsabila</div>
-                            <div class="founder-role">Co-Founder & CTO</div>
+                    <div class="founder-header">
+                        <div class="founder-image">
+                            <img src="img/founder.HEIC" alt="Syauqina Salsabila" onerror="this.src='https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80'">
+                        </div>
+                        <div class="founder-name">Syauqina Salsabila</div>
+                        <div class="founder-role">Co-Founder & CTO</div>
+                        <div class="founder-education">
+                            <i class="fas fa-graduation-cap"></i> Sistem Informasi - Telkom University
+                        </div>
+                        <div class="founder-quote">
+                            "Teknologi harus mempermudah, bukan mempersulit."
                         </div>
                     </div>
-                    <div class="founder-info">
-                        <p class="founder-bio">
-                            Mahasiswa Sistem Informasi Telkom University Bandung dengan spesialisasi dalam AI dan Machine Learning. 
-                            Syauqina telah mengembangkan beberapa aplikasi sebelum mendirikan Ruang Temu bersama Andarini.
-                        </p>
-                        <div class="founder-details">
-                            <div class="detail-item">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span>Sistem Informasi - Telkom University</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-award"></i>
-                                <span>Developer</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Bandung, Indonesia</span>
+                    
+                    <div class="founder-details">
+                        <div class="detail-group">
+                            <h4><i class="fas fa-user-tie"></i> Profil</h4>
+                            <div class="detail-content">
+                                Mahasiswa Sistem Informasi Telkom University dengan spesialisasi dalam AI dan Machine Learning. 
+                                Berpengalaman dalam pengembangan aplikasi web dan mobile.
                             </div>
                         </div>
-                        <div class="founder-social">
-                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fas fa-globe"></i></a>
+                        
+                        <div class="detail-group">
+                            <h4><i class="fas fa-briefcase"></i> Keahlian Utama</h4>
+                            <div class="detail-content">
+                                <ul class="skills-list">
+                                    <li>Full-Stack Dev</li>
+                                    <li>AI/ML</li>
+                                    <li>Database Design</li>
+                                    <li>Cloud Computing</li>
+                                </ul>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 40px;">
-                <p style="color: var(--gray-medium); max-width: 800px; margin: 0 auto; line-height: 1.8;">
-                    "Kami memulai Ruang Temu dari kamar kos di Telkom University dengan satu misi sederhana: 
-                    membuat reservasi cafe semudah memesan tiket bioskop. Dua tahun kemudian, kami telah 
-                    membantu ratusan mitra dan ribuan pelanggan menciptakan pengalaman kuliner yang lebih baik."
-                </p>
+            <!-- Founder Story Section -->
+            <div class="founder-story">
+                <div class="founder-story-content">
+                    <span class="quote-mark">"</span>
+                    <p>
+                        <strong>Kisah Kami</strong><br>
+                        Kami bertemu di Telkom University pada tahun 2024. Andarini dari program studi Administrasi Bisnis dan Syauqina dari program studi Sistem Informasi. 
+                        Ide Ruang Temu lahir dari pengalaman pribadi ketika kesulitan melakukan reservasi di cafe favorit di Bandung.
+                    </p>
+                    <p>
+                        Andarini membawa keahlian dalam analisis bisnis dan pemahaman mendalam tentang industri F&B, 
+                        sementara Syauqina menghadirkan kemampuan teknis untuk mewujudkan visi tersebut menjadi platform yang nyata.
+                    </p>
+                    <p>
+                        Dengan modal nekat dan laptop butut, kami mulai mengembangkan prototype pertama di kamar kos. 
+                        Dua tahun kemudian, Ruang Temu telah membantu ratusan cafe dan ribuan pelanggan menikmati pengalaman reservasi yang lebih baik.
+                    </p>
+                    <p style="font-style: italic; color: var(--pink-vibrant); margin-top: 20px;">
+                        "Kami percaya bahwa kolaborasi antara bisnis dan teknologi adalah kunci menciptakan solusi yang impactful."
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -1328,159 +1217,49 @@
         <section class="stats-section">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number">2+</span>
+                    <span class="stat-number" data-target="2">0</span>
                     <span class="stat-label">Tahun Beroperasi</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">127</span>
+                    <span class="stat-number" data-target="127">0</span>
                     <span class="stat-label">Mitra Cafe & Restoran</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">2.5K+</span>
-                    <span class="stat-label">Pengguna Aktif</span>
+                    <span class="stat-number" data-target="2.5">0</span>
+                    <span class="stat-label">Ribu Pengguna Aktif</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">45.2M</span>
-                    <span class="stat-label">Rp Transaksi Bulanan</span>
+                    <span class="stat-number" data-target="45.2">0</span>
+                    <span class="stat-label">Juta Rp Transaksi/Bulan</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">98%</span>
-                    <span class="stat-label">Kepuasan Pengguna</span>
+                    <span class="stat-number" data-target="98">0</span>
+                    <span class="stat-label">% Kepuasan Pengguna</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- 🎪 CAROUSEL SECTION -->
-        <section class="section carousel-section">
-            <div class="section-header">
-                <h2 class="section-title">Galeri Ruang Temu</h2>
-                <p class="section-subtitle">
-                    Momen-momen berharga dari perjalanan kami
-                </p>
-            </div>
-            
-            <div class="swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Ruang Temu Team">
-                        <div class="slide-overlay">
-                            <div class="slide-title">Tim Inti Ruang Temu</div>
-                            <div class="slide-desc">Para innovator di balik kesuksesan platform</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Office Environment">
-                        <div class="slide-overlay">
-                            <div class="slide-title">Kantor Pusat Innovation Hub</div>
-                            <div class="slide-desc">Tempat ide-ide brilian lahir dan berkembang</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80" 
-                             alt="Team Meeting">
-                        <div class="slide-overlay">
-                            <div class="slide-title">Brainstorming Session</div>
-                            <div class="slide-desc">Diskusi produktif untuk pengembangan fitur baru</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" 
-                             alt="Award Ceremony">
-                        <div class="slide-overlay">
-                            <div class="slide-title">Best Startup Award 2023</div>
-                            <div class="slide-desc">Penghargaan untuk inovasi dalam industri F&B</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
-                             alt="Product Launch">
-                        <div class="slide-overlay">
-                            <div class="slide-title">Launching Event</div>
-                            <div class="slide-desc">Perkenalan platform ke publik dan mitra</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
         </section>
     </main>
 
-    <!-- 🎭 FOOTER -->
+    <!-- 🎭 FOOTER - SIMPLIFIED -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>Ruang Temu</h3>
-                <p style="color: var(--gray-medium); margin-bottom: 20px; line-height: 1.6;">
-                    Platform reservasi dan manajemen cafe/restoran terdepan di Indonesia yang menghubungkan pecinta kuliner dengan tempat makan terbaik.
-                </p>
-                <div class="founder-social" style="justify-content: flex-start;">
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                </div>
+            <div class="copyright">
+                <p>&copy; 2024 Ruang Temu. Semua hak dilindungi undang-undang.</p>
+                <p>Dibuat dengan ❤️ di Bandung, Indonesia</p>
             </div>
-            
-            <div class="footer-section">
-                <h3>Link Cepat</h3>
-                <ul class="footer-links">
-                    <li><a href="dashboard.html">Dashboard Admin</a></li>
-                    <li><a href="about.html">Tentang Kami</a></li>
-                    <li><a href="services.html">Layanan</a></li>
-                    <li><a href="contact.html">Kontak</a></li>
-                    <li><a href="careers.html">Karir</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Kontak Kami</h3>
-                <div class="footer-contact">
-                    <p><i class="fas fa-map-marker-alt"></i> Innovation Hub, Telkom University, Bandung</p>
-                    <p><i class="fas fa-phone"></i> (022) 1234-5678</p>
-                    <p><i class="fas fa-envelope"></i> hello@ruangtemu.com</p>
-                    <p><i class="fas fa-clock"></i> Senin - Jumat, 9:00 - 18:00 WIB</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2024 Ruang Temu. Semua hak dilindungi undang-undang.</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Dibuat dengan ❤️ di Bandung, Indonesia</p>
         </div>
     </footer>
 
-    <!-- SWIPER JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 🎪 LOADING SCREEN
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('hidden');
-            }, 1000);
-
-            // 📱 MOBILE MENU
+            // 📱 MOBILE MENU (if needed in future)
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                this.innerHTML = navLinks.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
-
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!navLinks.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    // Add mobile menu functionality here if needed
+                    console.log('Mobile menu clicked');
+                });
+            }
 
             // 🎯 BACK TO TOP
             const backToTop = document.getElementById('backToTop');
@@ -1501,41 +1280,6 @@
                 });
             });
 
-            // 🎪 SWIPER CAROUSEL
-            const swiper = new Swiper('.swiper', {
-                // Optional parameters
-                direction: 'horizontal',
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                speed: 800,
-                effect: 'slide',
-                
-                // Navigation arrows
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                
-                // Responsive breakpoints
-                breakpoints: {
-                    320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20
-                    },
-                    768: {
-                        slidesPerView: 1,
-                        spaceBetween: 30
-                    },
-                    1024: {
-                        slidesPerView: 1,
-                        spaceBetween: 40
-                    }
-                }
-            });
-
             // 🎭 ANIMATION ON SCROLL
             const observerOptions = {
                 threshold: 0.1,
@@ -1554,8 +1298,8 @@
             // Observe all sections
             document.querySelectorAll('.section').forEach(section => {
                 section.style.opacity = '0';
-                section.style.transform = 'translateY(30px)';
-                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(section);
             });
 
@@ -1569,20 +1313,15 @@
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        // Close mobile menu if open
-                        navLinks.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                        
-                        // Smooth scroll to target
                         window.scrollTo({
-                            top: targetElement.offsetTop - 100,
+                            top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
 
-            // 🎪 COUNTER ANIMATION
+            // 🎪 COUNTER ANIMATION FOR STATS
             const statNumbers = document.querySelectorAll('.stat-number');
             const statsSection = document.querySelector('.stats-section');
             
@@ -1590,26 +1329,28 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         statNumbers.forEach(stat => {
-                            const target = parseInt(stat.textContent);
-                            const suffix = stat.textContent.includes('+') ? '+' : 
-                                          stat.textContent.includes('K') ? 'K' :
-                                          stat.textContent.includes('M') ? 'M' : '';
-                            const numTarget = parseFloat(stat.textContent);
+                            const target = parseFloat(stat.getAttribute('data-target'));
+                            const suffix = stat.textContent.includes('Juta') ? ' Juta' : 
+                                          stat.textContent.includes('Ribu') ? ' Ribu' :
+                                          stat.textContent.includes('%') ? '%' : '';
                             
                             let current = 0;
-                            const increment = target / 50;
+                            const increment = target / 30;
                             const timer = setInterval(() => {
                                 current += increment;
                                 if (current >= target) {
-                                    stat.textContent = target + suffix;
+                                    stat.textContent = target.toFixed(suffix.includes('Juta') || suffix.includes('Ribu') ? 1 : 0) + suffix;
                                     clearInterval(timer);
                                 } else {
-                                    stat.textContent = Math.floor(current) + suffix;
+                                    if (suffix.includes('Juta') || suffix.includes('Ribu')) {
+                                        stat.textContent = current.toFixed(1) + suffix;
+                                    } else {
+                                        stat.textContent = Math.floor(current) + suffix;
+                                    }
                                 }
-                            }, 30);
+                            }, 40);
                         });
                         
-                        // Unobserve after animation
                         counterObserver.unobserve(entry.target);
                     }
                 });
@@ -1619,24 +1360,13 @@
                 counterObserver.observe(statsSection);
             }
 
-            // 🎭 PARALLAX EFFECT FOR HERO
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const hero = document.querySelector('.hero-section');
-                
-                if (hero) {
-                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                }
-            });
-
             // 🎪 IMAGE FALLBACK HANDLING
             document.querySelectorAll('img').forEach(img => {
                 img.onerror = function() {
-                    // If logo fails, show text fallback
                     if (this.classList.contains('logo-image')) {
                         this.style.display = 'none';
                         const textFallback = document.createElement('div');
-                        textFallback.style.fontSize = '2rem';
+                        textFallback.style.fontSize = '1.8rem';
                         textFallback.style.fontWeight = 'bold';
                         textFallback.style.background = 'linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant))';
                         textFallback.style.webkitBackgroundClip = 'text';
@@ -1651,74 +1381,48 @@
             // Add hover effect to founder cards
             document.querySelectorAll('.founder-card').forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    this.style.transform = 'translateY(-5px)';
                 });
                 
                 card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.transform = 'translateY(0)';
                 });
             });
 
-            // Add click animation to buttons
-            document.querySelectorAll('.btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    // Create ripple effect
-                    const ripple = document.createElement('span');
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size / 2;
-                    const y = e.clientY - rect.top - size / 2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.7);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        width: ${size}px;
-                        height: ${size}px;
-                        top: ${y}px;
-                        left: ${x}px;
-                        pointer-events: none;
-                    `;
-                    
-                    this.style.position = 'relative';
-                    this.style.overflow = 'hidden';
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 600);
+            // Add hover effect to skills items
+            document.querySelectorAll('.skills-list li').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
                 });
             });
 
-            // Add CSS for ripple animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple {
-                    to {
-                        transform: scale(4);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        });
+            // Prevent default behavior for login button
+            document.querySelector('.login-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'register.html';
+            });
 
-        // 🎭 PAGE TRANSITION EFFECTS
-        document.querySelectorAll('a').forEach(link => {
-            if (link.href && link.href.includes(window.location.origin) && !link.href.includes('#')) {
-                link.addEventListener('click', function(e) {
-                    if (!this.classList.contains('btn')) {
-                        e.preventDefault();
-                        document.body.style.opacity = '0';
-                        document.body.style.transition = 'opacity 0.3s ease';
-                        
-                        setTimeout(() => {
-                            window.location.href = this.href;
-                        }, 300);
-                    }
-                });
+            // Add animation for founder story section
+            const founderStory = document.querySelector('.founder-story');
+            if (founderStory) {
+                founderStory.style.opacity = '0';
+                founderStory.style.transform = 'translateY(20px)';
+                founderStory.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                const storyObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, observerOptions);
+                
+                storyObserver.observe(founderStory);
             }
         });
     </script>

@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Temu • Pembayaran Berhasil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* 🎨 PALETTE CONSISTENCY */
+        :root {
+            --pink-vibrant: #F784C5;
+            --pink-soft: #FF8AB5;
+            --green-vibrant: #1B602F;
+            --green-soft: #80FFD6;
+            --blue-vibrant: #1E40AF;
+            --blue-soft: #60A5FA;
+            --gray-dark: #2D2D3A;
+            --gray-medium: #5A5A72;
+            --gray-light: #F5F5FA;
+            --white: #FFFFFF;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(255, 77, 148, 0.15);
+            --radius: 16px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #FFF5F9 0%, #F0FFFA 100%);
+            color: var(--gray-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* 🎀 CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink-vibrant);
+            border-radius: 10px;
+        }
+
+        /* 🎪 MAIN CONTAINER */
+        .payment-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-hover);
+            overflow: hidden;
+            position: relative;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* 🎉 SUCCESS HEADER */
+        .success-header {
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-header::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .success-header::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -75px;
+            left: -75px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            color: var(--green-vibrant);
+            z-index: 2;
+            position: relative;
+            animation: bounce 1s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        .success-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .success-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* 📄 PAYMENT DETAILS */
+        .payment-details {
+            padding: 40px 30px;
+        }
+
+        .detail-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--gray-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--pink-vibrant);
+        }
+
+        /* 💰 BILLING INFO */
+        .billing-card {
+            background: var(--gray-light);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .billing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .billing-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+        }
+
+        .billing-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: var(--green-vibrant);
+            color: white;
+        }
+
+        .billing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .billing-item {
+            background: white;
+            padding: 15px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .billing-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--green-vibrant);
+        }
+
+        .billing-label {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+        }
+
+        /* 📋 PAYMENT INFO */
+        .info-card {
+            background: linear-gradient(135deg, rgba(255, 77, 148, 0.05), rgba(0, 224, 160, 0.05));
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--pink-vibrant);
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .info-title {
+            font-weight: 700;
+            color: var(--gray-dark);
+        }
+
+        .info-content {
+            color: var(--gray-medium);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* 🧾 INVOICE DETAILS */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .invoice-table th {
+            background: linear-gradient(135deg, var(--gray-light), #eaeafa);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .invoice-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .invoice-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .invoice-table .total-row {
+            background: linear-gradient(135deg, rgba(0, 224, 160, 0.05), transparent);
+            font-weight: 700;
+        }
+
+        .invoice-table .total-value {
+            color: var(--green-vibrant);
+            font-size: 1.2rem;
+        }
+
+        /* 🎯 PAYMENT CONFIRMATION */
+        .confirmation-card {
+            background: linear-gradient(135deg, rgba(0, 224, 160, 0.1), rgba(255, 77, 148, 0.1));
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .confirmation-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--green-vibrant);
+        }
+
+        .confirmation-text {
+            color: var(--gray-medium);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .confirmation-details {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .confirmation-item {
+            text-align: center;
+        }
+
+        .confirmation-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--gray-dark);
+        }
+
+        .confirmation-label {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+        }
+
+        /* 🎭 ANIMATED CHECKMARK */
+        .checkmark-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+
+        .checkmark-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            position: absolute;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .checkmark {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            border-left: 5px solid white;
+            border-bottom: 5px solid white;
+            transform: rotate(-45deg);
+            left: 20px;
+            top: 25px;
+            animation: drawCheck 0.8s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes drawCheck {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                width: 40px;
+                height: 20px;
+                opacity: 1;
+            }
+        }
+
+        /* 🎪 CONFETTI ANIMATION */
+        .confetti-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--pink-vibrant);
+            border-radius: 2px;
+            opacity: 0;
+            animation: confettiFall 1.5s ease-out forwards;
+        }
+
+        .confetti:nth-child(2) {
+            background: var(--green-soft);
+            animation-delay: 0.2s;
+            left: 20%;
+        }
+
+        .confetti:nth-child(3) {
+            background: var(--blue-soft);
+            animation-delay: 0.4s;
+            left: 40%;
+        }
+
+        .confetti:nth-child(4) {
+            background: var(--pink-soft);
+            animation-delay: 0.6s;
+            left: 60%;
+        }
+
+        .confetti:nth-child(5) {
+            background: var(--green-vibrant);
+            animation-delay: 0.8s;
+            left: 80%;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(400px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 🔘 BUTTONS */
+        .btn {
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 224, 160, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 224, 160, 0.4);
+        }
+
+        /* 📱 DOWNLOAD SECTION */
+        .download-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid var(--gray-light);
+        }
+
+        .download-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* 🏠 BACK TO DASHBOARD */
+        .back-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .back-link {
+            color: var(--pink-vibrant);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            gap: 12px;
+        }
+
+        /* 📱 RESPONSIVE */
+        @media (max-width: 768px) {
+            .payment-container {
+                max-width: 100%;
+            }
+            
+            .success-header {
+                padding: 30px 20px;
+            }
+            
+            .payment-details {
+                padding: 30px 20px;
+            }
+            
+            .billing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .confirmation-details {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-title {
+                font-size: 1.5rem;
+            }
+            
+            .success-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+            }
+            
+            .billing-card,
+            .info-card,
+            .confirmation-card {
+                padding: 20px;
+            }
+        }
+
+        /* 🎨 UTILITY */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* 🎪 FOOTER */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            padding: 20px;
+        }
+
+        .footer a {
+            color: var(--pink-vibrant);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- 🎪 CONFETTI ANIMATION -->
+    <div class="confetti-container" id="confettiContainer">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+    </div>
+
+    <!-- 🎪 PAYMENT CONTAINER -->
+    <div class="payment-container">
+        <!-- 🎉 SUCCESS HEADER -->
+        <div class="success-header">
+            <div class="checkmark-container">
+                <div class="checkmark-circle"></div>
+                <div class="checkmark"></div>
+            </div>
+            
+            <h1 class="success-title">Pembayaran Berhasil!</h1>
+            <p class="success-subtitle">Tagihan Hara Cafe telah dibayar lunas</p>
+        </div>
+
+        <!-- 📄 PAYMENT DETAILS -->
+        <div class="payment-details">
+            <!-- 💰 BILLING INFO -->
+            <div class="detail-section">
+                <h2 class="section-title">
+                    <i class="fas fa-receipt"></i>
+                    Detail Tagihan
+                </h2>
+                
+                <div class="billing-card">
+                    <div class="billing-header">
+                        <div class="billing-title">Tagihan Desember 2024</div>
+                        <div class="billing-status">LUNAS</div>
+                    </div>
+                    
+                    <div class="billing-grid">
+                        <div class="billing-item">
+                            <div class="billing-value">Rp 8.500.000</div>
+                            <div class="billing-label">Total Penjualan Bulan Ini</div>
+                        </div>
+                        
+                        <div class="billing-item">
+                            <div class="billing-value">5%</div>
+                            <div class="billing-label">Komisi Aplikator</div>
+                        </div>
+                        
+                        <div class="billing-item">
+                            <div class="billing-value">Rp 425.000</div>
+                            <div class="billing-label">Jumlah Tagihan</div>
+                        </div>
+                        
+                        <div class="billing-item">
+                            <div class="billing-value">15 Des 2024</div>
+                            <div class="billing-label">Batas Waktu Pembayaran</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 📋 PAYMENT INFO -->
+            <div class="detail-section">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    Informasi Pembayaran
+                </h2>
+                
+                <div class="info-card">
+                    <div class="info-header">
+                        <div class="info-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="info-title">Detail Transaksi</div>
+                    </div>
+                    
+                    <div class="info-content">
+                        Tagihan bulanan sebesar 5% dari total penjualan telah berhasil dipotong. 
+                        Pembayaran dilakukan menggunakan sistem otomatis dari saldo RuangTemu. 
+                        Transaksi ini telah tercatat dan diverifikasi oleh sistem.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🧾 INVOICE DETAILS -->
+            <div class="detail-section">
+                <h2 class="section-title">
+                    <i class="fas fa-file-invoice"></i>
+                    Rincian Invoice
+                </h2>
+                
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Deskripsi</th>
+                            <th>Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Penjualan Desember 2024</td>
+                            <td>Rp 8.500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Komisi Aplikator (5%)</td>
+                            <td>Rp 425.000</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total Pembayaran</strong></td>
+                            <td class="total-value"><strong>Rp 425.000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 🎯 PAYMENT CONFIRMATION -->
+            <div class="confirmation-card">
+                <h3 class="confirmation-title">Konfirmasi Pembayaran</h3>
+                <p class="confirmation-text">
+                    Pembayaran tagihan operasional aplikator RuangTemu untuk bulan Desember 2024 
+                    telah berhasil diproses dan dikonfirmasi oleh sistem.
+                </p>
+                
+                <div class="confirmation-details">
+                    <div class="confirmation-item">
+                        <div class="confirmation-value">#INV-2024-0125</div>
+                        <div class="confirmation-label">No. Invoice</div>
+                    </div>
+                    
+                    <div class="confirmation-item">
+                        <div class="confirmation-value">15 Des 2024</div>
+                        <div class="confirmation-label">Tanggal Bayar</div>
+                    </div>
+                    
+                    <div class="confirmation-item">
+                        <div class="confirmation-value">BERHASIL</div>
+                        <div class="confirmation-label">Status</div>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <i class="fas fa-check-circle"></i> Transaksi telah diverifikasi dan tercatat
+                </div>
+            </div>
+
+            <!-- 📱 DOWNLOAD SECTION -->
+            <div class="download-section">
+                <h3 class="section-title">
+                    <i class="fas fa-download"></i>
+                    Download Dokumen
+                </h3>
+                
+                <div class="download-buttons">
+                    <button class="btn btn-secondary" id="downloadInvoice">
+                        <i class="fas fa-file-pdf"></i> Download Invoice
+                    </button>
+                    
+                    <button class="btn btn-secondary" id="downloadReceipt">
+                        <i class="fas fa-receipt"></i> Download Bukti Bayar
+                    </button>
+                </div>
+            </div>
+
+            <!-- 🏠 BACK TO DASHBOARD -->
+            <div class="back-section">
+                <button class="btn btn-success" id="backToDashboard">
+                    <i class="fas fa-tachometer-alt"></i> Kembali ke Dashboard
+                </button>
+                
+                <a href="dashboardmitra.html" class="back-link mt-20">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard Mitra
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🎪 FOOTER -->
+    <div class="footer">
+        <p>© 2024 RuangTemu • Semua hak dilindungi undang-undang</p>
+        <p>Butuh bantuan? <a href="mailto:support@ruangtemu.com">Hubungi Tim Support</a></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 🎉 CREATE CONFETTI
+            function createConfetti() {
+                const container = document.getElementById('confettiContainer');
+                const colors = [
+                    'var(--pink-vibrant)',
+                    'var(--green-vibrant)',
+                    'var(--blue-soft)',
+                    'var(--pink-soft)',
+                    'var(--green-soft)'
+                ];
+                
+                for (let i = 0; i < 20; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = Math.random() * 12 + 6 + 'px';
+                    confetti.style.height = Math.random() * 12 + 6 + 'px';
+                    confetti.style.animationDelay = Math.random() * 1 + 's';
+                    confetti.style.animationDuration = Math.random() * 1 + 1 + 's';
+                    container.appendChild(confetti);
+                }
+            }
+
+            // 📄 DOWNLOAD INVOICE
+            document.getElementById('downloadInvoice').addEventListener('click', function() {
+                showToast('Mengunduh invoice...', 'green');
+                
+                // Simulate download
+                setTimeout(() => {
+                    showToast('Invoice berhasil diunduh!', 'green');
+                    
+                    // In real app, this would trigger actual download
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = 'Invoice_HaraCafe_Desember2024.pdf';
+                    link.click();
+                }, 1000);
+            });
+
+            // 📄 DOWNLOAD RECEIPT
+            document.getElementById('downloadReceipt').addEventListener('click', function() {
+                showToast('Mengunduh bukti bayar...', 'green');
+                
+                // Simulate download
+                setTimeout(() => {
+                    showToast('Bukti bayar berhasil diunduh!', 'green');
+                    
+                    // In real app, this would trigger actual download
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = 'BuktiBayar_HaraCafe_Desember2024.pdf';
+                    link.click();
+                }, 1000);
+            });
+
+            // 🏠 BACK TO DASHBOARD
+            document.getElementById('backToDashboard').addEventListener('click', function() {
+                showToast('Mengarahkan ke dashboard...', 'pink');
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboardmitra.html';
+                }, 800);
+            });
+
+            // 🎭 TOAST FUNCTION
+            function showToast(message, type = 'green') {
+                // Create toast element
+                const toast = document.createElement('div');
+                toast.className = 'toast-message';
+                toast.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        bottom: 30px;
+                        right: 30px;
+                        background: ${type === 'green' ? 'var(--green-vibrant)' : 'var(--pink-vibrant)'};
+                        color: white;
+                        padding: 15px 20px;
+                        border-radius: var(--radius);
+                        box-shadow: var(--shadow-hover);
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        transform: translateY(100px);
+                        opacity: 0;
+                        transition: transform 0.3s ease, opacity 0.3s ease;
+                        z-index: 9999;
+                        max-width: 350px;
+                    ">
+                        <div style="
+                            width: 36px;
+                            height: 36px;
+                            border-radius: 50%;
+                            background: rgba(255, 255, 255, 0.2);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1rem;
+                        ">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 2px;">
+                                ${type === 'green' ? 'Berhasil!' : 'Informasi'}
+                            </div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">
+                                ${message}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(toast);
+                
+                // Show toast
+                setTimeout(() => {
+                    toast.querySelector('div').style.transform = 'translateY(0)';
+                    toast.querySelector('div').style.opacity = '1';
+                }, 10);
+                
+                // Hide toast after 3 seconds
+                setTimeout(() => {
+                    toast.querySelector('div').style.transform = 'translateY(100px)';
+                    toast.querySelector('div').style.opacity = '0';
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                }, 3000);
+            }
+
+            // 🎉 INITIAL ANIMATIONS
+            createConfetti();
+            
+            // Add more confetti after initial animation
+            setTimeout(() => {
+                createConfetti();
+            }, 1500);
+            
+            // Show success message
+            setTimeout(() => {
+                showToast('Pembayaran tagihan berhasil diproses!', 'green');
+            }, 500);
+
+            // 📊 UPDATE LOCAL STORAGE FOR DASHBOARD
+            function updatePaymentStatus() {
+                // Simulate updating payment status in localStorage
+                const paymentData = {
+                    invoiceNumber: '#INV-2024-0125',
+                    amount: 425000,
+                    date: new Date().toISOString(),
+                    status: 'paid',
+                    month: 'Desember 2024'
+                };
+                
+                // Save to localStorage for dashboard to read
+                localStorage.setItem('lastPayment', JSON.stringify(paymentData));
+                
+                // Also update billing status in dashboard data
+                const dashboardData = JSON.parse(localStorage.getItem('dashboardData') || '{}');
+                dashboardData.billingStatus = 'paid';
+                dashboardData.lastPayment = paymentData;
+                localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
+            }
+
+            // Update payment status
+            updatePaymentStatus();
+
+            // 🎯 PRINT FUNCTIONALITY (OPTIONAL)
+            const printBtn = document.createElement('button');
+            printBtn.className = 'btn btn-outline';
+            printBtn.innerHTML = '<i class="fas fa-print"></i> Cetak Halaman';
+            printBtn.style.marginTop = '10px';
+            printBtn.onclick = function() {
+                window.print();
+            };
+            
+            // Add print button to download section
+            document.querySelector('.download-section .download-buttons').appendChild(printBtn);
+
+            // 📱 RESPONSIVE ADJUSTMENTS
+            function adjustForMobile() {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.confirmation-details').style.flexDirection = 'column';
+                } else {
+                    document.querySelector('.confirmation-details').style.flexDirection = 'row';
+                }
+            }
+
+            window.addEventListener('resize', adjustForMobile);
+            adjustForMobile(); // Initial check
+
+            // 🎨 ADD VISUAL EFFECTS
+            const successIcon = document.querySelector('.success-icon');
+            if (successIcon) {
+                // Add pulse animation
+                successIcon.style.animation = 'bounce 1s ease infinite alternate';
+            }
+
+            // 🎵 ADD SUCCESS SOUND (OPTIONAL)
+            function playSuccessSound() {
+                // In real app, you could play a success sound here
+                console.log('🎵 Success sound would play here');
+            }
+
+            // Play sound after delay
+            setTimeout(playSuccessSound, 300);
+
+            // 📈 ANALYTICS TRACKING (EXAMPLE)
+            function trackPaymentSuccess() {
+                // In real app, you would send this to analytics service
+                console.log('📊 Payment success tracked:', {
+                    invoice: '#INV-2024-0125',
+                    amount: 425000,
+                    timestamp: new Date().toISOString()
+                });
+            }
+
+            trackPaymentSuccess();
+        });
+    </script>
+</body>
+</html>

@@ -81,17 +81,10 @@
             text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
+        .logo-image {
             height: 40px;
-            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
+            width: auto;
+            object-fit: contain;
         }
 
         .logo-text {
@@ -679,7 +672,8 @@
 
         .menu-image {
             height: 160px;
-            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            background-size: cover;
+            background-position: center;
             position: relative;
         }
 
@@ -813,7 +807,8 @@
             width: 100px;
             height: 100px;
             border-radius: var(--radius);
-            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -877,6 +872,221 @@
         .form-textarea {
             min-height: 120px;
             resize: vertical;
+        }
+
+        /* 📊 GRAPH VISUALIZATION */
+        .graph-container {
+            height: 300px;
+            position: relative;
+            background: linear-gradient(135deg, var(--gray-light), #f0f0fa);
+            border-radius: var(--radius);
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .graph-line {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: var(--gray-medium);
+            opacity: 0.2;
+        }
+
+        .graph-point {
+            position: absolute;
+            bottom: 40px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--pink-vibrant);
+            transform: translateX(-50%);
+        }
+
+        .graph-label {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.8rem;
+            color: var(--gray-medium);
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .graph-value {
+            position: absolute;
+            top: 0;
+            font-size: 0.9rem;
+            color: var(--green-vibrant);
+            font-weight: 600;
+            transform: translateX(-50%);
+        }
+
+        /* 🎭 SETTINGS SECTION */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .settings-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .settings-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px 0;
+        }
+
+        .toggle-label {
+            font-weight: 500;
+            color: var(--gray-dark);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gray-light);
+            transition: var(--transition);
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: var(--transition);
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* 💬 MITRA CARE - CHAT SUPPORT */
+        .chat-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pink-vibrant);
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+        }
+
+        .message.received {
+            background: var(--gray-light);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.sent {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            margin-top: 5px;
+            opacity: 0.7;
+        }
+
+        .chat-input {
+            padding: 20px;
+            border-top: 1px solid var(--gray-light);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--pink-vibrant);
         }
 
         /* 🎭 UTILITY */
@@ -958,6 +1168,75 @@
             color: var(--green-vibrant);
         }
 
+        /* 🎯 NOTIFICATION PANEL */
+        .notification-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notification-panel.show {
+            right: 0;
+        }
+
+        .notification-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .close-notifications {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--gray-medium);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .notification-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .notification-item {
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 10px;
+            background: var(--gray-light);
+            transition: var(--transition);
+        }
+
+        .notification-item.unread {
+            background: rgba(255, 77, 148, 0.05);
+            border-left: 3px solid var(--pink-vibrant);
+        }
+
+        .notification-item:hover {
+            background: rgba(255, 77, 148, 0.1);
+        }
+
+        .notification-time {
+            font-size: 0.8rem;
+            color: var(--gray-medium);
+            margin-top: 5px;
+        }
+
         /* 🎯 OVERLAY */
         .overlay {
             position: fixed;
@@ -985,11 +1264,6 @@
             
             .logo-text, .nav-item span, .user-info, .badge {
                 display: none;
-            }
-            
-            .logo-icon {
-                width: 40px;
-                height: 40px;
             }
             
             .nav-item {
@@ -1041,7 +1315,8 @@
             }
             
             .stats-grid,
-            .menu-grid {
+            .menu-grid,
+            .settings-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -1058,6 +1333,11 @@
                 flex: 1;
                 min-width: 120px;
             }
+            
+            .notification-panel {
+                width: 100%;
+                right: -100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1072,7 +1352,8 @@
             .stat-card,
             .chart-container,
             .billing-card,
-            .profile-card {
+            .profile-card,
+            .settings-card {
                 padding: 20px;
             }
             
@@ -1094,6 +1375,38 @@
     </style>
 </head>
 <body>
+    <!-- 🎯 NOTIFICATION PANEL -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification-header">
+            <h3>Notifikasi</h3>
+            <button class="close-notifications" id="closeNotifications">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <strong>Pesanan Baru!</strong>
+                <p>Pesanan #RT-2025-005 dari Sari telah masuk</p>
+                <div class="notification-time">5 menit yang lalu</div>
+            </div>
+            <div class="notification-item unread">
+                <strong>Review Baru</strong>
+                <p>Andarini memberikan rating 5 bintang untuk Hara Cafe</p>
+                <div class="notification-time">2 jam yang lalu</div>
+            </div>
+            <div class="notification-item">
+                <strong>Pembayaran Berhasil</strong>
+                <p>Tagihan November 2024 telah dibayar lunas</p>
+                <div class="notification-time">1 hari yang lalu</div>
+            </div>
+            <div class="notification-item">
+                <strong>Update Aplikasi</strong>
+                <p>Versi terbaru RuangTemu 2.1 sudah tersedia</p>
+                <div class="notification-time">3 hari yang lalu</div>
+            </div>
+        </div>
+    </div>
+
     <!-- 🎭 OVERLAY -->
     <div class="overlay" id="overlay"></div>
 
@@ -1112,7 +1425,7 @@
     <nav class="sidebar" id="sidebar">
         <div class="logo-section">
             <a href="index.html" class="logo">
-                <div class="logo-icon">R</div>
+                <img src="img/logo.png" alt="Logo" class="logo-image">
                 <div class="logo-text">RuangTemu</div>
             </a>
         </div>
@@ -1150,9 +1463,14 @@
                 <span class="badge badge-warning">!</span>
             </a>
             
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-tab="settings">
                 <div class="nav-icon">⚙️</div>
                 <span>Pengaturan</span>
+            </a>
+            
+            <a href="#" class="nav-item" data-tab="support">
+                <div class="nav-icon">💬</div>
+                <span>Mitra Care</span>
             </a>
         </div>
         
@@ -1262,10 +1580,8 @@
                             <button class="period-btn" data-period="year">Tahun Ini</button>
                         </div>
                     </div>
-                    <div class="chart-placeholder">
-                        <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                        <p>Grafik Pendapatan Hara Cafe</p>
-                        <p style="font-size: 0.9rem; font-weight: normal; margin-top: 10px;">Menampilkan trend pendapatan dari waktu ke waktu</p>
+                    <div class="graph-container" id="salesGraph">
+                        <!-- Graph akan dibuat dengan JavaScript -->
                     </div>
                 </div>
 
@@ -1273,35 +1589,35 @@
                 <div class="section-title">Menu Terpopuler</div>
                 <div class="menu-grid">
                     <div class="menu-item">
-                        <div class="menu-image"></div>
+                        <div class="menu-image" style="background-image: url('img/beefburger.jpg');"></div>
                         <div class="menu-content">
                             <div class="menu-header">
                                 <div>
-                                    <div class="menu-name">Signature Latte</div>
-                                    <div class="menu-category">Minuman</div>
+                                    <div class="menu-name">Beef Burger Premium</div>
+                                    <div class="menu-category">Makanan</div>
                                 </div>
-                                <div class="menu-price">Rp 35K</div>
+                                <div class="menu-price">Rp 85K</div>
                             </div>
-                            <div class="menu-description">Kopi latte dengan rasa signature Hara Cafe</div>
+                            <div class="menu-description">Burger dengan daging sapi premium, keju, dan sayuran segar</div>
                             <div style="color: var(--green-vibrant); font-size: 0.9rem; font-weight: 600;">
-                                <i class="fas fa-fire"></i> 128 kali dipesan bulan ini
+                                <i class="fas fa-fire"></i> 156 kali dipesan bulan ini
                             </div>
                         </div>
                     </div>
                     
                     <div class="menu-item">
-                        <div class="menu-image"></div>
+                        <div class="menu-image" style="background-image: url('img/pasta.jpg');"></div>
                         <div class="menu-content">
                             <div class="menu-header">
                                 <div>
-                                    <div class="menu-name">Spaghetti Carbonara</div>
+                                    <div class="menu-name">Pasta Alfredo</div>
                                     <div class="menu-category">Makanan</div>
                                 </div>
                                 <div class="menu-price">Rp 65K</div>
                             </div>
-                            <div class="menu-description">Spaghetti dengan saus carbonara creamy</div>
+                            <div class="menu-description">Pasta dengan saus alfredo creamy dan jamur</div>
                             <div style="color: var(--green-vibrant); font-size: 0.9rem; font-weight: 600;">
-                                <i class="fas fa-fire"></i> 95 kali dipesan bulan ini
+                                <i class="fas fa-fire"></i> 128 kali dipesan bulan ini
                             </div>
                         </div>
                     </div>
@@ -1398,60 +1714,82 @@
                 
                 <div class="menu-grid">
                     <div class="menu-item">
-                        <div class="menu-image"></div>
+                        <div class="menu-image" style="background-image: url('img/salad.jpg');"></div>
                         <div class="menu-content">
                             <div class="menu-header">
                                 <div>
-                                    <div class="menu-name">Signature Latte</div>
-                                    <div class="menu-category">Minuman</div>
-                                </div>
-                                <div class="menu-price">Rp 35K</div>
-                            </div>
-                            <div class="menu-description">Kopi latte dengan rasa signature Hara Cafe, menggunakan biji kopi pilihan dan susu segar.</div>
-                            <div class="menu-actions">
-                                <button class="btn btn-outline btn-sm edit-menu">
-                                    <i class="fas fa-edit"></i> Edit
-                                </button>
-                                <button class="btn btn-outline btn-sm delete-menu">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="menu-image"></div>
-                        <div class="menu-content">
-                            <div class="menu-header">
-                                <div>
-                                    <div class="menu-name">Spaghetti Carbonara</div>
-                                    <div class="menu-category">Makanan</div>
-                                </div>
-                                <div class="menu-price">Rp 65K</div>
-                            </div>
-                            <div class="menu-description">Spaghetti dengan saus carbonara creamy, smoked beef, dan keju parmesan.</div>
-                            <div class="menu-actions">
-                                <button class="btn btn-outline btn-sm edit-menu">
-                                    <i class="fas fa-edit"></i> Edit
-                                </button>
-                                <button class="btn btn-outline btn-sm delete-menu">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <div class="menu-image"></div>
-                        <div class="menu-content">
-                            <div class="menu-header">
-                                <div>
-                                    <div class="menu-name">Chocolate Lava Cake</div>
-                                    <div class="menu-category">Dessert</div>
+                                    <div class="menu-name">Caesar Salad</div>
+                                    <div class="menu-category">Appetizer</div>
                                 </div>
                                 <div class="menu-price">Rp 45K</div>
                             </div>
-                            <div class="menu-description">Kue coklat dengan lelehan coklat di dalamnya, disajikan dengan es krim vanilla.</div>
+                            <div class="menu-description">Salad segar dengan lettuce, crouton, parmesan, dan saus caesar spesial.</div>
+                            <div class="menu-actions">
+                                <button class="btn btn-outline btn-sm edit-menu">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-outline btn-sm delete-menu">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-image" style="background-image: url('img/pasta.jpg');"></div>
+                        <div class="menu-content">
+                            <div class="menu-header">
+                                <div>
+                                    <div class="menu-name">Pasta Alfredo</div>
+                                    <div class="menu-category">Main Course</div>
+                                </div>
+                                <div class="menu-price">Rp 65K</div>
+                            </div>
+                            <div class="menu-description">Pasta dengan saus alfredo creamy, smoked beef, dan jamur pilihan.</div>
+                            <div class="menu-actions">
+                                <button class="btn btn-outline btn-sm edit-menu">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-outline btn-sm delete-menu">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-image" style="background-image: url('img/beefburger.jpg');"></div>
+                        <div class="menu-content">
+                            <div class="menu-header">
+                                <div>
+                                    <div class="menu-name">Beef Burger Premium</div>
+                                    <div class="menu-category">Main Course</div>
+                                </div>
+                                <div class="menu-price">Rp 85K</div>
+                            </div>
+                            <div class="menu-description">Burger dengan daging sapi premium, keju cheddar, dan sayuran segar.</div>
+                            <div class="menu-actions">
+                                <button class="btn btn-outline btn-sm edit-menu">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-outline btn-sm delete-menu">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-image" style="background-image: url('img/caramel.webp');"></div>
+                        <div class="menu-content">
+                            <div class="menu-header">
+                                <div>
+                                    <div class="menu-name">Caramel Latte</div>
+                                    <div class="menu-category">Minuman</div>
+                                </div>
+                                <div class="menu-price">Rp 40K</div>
+                            </div>
+                            <div class="menu-description">Latte dengan saus caramel homemade dan whipped cream.</div>
                             <div class="menu-actions">
                                 <button class="btn btn-outline btn-sm edit-menu">
                                     <i class="fas fa-edit"></i> Edit
@@ -1469,7 +1807,7 @@
             <div class="tab-content" id="cafe-tab">
                 <div class="profile-card">
                     <div class="profile-header">
-                        <div class="cafe-logo">H</div>
+                        <div class="cafe-logo" style="background-image: url('img/hara.jpg');"></div>
                         <div class="profile-info">
                             <h2 class="cafe-name">Hara Cafe</h2>
                             <div class="cafe-rating">
@@ -1551,9 +1889,10 @@
             <div class="tab-content" id="reports-tab">
                 <h2 class="section-title">Laporan & Analitik</h2>
                 
+                <!-- LAPORAN PENJUALAN -->
                 <div class="chart-container">
                     <div class="chart-header">
-                        <h3 class="chart-title">Laporan Penjualan</h3>
+                        <h3 class="chart-title">Laporan Penjualan 7 Hari Terakhir</h3>
                         <div class="chart-controls">
                             <button class="period-btn active" data-period="daily">Harian</button>
                             <button class="period-btn" data-period="weekly">Mingguan</button>
@@ -1561,13 +1900,12 @@
                             <button class="period-btn" data-period="yearly">Tahunan</button>
                         </div>
                     </div>
-                    <div class="chart-placeholder">
-                        <i class="fas fa-chart-bar" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                        <p>Laporan Penjualan Hara Cafe</p>
-                        <p style="font-size: 0.9rem; font-weight: normal; margin-top: 10px;">Analisis detail performa penjualan</p>
+                    <div class="graph-container" id="reportsGraph">
+                        <!-- Graph akan dibuat dengan JavaScript -->
                     </div>
                 </div>
 
+                <!-- STATISTIK DETAIL -->
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-header">
@@ -1609,6 +1947,50 @@
                         <div class="stat-label">Growth vs Bulan Lalu</div>
                     </div>
                 </div>
+                
+                <!-- TABEL DATA PENJUALAN -->
+                <h3 class="section-title" style="margin-top: 40px;">Data Penjualan Harian</h3>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Total Pesanan</th>
+                            <th>Total Pendapatan</th>
+                            <th>Menu Terlaris</th>
+                            <th>Pelanggan Baru</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>14 Des 2024</td>
+                            <td>48</td>
+                            <td>Rp 3,840,000</td>
+                            <td>Beef Burger</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>13 Des 2024</td>
+                            <td>42</td>
+                            <td>Rp 3,150,000</td>
+                            <td>Pasta Alfredo</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>12 Des 2024</td>
+                            <td>38</td>
+                            <td>Rp 2,850,000</td>
+                            <td>Caramel Latte</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>11 Des 2024</td>
+                            <td>35</td>
+                            <td>Rp 2,625,000</td>
+                            <td>Caesar Salad</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
                 
                 <button class="btn btn-outline" style="width: 100%; margin-top: 20px;">
                     <i class="fas fa-download"></i> Download Laporan Excel
@@ -1705,6 +2087,212 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- SETTINGS TAB -->
+            <div class="tab-content" id="settings-tab">
+                <h2 class="section-title">Pengaturan Cafe</h2>
+                
+                <div class="settings-grid">
+                    <!-- PENGATURAN UMUM -->
+                    <div class="settings-card">
+                        <h3 class="settings-title">Pengaturan Umum</h3>
+                        
+                        <div class="toggle-switch">
+                            <span class="toggle-label">Notifikasi Pesanan</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-switch">
+                            <span class="toggle-label">Notifikasi Review</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-switch">
+                            <span class="toggle-label">Mode Buka/Tutup Otomatis</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-switch">
+                            <span class="toggle-label">Tampilkan Stok Menu</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PENGATURAN PESANAN -->
+                    <div class="settings-card">
+                        <h3 class="settings-title">Pengaturan Pesanan</h3>
+                        
+                        <div class="toggle-switch">
+                            <span class="toggle-label">Terima Pesanan Otomatis</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-switch">
+                            <span class="toggle-label">Konfirmasi Manual</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-switch">
+                            <span class="toggle-label">Batasan Waktu Pesanan</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-switch">
+                            <span class="toggle-label">Pre-order Menu</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PENGATURAN KEUANGAN -->
+                    <div class="settings-card">
+                        <h3 class="settings-title">Pengaturan Keuangan</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Minimum Transaksi</label>
+                            <input type="text" class="form-input" value="Rp 50,000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Metode Pembayaran</label>
+                            <div style="margin-top: 10px;">
+                                <label style="display: flex; align-items: center; gap: 5px; margin-bottom: 8px;">
+                                    <input type="checkbox" checked> Tunai
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 5px; margin-bottom: 8px;">
+                                    <input type="checkbox" checked> QRIS
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 5px;">
+                                    <input type="checkbox" checked> E-Wallet
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Pajak Restoran</label>
+                            <input type="text" class="form-input" value="10%">
+                        </div>
+                    </div>
+
+                    <!-- PENGATURAN AKUN -->
+                    <div class="settings-card">
+                        <h3 class="settings-title">Pengaturan Akun</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Nama Pemilik</label>
+                            <input type="text" class="form-input" value="Caca">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" value="caca@hara.cafe">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" value="••••••••">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Nomor Telepon</label>
+                            <input type="tel" class="form-input" value="0812-3456-7890">
+                        </div>
+                        
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                            <i class="fas fa-save"></i> Simpan Perubahan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MITRA CARE TAB -->
+            <div class="tab-content" id="support-tab">
+                <h2 class="section-title">Mitra Care - Dukungan 24/7</h2>
+                
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="chat-avatar">R</div>
+                        <div>
+                            <h3 style="color: white; margin: 0;">Tim Support RuangTemu</h3>
+                            <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Online • 24/7 Support</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message received">
+                            <p>Halo! Saya Rina dari Tim Support RuangTemu. Ada yang bisa saya bantu?</p>
+                            <div class="message-time">09:00 AM</div>
+                        </div>
+                        
+                        <div class="message sent">
+                            <p>Halo Rina, saya mau tanya tentang sistem komisi 5% itu bagaimana cara perhitungannya?</p>
+                            <div class="message-time">09:02 AM</div>
+                        </div>
+                        
+                        <div class="message received">
+                            <p>Komisi 5% dihitung dari total penjualan kotor bulanan Anda. Contoh: Jika penjualan Rp 10 juta, maka komisi Rp 500 ribu.</p>
+                            <div class="message-time">09:03 AM</div>
+                        </div>
+                        
+                        <div class="message sent">
+                            <p>Oh paham. Terima kasih atas penjelasannya!</p>
+                            <div class="message-time">09:05 AM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Ketik pesan Anda di sini...">
+                        <button class="btn btn-primary" id="sendMessage">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- FAQ SECTION -->
+                <div style="margin-top: 30px;">
+                    <h3 class="section-title">Pertanyaan Umum</h3>
+                    
+                    <div style="background: var(--white); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);">
+                        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--gray-light);">
+                            <strong style="color: var(--pink-vibrant);">Q: Bagaimana cara mengubah jam operasional cafe?</strong>
+                            <p style="color: var(--gray-medium); margin-top: 5px;">A: Buka tab "Edit Cafe" → Edit kolom "Jam Operasional" → Klik "Simpan Perubahan"</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--gray-light);">
+                            <strong style="color: var(--pink-vibrant);">Q: Kapan tagihan bulanan harus dibayar?</strong>
+                            <p style="color: var(--gray-medium); margin-top: 5px;">A: Tagihan jatuh tempo setiap tanggal 15. Pembayaran dapat dilakukan di tab "Tagihan"</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <strong style="color: var(--pink-vibrant);">Q: Bagaimana cara menambah menu baru?</strong>
+                            <p style="color: var(--gray-medium); margin-top: 5px;">A: Buka tab "Kelola Menu" → Klik "Tambah Menu" → Isi form → Simpan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -1734,9 +2322,31 @@
 
             overlay.addEventListener('click', function() {
                 sidebar.classList.remove('active');
+                notificationPanel.classList.remove('show');
                 overlay.classList.remove('show');
                 menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
+
+            // 🔔 NOTIFICATION SYSTEM
+            const notificationBtn = document.getElementById('notificationBtn');
+            const notificationPanel = document.getElementById('notificationPanel');
+            const closeNotifications = document.getElementById('closeNotifications');
+
+            notificationBtn.addEventListener('click', function() {
+                notificationPanel.classList.add('show');
+                overlay.classList.add('show');
+            });
+
+            closeNotifications.addEventListener('click', function() {
+                notificationPanel.classList.remove('show');
+                overlay.classList.remove('show');
+            });
+
+            // Update notification badge
+            const unreadNotifications = document.querySelectorAll('.notification-item.unread').length;
+            if (unreadNotifications > 0) {
+                document.querySelector('.notification-badge').style.display = 'block';
+            }
 
             // 🎪 TAB NAVIGATION
             const navItems = document.querySelectorAll('.nav-item');
@@ -1761,6 +2371,111 @@
                 });
             });
 
+            // 📊 CREATE SALES GRAPH
+            function createSalesGraph() {
+                const graphContainer = document.getElementById('salesGraph');
+                graphContainer.innerHTML = '';
+                
+                // Add baseline
+                const baseline = document.createElement('div');
+                baseline.className = 'graph-line';
+                graphContainer.appendChild(baseline);
+                
+                // Sample data for 7 days
+                const days = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+                const salesData = [3200000, 2850000, 3150000, 3840000, 4200000, 5100000, 4800000];
+                const maxSales = Math.max(...salesData);
+                
+                // Calculate positions
+                const width = 600; // approximate width
+                const height = 240; // available height for points
+                
+                days.forEach((day, index) => {
+                    const x = (index / (days.length - 1)) * (width - 80) + 40;
+                    const sales = salesData[index];
+                    const y = height - (sales / maxSales) * height + 40;
+                    
+                    // Create point
+                    const point = document.createElement('div');
+                    point.className = 'graph-point';
+                    point.style.left = `${x}px`;
+                    point.style.bottom = `${y}px`;
+                    point.title = `Rp ${(sales / 1000000).toFixed(1)}M`;
+                    graphContainer.appendChild(point);
+                    
+                    // Create value label
+                    const value = document.createElement('div');
+                    value.className = 'graph-value';
+                    value.textContent = `Rp ${(sales / 1000000).toFixed(1)}M`;
+                    value.style.left = `${x}px`;
+                    value.style.bottom = `${y + 20}px`;
+                    graphContainer.appendChild(value);
+                    
+                    // Create day label
+                    const label = document.createElement('div');
+                    label.className = 'graph-label';
+                    label.textContent = day;
+                    label.style.left = `${x}px`;
+                    label.style.bottom = '10px';
+                    graphContainer.appendChild(label);
+                });
+            }
+
+            // 📊 CREATE REPORTS GRAPH
+            function createReportsGraph() {
+                const graphContainer = document.getElementById('reportsGraph');
+                graphContainer.innerHTML = '';
+                
+                // Add baseline
+                const baseline = document.createElement('div');
+                baseline.className = 'graph-line';
+                graphContainer.appendChild(baseline);
+                
+                // Sample data for 7 days
+                const days = ['9 Des', '10 Des', '11 Des', '12 Des', '13 Des', '14 Des', '15 Des'];
+                const ordersData = [35, 38, 42, 48, 45, 52, 49];
+                const maxOrders = Math.max(...ordersData);
+                
+                // Calculate positions
+                const width = 600;
+                const height = 240;
+                
+                days.forEach((day, index) => {
+                    const x = (index / (days.length - 1)) * (width - 80) + 40;
+                    const orders = ordersData[index];
+                    const y = height - (orders / maxOrders) * height + 40;
+                    
+                    // Create point
+                    const point = document.createElement('div');
+                    point.className = 'graph-point';
+                    point.style.background = 'var(--green-vibrant)';
+                    point.style.left = `${x}px`;
+                    point.style.bottom = `${y}px`;
+                    point.title = `${orders} pesanan`;
+                    graphContainer.appendChild(point);
+                    
+                    // Create value label
+                    const value = document.createElement('div');
+                    value.className = 'graph-value';
+                    value.textContent = orders;
+                    value.style.left = `${x}px`;
+                    value.style.bottom = `${y + 20}px`;
+                    graphContainer.appendChild(value);
+                    
+                    // Create day label
+                    const label = document.createElement('div');
+                    label.className = 'graph-label';
+                    label.textContent = day;
+                    label.style.left = `${x}px`;
+                    label.style.bottom = '10px';
+                    graphContainer.appendChild(label);
+                });
+            }
+
+            // Initialize graphs
+            createSalesGraph();
+            createReportsGraph();
+
             // 📊 CHART PERIOD SELECTION
             const periodBtns = document.querySelectorAll('.period-btn');
             periodBtns.forEach(btn => {
@@ -1769,6 +2484,11 @@
                     this.classList.add('active');
                     const period = this.getAttribute('data-period');
                     showToast(`Menampilkan data ${period}`, 'pink');
+                    
+                    // Update graphs based on period
+                    if (period === 'week') {
+                        createSalesGraph();
+                    }
                 });
             });
 
@@ -1794,6 +2514,9 @@
                     
                     showToast(`Pesanan ${orderCode} dari ${customer} berhasil diterima!`, 'green');
                     
+                    // Update notification badge
+                    updateOrderBadge();
+                    
                     // Re-attach event listener
                     actionsCell.querySelector('.prepare-order').addEventListener('click', prepareOrderHandler);
                 });
@@ -1813,6 +2536,9 @@
                         actionsCell.innerHTML = '<span style="color: var(--gray-medium);">Pesanan ditolak</span>';
                         
                         showToast(`Pesanan ${orderCode} berhasil ditolak`, 'gray');
+                        
+                        // Update notification badge
+                        updateOrderBadge();
                     }
                 });
             });
@@ -1875,6 +2601,13 @@
                 actionsCell.innerHTML = '<span style="color: var(--green-vibrant); font-weight: 600;">✓ Pesanan selesai</span>';
                 
                 showToast(`Pesanan ${orderCode} telah selesai!`, 'green');
+            }
+
+            // Update order badge count
+            function updateOrderBadge() {
+                const pendingOrders = document.querySelectorAll('.status-pending').length;
+                const badge = document.querySelector('.nav-item[data-tab="orders"] .badge');
+                badge.textContent = pendingOrders;
             }
 
             // Attach initial event listeners
@@ -1959,6 +2692,63 @@
                 }
             });
 
+            // 💬 CHAT SUPPORT
+            const chatInput = document.getElementById('chatInput');
+            const sendMessageBtn = document.getElementById('sendMessage');
+            const chatMessages = document.getElementById('chatMessages');
+
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Add user message
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message sent';
+                    userMessage.innerHTML = `
+                        <p>${message}</p>
+                        <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                    `;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    chatInput.value = '';
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Simulate reply after 1 second
+                    setTimeout(() => {
+                        const replies = [
+                            "Terima kasih atas pertanyaannya. Ada hal lain yang bisa saya bantu?",
+                            "Saya akan cek informasi tersebut dan segera menghubungi Anda kembali.",
+                            "Untuk pertanyaan yang lebih teknis, tim kami akan menghubungi Anda dalam 1x24 jam.",
+                            "Apakah ada kendala lain yang sedang Anda alami?",
+                            "Sangat senang bisa membantu Anda hari ini!"
+                        ];
+                        
+                        const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                        
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'message received';
+                        botMessage.innerHTML = `
+                            <p>${randomReply}</p>
+                            <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                        `;
+                        chatMessages.appendChild(botMessage);
+                        
+                        // Scroll to bottom
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                }
+            }
+
+            sendMessageBtn.addEventListener('click', sendMessage);
+            
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
             // 🎭 TOAST FUNCTION
             function showToast(message, type = 'pink') {
                 const toast = document.getElementById('toast');
@@ -2006,15 +2796,16 @@
                     searchInput.focus();
                 }
                 
-                // Escape untuk menutup sidebar
+                // Escape untuk menutup sidebar dan panel
                 if (e.key === 'Escape') {
                     sidebar.classList.remove('active');
+                    notificationPanel.classList.remove('show');
                     overlay.classList.remove('show');
                     menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
                 }
                 
                 // Number keys untuk navigasi tab
-                if (e.key >= '1' && e.key <= '6') {
+                if (e.key >= '1' && e.key <= '8') {
                     const index = parseInt(e.key) - 1;
                     const navItemsArray = Array.from(navItems);
                     if (navItemsArray[index]) {
@@ -2049,6 +2840,25 @@
             }
             
             loadBillingData();
+
+            // Handle image errors
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.style.width = '40px';
+                    fallback.style.height = '40px';
+                    fallback.style.background = 'linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant))';
+                    fallback.style.borderRadius = '12px';
+                    fallback.style.display = 'flex';
+                    fallback.style.alignItems = 'center';
+                    fallback.style.justifyContent = 'center';
+                    fallback.style.color = 'white';
+                    fallback.style.fontWeight = 'bold';
+                    fallback.textContent = 'R';
+                    this.parentNode.insertBefore(fallback, this);
+                };
+            });
         });
     </script>
 </body>

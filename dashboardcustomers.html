@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruang Temu • Dashboard</title>
+    <title>Ruang Temu • Dashboard Customer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -75,12 +75,6 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-        }
-       
-        .logo-image {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
         }
 
         .logo-icon {
@@ -637,8 +631,14 @@
 
         .restaurant-image {
             height: 160px;
-            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            background-size: cover;
+            background-position: center;
             position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .restaurant-card:hover .restaurant-image {
+            transform: scale(1.05);
         }
 
         .restaurant-rating {
@@ -654,6 +654,7 @@
             font-weight: 600;
             font-size: 0.9rem;
             backdrop-filter: blur(4px);
+            z-index: 2;
         }
 
         .restaurant-content {
@@ -1003,9 +1004,119 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* 🎨 QR CODE MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .modal-subtitle {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .modal-footer {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .modal-close {
+            background: var(--gray-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--gray-medium);
+            color: white;
+        }
     </style>
 </head>
 <body>
+    <!-- 🎨 QR CODE MODAL -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">QR Code Reservasi</h3>
+                <p class="modal-subtitle">Tunjukkan kode ini saat check-in di restoran</p>
+            </div>
+            <div class="qr-code">
+                <div>RT-2024-0158</div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close" id="closeModal">Tutup</button>
+                <button class="btn btn-secondary" id="downloadQR">
+                    <i class="fas fa-download"></i> Download QR
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 🎭 OVERLAY -->
     <div class="overlay" id="overlay"></div>
 
@@ -1031,7 +1142,7 @@
         <div class="notification-list">
             <div class="notification-item unread">
                 <strong>Reservasi Dikonfirmasi!</strong>
-                <p>Reservasi di Wheels Coffee telah dikonfirmasi</p>
+                <p>Reservasi di Hara Cafe telah dikonfirmasi</p>
                 <div class="notification-time">5 menit yang lalu</div>
             </div>
             <div class="notification-item">
@@ -1051,7 +1162,7 @@
     <nav class="sidebar" id="sidebar">
         <div class="logo-section">
             <a href="index.html" class="logo">
-                <img src="img/logo.png" alt="Logo" class="logo-image">
+                <div class="logo-icon">R</div>
                 <div class="logo-text">RuangTemu</div>
             </a>
         </div>
@@ -1101,10 +1212,10 @@
         </div>
         
         <div class="user-section">
-            <div class="user-avatar">A</div>
+            <div class="user-avatar">R</div>
             <div class="user-info">
-                <h4>Andarini</h4>
-                <p>andarini@email.com</p>
+                <h4 id="userName">Ririn</h4>
+                <p>Customer Premium</p>
             </div>
             <button class="logout-btn" title="Keluar">
                 <i class="fas fa-sign-out-alt"></i>
@@ -1118,7 +1229,7 @@
         <div class="top-bar">
             <div>
                 <span class="highlight">✨ Selamat Datang Kembali!</span>
-                <h1 class="page-title">Dashboard <span class="gradient-text">Customer</span></h1>
+                <h1 class="page-title">Dashboard <span class="gradient-text" id="dashboardRole">Customer</span></h1>
             </div>
             
             <div class="search-bar">
@@ -1193,7 +1304,7 @@
         <!-- 🍽️ QUICK ACTIONS -->
         <div class="section-header">
             <h2 class="section-title">Aksi Cepat</h2>
-            <a href="#" class="view-all">
+            <a href="cafe.html" class="view-all">
                 Lihat Semua <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -1227,13 +1338,13 @@
         <!-- 📅 UPCOMING RESERVATIONS -->
         <div class="section-header">
             <h2 class="section-title">Reservasi Mendatang</h2>
-            <a href="#" class="view-all">
+            <a href="successreservation.html" class="view-all">
                 Lihat Semua <i class="fas fa-arrow-right"></i>
             </a>
         </div>
         
         <div class="reservations-grid">
-            <!-- Reservation 1 -->
+            <!-- Reservation 1 - Hara Cafe -->
             <div class="reservation-card">
                 <div class="reservation-header">
                     <div class="reservation-title">
@@ -1267,7 +1378,7 @@
                 </div>
                 
                 <div class="reservation-actions">
-                    <button class="btn btn-outline show-qr-btn">
+                    <button class="btn btn-outline show-qr-btn" data-booking="RT-2024-0158" data-restaurant="Hara Cafe">
                         <i class="fas fa-qrcode"></i> Tampilkan QR
                     </button>
                     <button class="btn btn-primary modify-btn">
@@ -1275,21 +1386,20 @@
                     </button>
                 </div>
             </div>
-
-            
+        </div>
 
         <!-- 🏆 TOP RESTAURANTS -->
         <div class="section-header">
             <h2 class="section-title">Rekomendasi Untukmu</h2>
-            <a href="#" class="view-all">
+            <a href="cafe.html" class="view-all">
                 Lihat Semua <i class="fas fa-arrow-right"></i>
             </a>
         </div>
         
         <div class="restaurants-grid">
-            <!-- Restaurant 1 -->
+            <!-- Restaurant 1 - Hara Cafe -->
             <div class="restaurant-card">
-                <div class="restaurant-image">
+                <div class="restaurant-image" style="background-image: url('img/hara.jpg');">
                     <div class="restaurant-rating">
                         <i class="fas fa-star" style="color: #FFB400;"></i> 4.8
                     </div>
@@ -1298,7 +1408,7 @@
                 <div class="restaurant-content">
                     <div class="restaurant-header">
                         <div>
-                            <div class="restaurant-name">Hara Caffe</div>
+                            <div class="restaurant-name">Hara Cafe</div>
                             <div class="restaurant-cuisine">Western • Coffee • Desserts</div>
                         </div>
                         <button class="favorite-btn active">
@@ -1318,19 +1428,146 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-primary book-now-btn">
+                    <button class="btn btn-primary book-now-btn" data-restaurant="Hara Cafe">
                         <i class="fas fa-calendar-plus"></i> Book Sekarang
                     </button>
                 </div>
             </div>
             
+            <!-- Restaurant 2 - Bodas -->
+            <div class="restaurant-card">
+                <div class="restaurant-image" style="background-image: url('img/bodas.jpg');">
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star" style="color: #FFB400;"></i> 4.5
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Bodas Bistro Paris</div>
+                            <div class="restaurant-cuisine">French • European • Fine Dining</div>
+                        </div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i> 3.5 km
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i> Buka sampai 23:00
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair"></i> 8 meja tersedia
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary book-now-btn" data-restaurant="Bodas Cafe">
+                        <i class="fas fa-calendar-plus"></i> Book Sekarang
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Restaurant 3 - Tsukuma -->
+            <div class="restaurant-card">
+                <div class="restaurant-image" style="background-image: url('img/tsukuma.jpg');">
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star" style="color: #FFB400;"></i> 4.7
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Tsukuma Coffee Bar & Izakaya</div>
+                            <div class="restaurant-cuisine">Japanese • Sushi • Fine Dining</div>
+                        </div>
+                        <button class="favorite-btn active">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i> 1.8 km
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i> Buka sampai 21:00
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair"></i> 15 meja tersedia
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary book-now-btn" data-restaurant="Tsukuma Ramen">
+                        <i class="fas fa-calendar-plus"></i> Book Sekarang
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Restaurant 4 - Umanari -->
+            <div class="restaurant-card">
+                <div class="restaurant-image" style="background-image: url('img/umanari.jpg');">
+                    <div class="restaurant-rating">
+                        <i class="fas fa-star" style="color: #FFB400;"></i> 4.9
+                    </div>
+                </div>
+                
+                <div class="restaurant-content">
+                    <div class="restaurant-header">
+                        <div>
+                            <div class="restaurant-name">Umanari</div>
+                            <div class="restaurant-cuisine">Indonesian • Fresh • Family</div>
+                        </div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="restaurant-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i> 4.2 km
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i> Buka sampai 22:30
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-chair"></i> 6 meja tersedia
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary book-now-btn" data-restaurant="Umanari Sushi">
+                        <i class="fas fa-calendar-plus"></i> Book Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 👤 LOAD USER DATA FROM LOCALSTORAGE
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const userName = document.getElementById('userName');
+            const dashboardRole = document.getElementById('dashboardRole');
+            
+            if (currentUser.username) {
+                const name = currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1);
+                userName.textContent = name;
+                dashboardRole.textContent = currentUser.role || 'Customer';
+                
+                // Update avatar initial
+                const avatar = document.querySelector('.user-avatar');
+                avatar.textContent = name.charAt(0).toUpperCase();
+            }
+
             // 📱 MOBILE MENU TOGGLE
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
-            const mainContent = document.querySelector('.main-content');
 
             menuToggle.addEventListener('click', function() {
                 sidebar.classList.toggle('active');
@@ -1344,6 +1581,7 @@
                 sidebar.classList.remove('active');
                 overlay.classList.remove('show');
                 document.getElementById('notificationPanel').classList.remove('show');
+                document.getElementById('qrModal').classList.remove('show');
                 menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
 
@@ -1352,16 +1590,17 @@
             favoriteBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const icon = this.querySelector('i');
+                    const isActive = this.classList.contains('active');
+                    const restaurantName = this.closest('.restaurant-card').querySelector('.restaurant-name').textContent;
+                    
                     this.classList.toggle('active');
                     
-                    if (this.classList.contains('active')) {
-                        icon.classList.remove('far', 'fa-heart');
-                        icon.classList.add('fas', 'fa-heart');
-                        showToast('Ditambahkan ke Favorit!', 'pink');
+                    if (!isActive) {
+                        icon.className = 'fas fa-heart';
+                        showToast(`${restaurantName} ditambahkan ke Favorit!`, 'pink');
                     } else {
-                        icon.classList.remove('fas', 'fa-heart');
-                        icon.classList.add('far', 'fa-heart');
-                        showToast('Dihapus dari Favorit', 'gray');
+                        icon.className = 'far fa-heart';
+                        showToast(`${restaurantName} dihapus dari Favorit`, 'gray');
                     }
                 });
             });
@@ -1376,10 +1615,12 @@
 
             document.getElementById('giveReview').addEventListener('click', function() {
                 showToast('Membuka halaman review...', 'green');
+                // Bisa diarahkan ke halaman review
             });
 
             document.getElementById('redeemPoints').addEventListener('click', function() {
                 showToast('Membuka halaman rewards...', 'green');
+                // Bisa diarahkan ke halaman rewards
             });
 
             // 🔔 NOTIFICATION PANEL
@@ -1402,8 +1643,12 @@
             logoutBtn.addEventListener('click', function() {
                 if (confirm('Yakin ingin keluar dari akun?')) {
                     showToast('Sedang keluar...', 'pink');
+                    
+                    // Hapus data user dari localStorage
+                    localStorage.removeItem('currentUser');
+                    
                     setTimeout(() => {
-                        window.location.href = 'login.html';
+                        window.location.href = 'register.html';
                     }, 1000);
                 }
             });
@@ -1422,29 +1667,47 @@
                 }, 500);
             });
 
-            // 📅 RESERVATION ACTIONS
+            // 📅 RESERVATION ACTIONS - QR CODE
             const showQrBtns = document.querySelectorAll('.show-qr-btn');
+            const qrModal = document.getElementById('qrModal');
+            const closeModal = document.getElementById('closeModal');
+            const downloadQR = document.getElementById('downloadQR');
+            
             showQrBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    showToast('Menampilkan QR Code reservasi', 'green');
-                    // Implementasi QR code modal di sini
+                    const bookingCode = this.getAttribute('data-booking');
+                    const restaurant = this.getAttribute('data-restaurant');
+                    
+                    // Update modal content
+                    document.querySelector('.modal-title').textContent = `QR Code Reservasi ${restaurant}`;
+                    document.querySelector('.modal-subtitle').textContent = `Kode Booking: ${bookingCode}`;
+                    document.querySelector('.qr-code div').textContent = bookingCode;
+                    
+                    qrModal.classList.add('show');
+                    overlay.classList.add('show');
                 });
             });
 
-            const modifyBtns = document.querySelectorAll('.modify-btn');
-            modifyBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    showToast('Membuka halaman ubah reservasi', 'pink');
-                });
+            closeModal.addEventListener('click', function() {
+                qrModal.classList.remove('show');
+                overlay.classList.remove('show');
+            });
+
+            downloadQR.addEventListener('click', function() {
+                showToast('QR Code berhasil didownload!', 'green');
+                // Implementasi download QR code di sini
             });
 
             // 🍽️ BOOK NOW BUTTONS
             const bookNowBtns = document.querySelectorAll('.book-now-btn');
             bookNowBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const restaurantCard = this.closest('.restaurant-card');
-                    const restaurantName = restaurantCard.querySelector('.restaurant-name').textContent;
-                    showToast(`Booking ${restaurantName}...`, 'pink');
+                    const restaurantName = this.getAttribute('data-restaurant');
+                    showToast(`Membuat reservasi di ${restaurantName}...`, 'pink');
+                    
+                    // Simpan nama restoran ke localStorage untuk digunakan di halaman booking
+                    localStorage.setItem('selectedRestaurant', restaurantName);
+                    
                     setTimeout(() => {
                         window.location.href = 'booking.html';
                     }, 500);
@@ -1482,13 +1745,6 @@
                 }, 3000);
             }
 
-            // 🌙 DARK MODE READY (placeholder)
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-            
-            if (prefersDarkScheme.matches) {
-                // Bisa ditambahkan dark mode di sini
-            }
-
             // 📱 TOUCH SUPPORT
             let touchStartX = 0;
             let touchEndX = 0;
@@ -1518,6 +1774,7 @@
                     sidebar.classList.remove('active');
                     overlay.classList.remove('show');
                     notificationPanel.classList.remove('show');
+                    qrModal.classList.remove('show');
                     menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
                 }
             }
@@ -1535,12 +1792,25 @@
                     sidebar.classList.remove('active');
                     overlay.classList.remove('show');
                     notificationPanel.classList.remove('show');
+                    qrModal.classList.remove('show');
                     menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
                 }
+            });
+
+            // 🌟 INITIAL TOAST
+            if (currentUser.username) {
+                const name = currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1);
+                setTimeout(() => {
+                    showToast(`Selamat datang kembali, ${name}!`, 'pink');
+                }, 1000);
+            }
+
+            // 🎨 LOAD IMAGES WITH FALLBACK
+            const restaurantImages = document.querySelectorAll('.restaurant-image');
+            restaurantImages.forEach(img => {
+                img.style.backgroundImage = img.style.backgroundImage || 'linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant))';
             });
         });
     </script>
 </body>
 </html>
-
-

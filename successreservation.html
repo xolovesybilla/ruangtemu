@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Berhasil • Hara Cafe</title>
+    <title>Booking Berhasil • Ruang Temu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
         /* 🎨 PALETTE CONSISTENCY */
         :root {
@@ -31,7 +30,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #FFFBF0 0%, #FFF5EB 100%);
+            background: linear-gradient(135deg, #FFF5F9 0%, #F0FFFA 100%);
             color: var(--gray-dark);
             min-height: 100vh;
         }
@@ -44,7 +43,7 @@
             background: var(--gray-light);
         }
         ::-webkit-scrollbar-thumb {
-            background: var(--brown-cafe);
+            background: var(--pink-vibrant);
             border-radius: 10px;
         }
 
@@ -60,7 +59,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(139, 69, 19, 0.1);
         }
 
         .logo {
@@ -70,17 +68,25 @@
             text-decoration: none;
         }
 
-        .logo-img {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
         }
 
         .logo-text {
             font-size: 1.4rem;
             font-weight: 800;
-            color: var(--brown-cafe);
-            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--gray-dark), var(--pink-vibrant));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-actions {
@@ -110,12 +116,12 @@
         }
 
         .btn-outline:hover {
-            border-color: var(--brown-cafe);
-            background: rgba(139, 69, 19, 0.05);
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--brown-cafe), #A0522D);
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
             color: white;
             box-shadow: var(--shadow);
         }
@@ -129,7 +135,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--brown-cafe), var(--green-vibrant));
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -176,7 +182,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, var(--brown-cafe), var(--green-vibrant));
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -195,20 +201,19 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             margin-bottom: 30px;
-            border: 1px solid var(--cream);
         }
 
         .booking-header {
             padding: 30px;
-            background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(27, 96, 47, 0.1));
-            border-bottom: 1px solid var(--cream);
+            background: linear-gradient(135deg, rgba(255, 77, 148, 0.1), rgba(0, 224, 160, 0.1));
+            border-bottom: 1px solid var(--gray-light);
             text-align: center;
         }
 
         .booking-code {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--brown-cafe);
+            color: var(--pink-vibrant);
             font-family: monospace;
             letter-spacing: 2px;
             margin-bottom: 10px;
@@ -235,9 +240,8 @@
 
         .booking-section {
             padding: 25px;
-            background: var(--cream);
+            background: var(--gray-light);
             border-radius: var(--radius);
-            border: 1px solid rgba(139, 69, 19, 0.1);
         }
 
         .section-title {
@@ -247,11 +251,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            color: var(--brown-cafe);
+            color: var(--gray-dark);
         }
 
         .section-title i {
-            color: var(--brown-cafe);
+            color: var(--pink-vibrant);
         }
 
         .info-grid {
@@ -263,7 +267,7 @@
             display: flex;
             justify-content: space-between;
             padding-bottom: 12px;
-            border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
         .info-row:last-child {
@@ -291,7 +295,6 @@
             border-radius: 12px;
             overflow: hidden;
             margin-top: 15px;
-            border: 1px solid var(--cream);
         }
 
         .order-item {
@@ -299,7 +302,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            border-bottom: 1px solid var(--cream);
+            border-bottom: 1px solid var(--gray-light);
         }
 
         .order-item:last-child {
@@ -322,7 +325,7 @@
 
         .order-item-price {
             font-weight: 700;
-            color: var(--brown-cafe);
+            color: var(--pink-vibrant);
             min-width: 100px;
             text-align: right;
         }
@@ -330,7 +333,7 @@
         .order-summary {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 2px solid var(--cream);
+            border-top: 2px solid var(--gray-light);
         }
 
         .summary-row {
@@ -342,10 +345,10 @@
         .summary-row.final {
             font-size: 1.2rem;
             font-weight: 800;
-            color: var(--brown-cafe);
+            color: var(--pink-vibrant);
             margin-top: 10px;
             padding-top: 10px;
-            border-top: 1px solid var(--cream);
+            border-top: 1px solid var(--gray-light);
         }
 
         /* 🎪 QR CODE SECTION */
@@ -356,24 +359,19 @@
             text-align: center;
             box-shadow: var(--shadow);
             margin-bottom: 30px;
-            border: 1px solid var(--cream);
         }
 
         .qrcode-container {
             width: 200px;
             height: 200px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            border-radius: 12px;
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        #qrCodeCanvas {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            padding: 10px;
-            background: white;
+            color: white;
+            font-size: 4rem;
         }
 
         .qrcode-note {
@@ -390,7 +388,6 @@
             padding: 30px;
             box-shadow: var(--shadow);
             margin-bottom: 30px;
-            border: 1px solid var(--cream);
         }
 
         .note-item {
@@ -398,7 +395,7 @@
             gap: 15px;
             margin-bottom: 20px;
             padding-bottom: 20px;
-            border-bottom: 1px solid var(--cream);
+            border-bottom: 1px solid var(--gray-light);
         }
 
         .note-item:last-child {
@@ -411,7 +408,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--brown-cafe), #A0522D);
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -452,7 +449,7 @@
 
         .action-card:hover {
             transform: translateY(-5px);
-            border-color: var(--brown-cafe);
+            border-color: var(--pink-vibrant);
             box-shadow: var(--shadow-hover);
         }
 
@@ -460,7 +457,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--brown-cafe), #A0522D);
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
             color: white;
             display: flex;
             align-items: center;
@@ -472,7 +469,6 @@
         .action-card h3 {
             margin-bottom: 8px;
             font-size: 1.1rem;
-            color: var(--brown-cafe);
         }
 
         .action-card p {
@@ -529,71 +525,12 @@
 
         /* 🎨 DECORATIVE */
         .highlight {
-            background: linear-gradient(120deg, rgba(139, 69, 19, 0.1) 0%, rgba(27, 96, 47, 0.1) 100%);
+            background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
             padding: 4px 12px;
             border-radius: 6px;
             font-weight: 600;
             display: inline-block;
             margin-bottom: 10px;
-            color: var(--brown-cafe);
-        }
-        
-        .restaurant-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--cream);
-        }
-        
-        .restaurant-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 2px solid var(--cream);
-        }
-        
-        .restaurant-info h3 {
-            color: var(--brown-cafe);
-            margin-bottom: 5px;
-        }
-        
-        .restaurant-info p {
-            color: var(--gray-medium);
-            font-size: 0.9rem;
-        }
-        
-        /* COUNTDOWN TIMER */
-        .countdown-timer {
-            background: linear-gradient(135deg, var(--brown-cafe), var(--green-vibrant));
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .countdown-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            line-height: 1;
-        }
-        
-        .countdown-label {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            margin-top: 5px;
         }
     </style>
 </head>
@@ -601,15 +538,17 @@
     <!-- 🧭 NAVBAR -->
     <nav class="main-nav">
         <a href="index.html" class="logo">
-            <img src="img/logo.png" alt="Hara Cafe Logo" class="logo-img">
-            <div class="logo-text">Hara Cafe</div>
+            <div class="logo-icon">
+                <img src="img/logo.png" alt="Logo Website">
+            </div>
+            <div class="logo-text">RuangTemu</div>
         </a>
         
         <div class="nav-actions">
             <a href="cafe.html" class="btn btn-outline">
                 <i class="fas fa-search"></i> Cari Restoran
             </a>
-            <div class="user-avatar">AC</div>
+            <div class="user-avatar">AS</div>
         </div>
     </nav>
 
@@ -627,29 +566,9 @@
         <!-- 🎯 BOOKING CARD -->
         <div class="booking-card">
             <div class="booking-header">
-                <div class="booking-code">HC-2024-0876</div>
+                <div class="booking-code">RT-2024-0158</div>
                 <div class="booking-status">
                     <i class="fas fa-check-circle"></i> Dikonfirmasi • Menunggu Kedatangan
-                </div>
-            </div>
-            
-            <!-- COUNTDOWN TIMER -->
-            <div class="countdown-timer">
-                <div class="countdown-item">
-                    <div class="countdown-value" id="countdown-days">00</div>
-                    <div class="countdown-label">HARI</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-value" id="countdown-hours">00</div>
-                    <div class="countdown-label">JAM</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-value" id="countdown-minutes">00</div>
-                    <div class="countdown-label">MENIT</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-value" id="countdown-seconds">00</div>
-                    <div class="countdown-label">DETIK</div>
                 </div>
             </div>
             
@@ -662,7 +581,7 @@
                     <div class="info-grid">
                         <div class="info-row">
                             <span class="info-label">Tanggal</span>
-                            <span class="info-value">18 Desember 2024</span>
+                            <span class="info-value">15 Desember 2024</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Waktu</span>
@@ -678,36 +597,32 @@
                         </div>
                         <div class="info-row">
                             <span class="info-label">Meja</span>
-                            <span class="info-value">#08 • Outdoor Garden</span>
+                            <span class="info-value">#12 • Window View</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- 🏪 Restaurant Info -->
                 <div class="booking-section">
-                    <div class="restaurant-header">
-                        <img src="img/logo.png" alt="Hara Cafe Logo" class="restaurant-logo">
-                        <div class="restaurant-info">
-                            <h3>Hara Cafe</h3>
-                            <p>Jl. Prof. Dr. Sutami No.62, Bandung</p>
-                        </div>
-                    </div>
+                    <h3 class="section-title">
+                        <i class="fas fa-utensils"></i> Informasi Restoran
+                    </h3>
                     <div class="info-grid">
                         <div class="info-row">
-                            <span class="info-label">Alamat Lengkap</span>
-                            <span class="info-value">Jl. Prof. Dr. Sutami No.62, Bandung</span>
+                            <span class="info-label">Nama Restoran</span>
+                            <span class="info-value">Wheels Coffee Roasters</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Alamat</span>
+                            <span class="info-value">Jl. LLRE Martadinata No.65, Bandung</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Telepon</span>
-                            <span class="info-value">(022) 1234-5678</span>
+                            <span class="info-value">(021) 1234-5678</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Email</span>
-                            <span class="info-value">haracafe_bdg@email.com</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Jam Operasional</span>
-                            <span class="info-value">08:00 - 22:00 WIB</span>
+                            <span class="info-value">wheelscoffe@email.com</span>
                         </div>
                     </div>
                 </div>
@@ -755,11 +670,11 @@
                         </div>
                         <div class="info-row">
                             <span class="info-label">Waktu Bayar</span>
-                            <span class="info-value">18 Des 2024, 14:30</span>
+                            <span class="info-value">15 Des 2024, 14:30</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">ID Transaksi</span>
-                            <span class="info-value">HC-TX-789012</span>
+                            <span class="info-value">TX-7890123456</span>
                         </div>
                     </div>
                 </div>
@@ -767,66 +682,66 @@
                 <!-- 🍽️ Order Details -->
                 <div class="booking-section order-section">
                     <h3 class="section-title">
-                        <i class="fas fa-receipt"></i> Detail Order Hara Cafe
+                        <i class="fas fa-receipt"></i> Detail Order
                     </h3>
                     <div class="order-items">
                         <!-- Order Item 1 -->
                         <div class="order-item">
                             <div class="order-item-info">
-                                <div class="order-item-name">Hara Signature Burger</div>
-                                <div class="order-item-detail">2x • Extra Cheese & Bacon</div>
+                                <div class="order-item-name">Beef Burger Premium</div>
+                                <div class="order-item-detail">2x • Special Request: Extra Cheese</div>
                             </div>
-                            <div class="order-item-price">Rp 185.000</div>
+                            <div class="order-item-price">Rp 240.000</div>
                         </div>
                         
                         <!-- Order Item 2 -->
                         <div class="order-item">
                             <div class="order-item-info">
-                                <div class="order-item-name">Truffle Mushroom Pasta</div>
+                                <div class="order-item-name">Truffle Pasta</div>
                                 <div class="order-item-detail">1x</div>
                             </div>
-                            <div class="order-item-price">Rp 120.000</div>
+                            <div class="order-item-price">Rp 145.000</div>
                         </div>
                         
                         <!-- Order Item 3 -->
                         <div class="order-item">
                             <div class="order-item-info">
-                                <div class="order-item-name">Hara Special Coffee</div>
+                                <div class="order-item-name">Iced Caramel Latte</div>
                                 <div class="order-item-detail">3x</div>
                             </div>
-                            <div class="order-item-price">Rp 105.000</div>
+                            <div class="order-item-price">Rp 135.000</div>
                         </div>
                         
                         <!-- Order Item 4 -->
                         <div class="order-item">
                             <div class="order-item-info">
-                                <div class="order-item-name">Avocado Toast</div>
-                                <div class="order-item-detail">1x • Extra Poached Egg</div>
+                                <div class="order-item-name">Garden Salad</div>
+                                <div class="order-item-detail">1x • Dressing on the side</div>
                             </div>
-                            <div class="order-item-price">Rp 55.000</div>
+                            <div class="order-item-price">Rp 65.000</div>
                         </div>
                     </div>
                     
                     <div class="order-summary">
                         <div class="summary-row">
                             <span>Subtotal</span>
-                            <span>Rp 465.000</span>
+                            <span>Rp 585.000</span>
                         </div>
                         <div class="summary-row">
                             <span>Tax (10%)</span>
-                            <span>Rp 46.500</span>
+                            <span>Rp 58.500</span>
                         </div>
                         <div class="summary-row">
                             <span>Service Fee</span>
                             <span>Rp 15.000</span>
                         </div>
                         <div class="summary-row">
-                            <span>Promo HARA10</span>
-                            <span style="color: var(--green-vibrant);">- Rp 46.500</span>
+                            <span>Promo</span>
+                            <span style="color: var(--green-vibrant);">- Rp 50.000</span>
                         </div>
                         <div class="summary-row final">
                             <span>Total Pembayaran</span>
-                            <span>Rp 480.000</span>
+                            <span>Rp 608.500</span>
                         </div>
                     </div>
                 </div>
@@ -835,20 +750,20 @@
 
         <!-- 🎪 QR CODE SECTION -->
         <div class="qrcode-section">
-            <h2 style="margin-bottom: 20px; color: var(--brown-cafe);">Tunjukkan QR Code Ini</h2>
+            <h2 style="margin-bottom: 20px;">Tunjukkan QR Code Ini</h2>
             <div class="qrcode-container">
-                <canvas id="qrCodeCanvas"></canvas>
+                <i class="fas fa-qrcode"></i>
             </div>
-            <div class="booking-code" style="font-size: 1.5rem; margin: 20px 0;">HC-2024-0876</div>
+            <div class="booking-code" style="font-size: 1.5rem; margin: 20px 0;">RT-2024-1587</div>
             <p class="qrcode-note">
-                Tunjukkan QR code atau kode booking di atas kepada staf Hara Cafe saat tiba.
-                QR code hanya berlaku untuk 1 kunjungan dan akan kadaluarsa setelah 24 Desember 2024.
+                Tunjukkan QR code atau kode booking di atas kepada staf restoran saat tiba.
+                QR code hanya berlaku untuk 1 kunjungan.
             </p>
         </div>
 
         <!-- 📱 IMPORTANT NOTES -->
         <div class="notes-section">
-            <h2 style="margin-bottom: 25px; color: var(--brown-cafe);">Informasi Penting Hara Cafe</h2>
+            <h2 style="margin-bottom: 25px;">Informasi Penting</h2>
             
             <div class="note-item">
                 <div class="note-icon">
@@ -866,7 +781,7 @@
                 </div>
                 <div class="note-content">
                     <h4>Perubahan Jumlah Tamu</h4>
-                    <p>Perubahan jumlah tamu maksimal 2 orang. Hubungi Hara Cafe minimal 2 jam sebelumnya untuk perubahan.</p>
+                    <p>Perubahan jumlah tamu maksimal 2 orang. Hubungi restoran minimal 2 jam sebelumnya untuk perubahan.</p>
                 </div>
             </div>
             
@@ -886,7 +801,7 @@
                 </div>
                 <div class="note-content">
                     <h4>Pre-order Makanan</h4>
-                    <p>Makanan yang telah dipesan akan disiapkan dan siap saji saat Anda tiba di meja. Kitchen tutup pukul 21:30.</p>
+                    <p>Makanan yang telah dipesan akan disiapkan dan siap saji saat Anda tiba di meja.</p>
                 </div>
             </div>
         </div>
@@ -919,23 +834,20 @@
             
             <div class="action-card" onclick="viewRestaurant()">
                 <div class="action-icon">
-                    <i class="fas fa-map-marker-alt"></i>
+                    <i class="fas fa-store"></i>
                 </div>
-                <h3>Petunjuk Arah</h3>
-                <p>Lihat lokasi Hara Cafe di maps</p>
+                <h3>Lihat Restoran</h3>
+                <p>Lihat detail restoran & arah</p>
             </div>
         </div>
 
         <!-- 🎯 CTA BUTTONS -->
-        <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 50px; flex-wrap: wrap;">
+        <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 50px;">
             <a href="dashboardcustomers.html" class="btn btn-primary" style="padding: 15px 30px;">
                 <i class="fas fa-home"></i> Kembali ke Dashboard
             </a>
             <a href="cafe.html" class="btn btn-outline" style="padding: 15px 30px;">
                 <i class="fas fa-plus"></i> Buat Booking Baru
-            </a>
-            <a href="https://maps.google.com/?q=Hara+Cafe+Jl.+Prof.+Dr.+Sutami+No.62+Bandung" target="_blank" class="btn btn-outline" style="padding: 15px 30px;">
-                <i class="fas fa-map"></i> Buka di Google Maps
             </a>
         </div>
     </div>
@@ -946,7 +858,7 @@
     <script>
         // 🎉 CREATE CONFETTI
         function createConfetti() {
-            const colors = ['#8B4513', '#1B602F', '#FFB400', '#F784C5'];
+            const colors = [var(--pink-vibrant), var(--green-vibrant), '#FFB400', '#667eea'];
             const container = document.getElementById('confettiContainer');
             
             for (let i = 0; i < 100; i++) {
@@ -967,121 +879,25 @@
             }
         }
 
-        // 📍 GENERATE REALISTIC QR CODE
-        function generateQRCode() {
-            const bookingData = {
-                code: "HC-2024-0876",
-                name: "Andarini Cahyani",
-                restaurant: "Hara Cafe",
-                date: "2024-12-18",
-                time: "19:00",
-                guests: 4,
-                table: "#08",
-                email: "andarini@email.com"
-            };
-            
-            const qrData = JSON.stringify(bookingData);
-            const canvas = document.getElementById('qrCodeCanvas');
-            
-            QRCode.toCanvas(canvas, qrData, {
-                width: 180,
-                height: 180,
-                margin: 1,
-                color: {
-                    dark: '#8B4513',
-                    light: '#FFF5EB'
-                },
-                errorCorrectionLevel: 'H'
-            }, function(error) {
-                if (error) {
-                    console.error(error);
-                    canvas.getContext('2d').fillStyle = '#8B4513';
-                    canvas.getContext('2d').fillRect(0, 0, 180, 180);
-                    canvas.getContext('2d').fillStyle = 'white';
-                    canvas.getContext('2d').font = '16px Arial';
-                    canvas.getContext('2d').fillText('HC-2024-0876', 20, 90);
-                }
-            });
-        }
-
-        // ⏰ COUNTDOWN TIMER
-        function updateCountdown() {
-            const bookingTime = new Date('December 18, 2024 19:00:00').getTime();
-            const now = new Date().getTime();
-            const timeLeft = bookingTime - now;
-            
-            if (timeLeft > 0) {
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
-            } else {
-                document.querySelector('.countdown-timer').innerHTML = '<div style="font-size: 1.2rem; font-weight: 600;">Waktu reservasi telah dimulai!</div>';
-            }
-        }
-
         // 📥 DOWNLOAD TICKET
         function downloadTicket() {
             showToast('Mengunduh e-ticket...');
             setTimeout(() => {
                 showToast('E-ticket berhasil diunduh!');
-                // Simulate download
-                const ticketData = `
-==========================================
-                HARA CAFE
-==========================================
-        E-TICKET RESERVASI
-
-Kode Booking: HC-2024-0876
-Tanggal: 18 Desember 2024
-Waktu: 19:00 WIB
-Jumlah Tamu: 4 Orang
-Meja: #08 • Outdoor Garden
-
-Nama: Andarini Cahyani
-Email: andarini@email.com
-Telepon: 0812-3456-7890
-
-Alamat Restoran:
-Jl. Prof. Dr. Sutami No.62, Bandung
-Telepon: (022) 1234-5678
-
-Status: Dikonfirmasi • Lunas
-Total: Rp 480.000
-
-==========================================
-Tunjukkan QR code atau kode booking ini
-saat tiba di restoran.
-==========================================
-                `;
-                
-                const blob = new Blob([ticketData], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'HaraCafe-Ticket-HC-2024-0876.txt';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
             }, 1500);
         }
 
         // 📅 ADD TO CALENDAR
         function addToCalendar() {
             const eventDetails = {
-                title: 'Reservasi Hara Cafe',
-                description: 'Booking Code: HC-2024-0876\nMeja: #08 • 4 Orang\nLokasi: Jl. Prof. Dr. Sutami No.62, Bandung\nTelepon: (022) 1234-5678',
-                start: '2024-12-18T19:00:00',
-                end: '2024-12-18T21:00:00',
-                location: 'Hara Cafe, Jl. Prof. Dr. Sutami No.62, Bandung'
+                title: 'Reservasi The Garden Café',
+                description: 'Booking Code: RT-2024-1587\nMeja: #12 • 4 Orang\nLokasi: Jl. Sudirman No. 123, Jakarta',
+                start: '2024-12-15T19:00:00',
+                end: '2024-12-15T21:00:00',
+                location: 'The Garden Café, Jakarta'
             };
             
+            // Create .ics file
             const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
@@ -1097,7 +913,7 @@ END:VCALENDAR`;
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'reservasi-hara-cafe.ics';
+            a.download = 'booking-ruangtemu.ics';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -1109,8 +925,8 @@ END:VCALENDAR`;
         // 🔗 SHARE BOOKING
         function shareBooking() {
             const bookingData = {
-                title: 'Reservasi Hara Cafe via RuangTemu',
-                text: 'Saya sudah booking meja di Hara Cafe melalui RuangTemu! 🎉\nKode: HC-2024-0876\nTanggal: 18 Des 2024, 19:00\nUntuk: 4 Orang\nLokasi: Jl. Prof. Dr. Sutami No.62, Bandung',
+                title: 'Reservasi The Garden Café via RuangTemu',
+                text: 'Saya sudah booking meja di The Garden Café melalui RuangTemu! 🎉\nKode: RT-2024-1587\nTanggal: 15 Des 2024, 19:00\nUntuk: 4 Orang',
                 url: window.location.href
             };
             
@@ -1124,11 +940,12 @@ END:VCALENDAR`;
         }
 
         function copyToClipboard() {
-            const text = `Reservasi Hara Cafe via RuangTemu\nKode: HC-2024-0876\nTanggal: 18 Des 2024, 19:00\nUntuk: 4 Orang\nMeja: #08 • Outdoor Garden\nLokasi: Jl. Prof. Dr. Sutami No.62, Bandung\nTelepon: (022) 1234-5678\nLink: ${window.location.href}`;
+            const text = `Reservasi The Garden Café via RuangTemu\nKode: RT-2024-1587\nTanggal: 15 Des 2024, 19:00\nUntuk: 4 Orang\nLink: ${window.location.href}`;
             
             navigator.clipboard.writeText(text)
                 .then(() => showToast('Tautan berhasil disalin!'))
                 .catch(() => {
+                    // Fallback for older browsers
                     const textarea = document.createElement('textarea');
                     textarea.value = text;
                     document.body.appendChild(textarea);
@@ -1139,29 +956,31 @@ END:VCALENDAR`;
                 });
         }
 
-        // 🗺️ VIEW RESTAURANT
+        // 🏪 VIEW RESTAURANT
         function viewRestaurant() {
-            window.open('https://maps.google.com/?q=Hara+Cafe+Jl.+Prof.+Dr.+Sutami+No.62+Bandung', '_blank');
+            window.location.href = 'restaurant-detail.html';
         }
 
         // ✨ TOAST FUNCTION
         function showToast(message) {
+            // Create toast element
             const toast = document.createElement('div');
             toast.className = 'toast';
             toast.innerHTML = `
-                <i class="fas fa-check-circle" style="color: #8B4513; font-size: 1.2rem;"></i>
+                <i class="fas fa-check-circle" style="color: var(--pink-vibrant); font-size: 1.2rem;"></i>
                 <span>${message}</span>
             `;
             
+            // Style toast
             toast.style.cssText = `
                 position: fixed;
                 bottom: 20px;
                 right: 20px;
-                background: #FFFFFF;
+                background: var(--white);
                 padding: 15px 25px;
                 border-radius: 12px;
-                box-shadow: 0 15px 40px rgba(139, 69, 19, 0.15);
-                border-left: 4px solid #8B4513;
+                box-shadow: var(--shadow-hover);
+                border-left: 4px solid var(--pink-vibrant);
                 display: flex;
                 align-items: center;
                 gap: 12px;
@@ -1173,11 +992,13 @@ END:VCALENDAR`;
             
             document.body.appendChild(toast);
             
+            // Show toast
             setTimeout(() => {
                 toast.style.transform = 'translateY(0)';
                 toast.style.opacity = '1';
             }, 10);
             
+            // Hide and remove toast
             setTimeout(() => {
                 toast.style.transform = 'translateY(100px)';
                 toast.style.opacity = '0';
@@ -1187,17 +1008,30 @@ END:VCALENDAR`;
             }, 3000);
         }
 
+        // 📅 COUNTDOWN TIMER
+        function updateCountdown() {
+            const bookingTime = new Date('2024-12-15T19:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = bookingTime - now;
+            
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                
+                // You can display this somewhere on the page
+                console.log(`${days}h ${hours}j ${minutes}m menuju waktu reservasi`);
+            }
+        }
+
         // 🎉 INITIALIZE
         document.addEventListener('DOMContentLoaded', function() {
             // Create confetti on load
             createConfetti();
             
-            // Generate QR code
-            generateQRCode();
-            
-            // Initialize countdown
+            // Update countdown every minute
             updateCountdown();
-            setInterval(updateCountdown, 1000);
+            setInterval(updateCountdown, 60000);
             
             // Auto-hide confetti after 5 seconds
             setTimeout(() => {
@@ -1224,8 +1058,8 @@ END:VCALENDAR`;
                 background: #FFFFFF;
                 padding: 15px 25px;
                 border-radius: 12px;
-                box-shadow: 0 15px 40px rgba(139, 69, 19, 0.15);
-                border-left: 4px solid #8B4513;
+                box-shadow: 0 15px 40px rgba(255, 77, 148, 0.15);
+                border-left: 4px solid #FF4D94;
                 display: flex;
                 align-items: center;
                 gap: 12px;
@@ -1248,5 +1082,5 @@ END:VCALENDAR`;
         document.head.appendChild(style);
     </script>
 </body>
-</html>
 
+</html>

@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruang Temu • Pembayaran Berhasil</title>
+    <title>Booking Berhasil • Ruang Temu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* 🎨 PALETTE CONSISTENCY */
         :root {
@@ -13,8 +12,6 @@
             --pink-soft: #FF8AB5;
             --green-vibrant: #1B602F;
             --green-soft: #80FFD6;
-            --blue-vibrant: #1E40AF;
-            --blue-soft: #60A5FA;
             --gray-dark: #2D2D3A;
             --gray-medium: #5A5A72;
             --gray-light: #F5F5FA;
@@ -23,7 +20,6 @@
             --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             --shadow-hover: 0 15px 40px rgba(255, 77, 148, 0.15);
             --radius: 16px;
-            --radius-lg: 20px;
         }
 
         * {
@@ -37,11 +33,6 @@
             background: linear-gradient(135deg, #FFF5F9 0%, #F0FFFA 100%);
             color: var(--gray-dark);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
         }
 
         /* 🎀 CUSTOM SCROLLBAR */
@@ -56,426 +47,84 @@
             border-radius: 10px;
         }
 
-        /* 🎪 MAIN CONTAINER */
-        .payment-container {
+        /* 🧭 NAVBAR - LOGO DIPERBAIKI */
+        .main-nav {
+            position: fixed;
+            top: 0;
             width: 100%;
-            max-width: 480px;
             background: var(--white);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-hover);
-            overflow: hidden;
-            position: relative;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* 🎉 SUCCESS HEADER */
-        .success-header {
-            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .success-header::before {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            top: -100px;
-            right: -100px;
-        }
-
-        .success-header::after {
-            content: '';
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            bottom: -75px;
-            left: -75px;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 2.5rem;
-            color: var(--green-vibrant);
-            z-index: 2;
-            position: relative;
-            animation: bounce 1s ease infinite alternate;
-        }
-
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
-        }
-
-        .success-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            z-index: 2;
-            position: relative;
-        }
-
-        .success-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            z-index: 2;
-            position: relative;
-        }
-
-        /* 📄 PAYMENT DETAILS */
-        .payment-details {
-            padding: 40px 30px;
-        }
-
-        .detail-section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--gray-dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: var(--pink-vibrant);
-        }
-
-        /* 💰 BILLING INFO */
-        .billing-card {
-            background: var(--gray-light);
-            border-radius: var(--radius);
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-
-        .billing-header {
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-light);
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
         }
 
-        .billing-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--gray-dark);
-        }
-
-        .billing-status {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            background: var(--green-vibrant);
-            color: white;
-        }
-
-        .billing-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .billing-item {
-            background: white;
-            padding: 15px;
-            border-radius: var(--radius);
-            text-align: center;
-        }
-
-        .billing-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-            color: var(--green-vibrant);
-        }
-
-        .billing-label {
-            color: var(--gray-medium);
-            font-size: 0.9rem;
-        }
-
-        /* 📋 PAYMENT INFO */
-        .info-card {
-            background: linear-gradient(135deg, rgba(255, 77, 148, 0.05), rgba(0, 224, 160, 0.05));
-            border-radius: var(--radius);
-            padding: 25px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--pink-vibrant);
-        }
-
-        .info-header {
+        .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 12px;
+            text-decoration: none;
         }
 
-        .info-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+        /* PERBAIKAN LOGO: Gambar lebih presisi */
+        .logo-icon {
+            width: 42px;
+            height: 42px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-        }
-
-        .info-title {
-            font-weight: 700;
-            color: var(--gray-dark);
-        }
-
-        .info-content {
-            color: var(--gray-medium);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* 🧾 INVOICE DETAILS */
-        .invoice-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow);
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            padding: 4px;
         }
 
-        .invoice-table th {
-            background: linear-gradient(135deg, var(--gray-light), #eaeafa);
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--gray-dark);
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
 
-        .invoice-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .invoice-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .invoice-table .total-row {
-            background: linear-gradient(135deg, rgba(0, 224, 160, 0.05), transparent);
-            font-weight: 700;
-        }
-
-        .invoice-table .total-value {
-            color: var(--green-vibrant);
-            font-size: 1.2rem;
-        }
-
-        /* 🎯 PAYMENT CONFIRMATION */
-        .confirmation-card {
-            background: linear-gradient(135deg, rgba(0, 224, 160, 0.1), rgba(255, 77, 148, 0.1));
-            border-radius: var(--radius);
-            padding: 30px;
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .confirmation-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--green-vibrant);
-        }
-
-        .confirmation-text {
-            color: var(--gray-medium);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .confirmation-details {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .confirmation-item {
-            text-align: center;
-        }
-
-        .confirmation-value {
-            font-size: 1.3rem;
+        .logo-text {
+            font-size: 1.4rem;
             font-weight: 800;
-            margin-bottom: 5px;
-            color: var(--gray-dark);
+            background: linear-gradient(135deg, var(--gray-dark), var(--pink-vibrant));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .confirmation-label {
-            color: var(--gray-medium);
-            font-size: 0.9rem;
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
-        /* 🎭 ANIMATED CHECKMARK */
-        .checkmark-container {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-        }
-
-        .checkmark-circle {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
-            position: absolute;
-            animation: scaleIn 0.5s ease-out;
-        }
-
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .checkmark {
-            position: absolute;
-            width: 40px;
-            height: 20px;
-            border-left: 5px solid white;
-            border-bottom: 5px solid white;
-            transform: rotate(-45deg);
-            left: 20px;
-            top: 25px;
-            animation: drawCheck 0.8s ease-out 0.3s forwards;
-            opacity: 0;
-        }
-
-        @keyframes drawCheck {
-            0% {
-                width: 0;
-                height: 0;
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                width: 40px;
-                height: 20px;
-                opacity: 1;
-            }
-        }
-
-        /* 🎪 CONFETTI ANIMATION */
-        .confetti-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--pink-vibrant);
-            border-radius: 2px;
-            opacity: 0;
-            animation: confettiFall 1.5s ease-out forwards;
-        }
-
-        .confetti:nth-child(2) {
-            background: var(--green-soft);
-            animation-delay: 0.2s;
-            left: 20%;
-        }
-
-        .confetti:nth-child(3) {
-            background: var(--blue-soft);
-            animation-delay: 0.4s;
-            left: 40%;
-        }
-
-        .confetti:nth-child(4) {
-            background: var(--pink-soft);
-            animation-delay: 0.6s;
-            left: 60%;
-        }
-
-        .confetti:nth-child(5) {
-            background: var(--green-vibrant);
-            animation-delay: 0.8s;
-            left: 80%;
-        }
-
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(400px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* 🔘 BUTTONS */
         .btn {
-            padding: 16px 32px;
-            border-radius: var(--radius);
+            padding: 10px 20px;
+            border-radius: 10px;
             font-weight: 600;
-            font-size: 1rem;
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            margin-top: 10px;
+            gap: 8px;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--pink-soft);
+            background: rgba(255, 77, 148, 0.05);
         }
 
         .btn-primary {
@@ -489,123 +138,435 @@
             box-shadow: var(--shadow-hover);
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--gray-light);
-            color: var(--gray-dark);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--pink-soft);
-            background: rgba(255, 77, 148, 0.05);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            box-shadow: 0 8px 25px rgba(0, 224, 160, 0.3);
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0, 224, 160, 0.4);
+        /* 🎉 CONFIRMATION HERO */
+        .confirmation-container {
+            max-width: 1000px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
         }
 
-        /* 📱 DOWNLOAD SECTION */
-        .download-section {
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 2px solid var(--gray-light);
+        .confirmation-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .download-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--green-vibrant), var(--green-soft));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            margin: 0 auto 20px;
+            animation: successPulse 2s infinite;
         }
 
-        /* 🏠 BACK TO DASHBOARD */
-        .back-section {
-            margin-top: 30px;
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .confirmation-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .confirmation-header p {
+            color: var(--gray-medium);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 🎯 BOOKING CARD */
+        .booking-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .booking-header {
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 77, 148, 0.1), rgba(0, 224, 160, 0.1));
+            border-bottom: 1px solid var(--gray-light);
             text-align: center;
         }
 
-        .back-link {
+        .booking-code {
+            font-size: 2rem;
+            font-weight: 800;
             color: var(--pink-vibrant);
-            text-decoration: none;
-            font-weight: 600;
+            font-family: monospace;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .booking-status {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: var(--transition);
+            padding: 8px 20px;
+            background: var(--green-vibrant);
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        .back-link:hover {
+        .booking-content {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .booking-section {
+            padding: 25px;
+            background: var(--gray-light);
+            border-radius: var(--radius);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-dark);
+        }
+
+        .section-title i {
+            color: var(--pink-vibrant);
+        }
+
+        .info-grid {
+            display: grid;
             gap: 12px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* 📊 ORDER DETAILS */
+        .order-section {
+            grid-column: 1 / -1;
+            margin-top: 10px;
+        }
+
+        .order-items {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-info {
+            flex: 1;
+        }
+
+        .order-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .order-item-detail {
+            font-size: 0.9rem;
+            color: var(--gray-medium);
+        }
+
+        .order-item-price {
+            font-weight: 700;
+            color: var(--pink-vibrant);
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .order-summary {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--gray-light);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .summary-row.final {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--pink-vibrant);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        /* 🎪 QR CODE SECTION */
+        .qrcode-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .qrcode-container {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            border-radius: 12px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .qrcode-note {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* 📱 IMPORTANT NOTES */
+        .notes-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .note-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .note-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .note-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .note-content h4 {
+            margin-bottom: 5px;
+            color: var(--gray-dark);
+        }
+
+        .note-content p {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* 🎭 ACTION BUTTONS */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .action-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--pink-vibrant);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .action-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--pink-soft));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 15px;
+        }
+
+        .action-card h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .action-card p {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+        }
+
+        /* ✨ CONFETTI ANIMATION YANG DIPERBAIKI */
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .confetti-piece:nth-child(5n) {
+            width: 16px;
+            height: 8px;
+        }
+        
+        .confetti-piece:nth-child(3n) {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .confetti-piece:nth-child(7n) {
+            width: 20px;
+            height: 6px;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confetti-swing {
+            0%, 100% {
+                transform: translateX(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateX(50px) rotate(180deg);
+            }
         }
 
         /* 📱 RESPONSIVE */
         @media (max-width: 768px) {
-            .payment-container {
-                max-width: 100%;
+            .main-nav {
+                padding: 15px 20px;
             }
             
-            .success-header {
-                padding: 30px 20px;
+            .confirmation-container {
+                margin-top: 80px;
+                padding: 0 15px;
             }
             
-            .payment-details {
-                padding: 30px 20px;
+            .confirmation-header h1 {
+                font-size: 2rem;
             }
             
-            .billing-grid {
+            .booking-content {
                 grid-template-columns: 1fr;
             }
             
-            .download-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .confirmation-details {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .success-title {
+            .booking-code {
                 font-size: 1.5rem;
             }
             
-            .success-subtitle {
-                font-size: 1rem;
+            .action-buttons {
+                grid-template-columns: 1fr;
             }
             
-            .section-title {
-                font-size: 1.1rem;
+            .qrcode-container {
+                width: 150px;
+                height: 150px;
             }
             
-            .billing-card,
-            .info-card,
-            .confirmation-card {
-                padding: 20px;
+            .logo-icon {
+                width: 36px;
+                height: 36px;
             }
         }
 
-        /* 🎨 UTILITY */
-        .text-center {
-            text-align: center;
-        }
-
-        .mt-20 {
-            margin-top: 20px;
-        }
-
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-
+        /* 🎨 DECORATIVE */
         .highlight {
             background: linear-gradient(120deg, rgba(255, 77, 148, 0.1) 0%, rgba(0, 224, 160, 0.1) 100%);
             padding: 4px 12px;
@@ -613,432 +574,549 @@
             font-weight: 600;
             display: inline-block;
             margin-bottom: 10px;
-            font-size: 0.9rem;
         }
-
-        /* 🎪 FOOTER */
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            color: var(--gray-medium);
-            font-size: 0.9rem;
-            padding: 20px;
+        
+        /* STYLE TOAST */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(255, 77, 148, 0.15);
+            border-left: 4px solid var(--pink-vibrant);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
-
-        .footer a {
-            color: var(--pink-vibrant);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <!-- 🎪 CONFETTI ANIMATION -->
-    <div class="confetti-container" id="confettiContainer">
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-    </div>
+    <!-- 🧭 NAVBAR -->
+    <nav class="main-nav">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <img src="img/logo.png" alt="RuangTemu Logo">
+            </div>
+            <div class="logo-text">RuangTemu</div>
+        </a>
+        
+        <div class="nav-actions">
+            <a href="cafe.html" class="btn btn-outline">
+                <i class="fas fa-search"></i> Cari Restoran
+            </a>
+            <div class="user-avatar">AS</div>
+        </div>
+    </nav>
 
-    <!-- 🎪 PAYMENT CONTAINER -->
-    <div class="payment-container">
-        <!-- 🎉 SUCCESS HEADER -->
-        <div class="success-header">
-            <div class="checkmark-container">
-                <div class="checkmark-circle"></div>
-                <div class="checkmark"></div>
+    <!-- 🎉 CONFIRMATION HERO -->
+    <div class="confirmation-container">
+        <div class="confirmation-header">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <span class="highlight">🎉 Booking Berhasil!</span>
+            <h1>Reservasi Anda Telah <span class="gradient-text">Dikonfirmasi</span></h1>
+            <p>Tunjukkan QR code di bawah saat tiba di restoran. Detail reservasi telah dikirim ke email Anda.</p>
+        </div>
+
+        <!-- 🎯 BOOKING CARD -->
+        <div class="booking-card">
+            <div class="booking-header">
+                <div class="booking-code">RT-2024-0158</div>
+                <div class="booking-status">
+                    <i class="fas fa-check-circle"></i> Dikonfirmasi • Menunggu Kedatangan
+                </div>
             </div>
             
-            <h1 class="success-title">Pembayaran Berhasil!</h1>
-            <p class="success-subtitle">Tagihan Hara Cafe telah dibayar lunas</p>
+            <div class="booking-content">
+                <!-- 📅 Booking Info -->
+                <div class="booking-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-calendar-check"></i> Detail Reservasi
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Tanggal</span>
+                            <span class="info-value">15 Desember 2024</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Waktu</span>
+                            <span class="info-value">19:00 WIB</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Durasi</span>
+                            <span class="info-value">2 Jam</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Jumlah Tamu</span>
+                            <span class="info-value">4 Orang</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Meja</span>
+                            <span class="info-value">#12 • Window View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🏪 Restaurant Info -->
+                <div class="booking-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-utensils"></i> Informasi Restoran
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Nama Restoran</span>
+                            <span class="info-value">Wheels Coffee Roasters</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Alamat</span>
+                            <span class="info-value">Jl. LLRE Martadinata No.65, Bandung</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Telepon</span>
+                            <span class="info-value">(021) 1234-5678</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Email</span>
+                            <span class="info-value">wheelscoffe@email.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 👤 Customer Info -->
+                <div class="booking-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user"></i> Informasi Anda
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Nama</span>
+                            <span class="info-value">Andarini Cahyani</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Email</span>
+                            <span class="info-value">andarini@email.com</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Telepon</span>
+                            <span class="info-value">0812-3456-7890</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Catatan</span>
+                            <span class="info-value">Birthday Celebration 🎂</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 💰 Payment Info -->
+                <div class="booking-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-credit-card"></i> Pembayaran
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Metode</span>
+                            <span class="info-value">QRIS</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Status</span>
+                            <span class="info-value" style="color: var(--green-vibrant);">
+                                <i class="fas fa-check-circle"></i> Lunas
+                            </span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Waktu Bayar</span>
+                            <span class="info-value">15 Des 2024, 14:30</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">ID Transaksi</span>
+                            <span class="info-value">TX-7890123456</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🍽️ Order Details -->
+                <div class="booking-section order-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-receipt"></i> Detail Order
+                    </h3>
+                    <div class="order-items">
+                        <!-- Order Item 1 -->
+                        <div class="order-item">
+                            <div class="order-item-info">
+                                <div class="order-item-name">Beef Burger Premium</div>
+                                <div class="order-item-detail">2x • Special Request: Extra Cheese</div>
+                            </div>
+                            <div class="order-item-price">Rp 240.000</div>
+                        </div>
+                        
+                        <!-- Order Item 2 -->
+                        <div class="order-item">
+                            <div class="order-item-info">
+                                <div class="order-item-name">Truffle Pasta</div>
+                                <div class="order-item-detail">1x</div>
+                            </div>
+                            <div class="order-item-price">Rp 145.000</div>
+                        </div>
+                        
+                        <!-- Order Item 3 -->
+                        <div class="order-item">
+                            <div class="order-item-info">
+                                <div class="order-item-name">Iced Caramel Latte</div>
+                                <div class="order-item-detail">3x</div>
+                            </div>
+                            <div class="order-item-price">Rp 135.000</div>
+                        </div>
+                        
+                        <!-- Order Item 4 -->
+                        <div class="order-item">
+                            <div class="order-item-info">
+                                <div class="order-item-name">Garden Salad</div>
+                                <div class="order-item-detail">1x • Dressing on the side</div>
+                            </div>
+                            <div class="order-item-price">Rp 65.000</div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>Rp 585.000</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (10%)</span>
+                            <span>Rp 58.500</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Service Fee</span>
+                            <span>Rp 15.000</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Promo</span>
+                            <span style="color: var(--green-vibrant);">- Rp 50.000</span>
+                        </div>
+                        <div class="summary-row final">
+                            <span>Total Pembayaran</span>
+                            <span>Rp 608.500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- 📄 PAYMENT DETAILS -->
-        <div class="payment-details">
-            <!-- 💰 BILLING INFO -->
-            <div class="detail-section">
-                <h2 class="section-title">
-                    <i class="fas fa-receipt"></i>
-                    Detail Tagihan
-                </h2>
-                
-                <div class="billing-card">
-                    <div class="billing-header">
-                        <div class="billing-title">Tagihan Desember 2024</div>
-                        <div class="billing-status">LUNAS</div>
-                    </div>
-                    
-                    <div class="billing-grid">
-                        <div class="billing-item">
-                            <div class="billing-value">Rp 8.500.000</div>
-                            <div class="billing-label">Total Penjualan Bulan Ini</div>
-                        </div>
-                        
-                        <div class="billing-item">
-                            <div class="billing-value">5%</div>
-                            <div class="billing-label">Komisi Aplikator</div>
-                        </div>
-                        
-                        <div class="billing-item">
-                            <div class="billing-value">Rp 425.000</div>
-                            <div class="billing-label">Jumlah Tagihan</div>
-                        </div>
-                        
-                        <div class="billing-item">
-                            <div class="billing-value">15 Des 2024</div>
-                            <div class="billing-label">Batas Waktu Pembayaran</div>
-                        </div>
-                    </div>
+        <!-- 🎪 QR CODE SECTION -->
+        <div class="qrcode-section">
+            <h2 style="margin-bottom: 20px;">Tunjukkan QR Code Ini</h2>
+            <div class="qrcode-container">
+                <i class="fas fa-qrcode"></i>
+            </div>
+            <div class="booking-code" style="font-size: 1.5rem; margin: 20px 0;">RT-2024-1587</div>
+            <p class="qrcode-note">
+                Tunjukkan QR code atau kode booking di atas kepada staf restoran saat tiba.
+                QR code hanya berlaku untuk 1 kunjungan.
+            </p>
+        </div>
+
+        <!-- 📱 IMPORTANT NOTES -->
+        <div class="notes-section">
+            <h2 style="margin-bottom: 25px;">Informasi Penting</h2>
+            
+            <div class="note-item">
+                <div class="note-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="note-content">
+                    <h4>Jam Kedatangan</h4>
+                    <p>Silakan datang 15 menit sebelum waktu reservasi. Reservasi akan hangus jika terlambat lebih dari 30 menit.</p>
                 </div>
             </div>
-
-            <!-- 📋 PAYMENT INFO -->
-            <div class="detail-section">
-                <h2 class="section-title">
-                    <i class="fas fa-info-circle"></i>
-                    Informasi Pembayaran
-                </h2>
-                
-                <div class="info-card">
-                    <div class="info-header">
-                        <div class="info-icon">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <div class="info-title">Detail Transaksi</div>
-                    </div>
-                    
-                    <div class="info-content">
-                        Tagihan bulanan sebesar 5% dari total penjualan telah berhasil dipotong. 
-                        Pembayaran dilakukan menggunakan sistem otomatis dari saldo RuangTemu. 
-                        Transaksi ini telah tercatat dan diverifikasi oleh sistem.
-                    </div>
+            
+            <div class="note-item">
+                <div class="note-icon">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+                <div class="note-content">
+                    <h4>Perubahan Jumlah Tamu</h4>
+                    <p>Perubahan jumlah tamu maksimal 2 orang. Hubungi restoran minimal 2 jam sebelumnya untuk perubahan.</p>
                 </div>
             </div>
-
-            <!-- 🧾 INVOICE DETAILS -->
-            <div class="detail-section">
-                <h2 class="section-title">
-                    <i class="fas fa-file-invoice"></i>
-                    Rincian Invoice
-                </h2>
-                
-                <table class="invoice-table">
-                    <thead>
-                        <tr>
-                            <th>Deskripsi</th>
-                            <th>Jumlah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Total Penjualan Desember 2024</td>
-                            <td>Rp 8.500.000</td>
-                        </tr>
-                        <tr>
-                            <td>Komisi Aplikator (5%)</td>
-                            <td>Rp 425.000</td>
-                        </tr>
-                        <tr class="total-row">
-                            <td><strong>Total Pembayaran</strong></td>
-                            <td class="total-value"><strong>Rp 425.000</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- 🎯 PAYMENT CONFIRMATION -->
-            <div class="confirmation-card">
-                <h3 class="confirmation-title">Konfirmasi Pembayaran</h3>
-                <p class="confirmation-text">
-                    Pembayaran tagihan operasional aplikator RuangTemu untuk bulan Desember 2024 
-                    telah berhasil diproses dan dikonfirmasi oleh sistem.
-                </p>
-                
-                <div class="confirmation-details">
-                    <div class="confirmation-item">
-                        <div class="confirmation-value">#INV-2024-0125</div>
-                        <div class="confirmation-label">No. Invoice</div>
-                    </div>
-                    
-                    <div class="confirmation-item">
-                        <div class="confirmation-value">15 Des 2024</div>
-                        <div class="confirmation-label">Tanggal Bayar</div>
-                    </div>
-                    
-                    <div class="confirmation-item">
-                        <div class="confirmation-value">BERHASIL</div>
-                        <div class="confirmation-label">Status</div>
-                    </div>
+            
+            <div class="note-item">
+                <div class="note-icon">
+                    <i class="fas fa-times-circle"></i>
                 </div>
-                
-                <div class="highlight">
-                    <i class="fas fa-check-circle"></i> Transaksi telah diverifikasi dan tercatat
+                <div class="note-content">
+                    <h4>Pembatalan</h4>
+                    <p>Pembatalan gratis 24 jam sebelum waktu reservasi. Pembatalan kurang dari 24 jam dikenakan biaya 50%.</p>
                 </div>
             </div>
+            
+            <div class="note-item">
+                <div class="note-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="note-content">
+                    <h4>Pre-order Makanan</h4>
+                    <p>Makanan yang telah dipesan akan disiapkan dan siap saji saat Anda tiba di meja.</p>
+                </div>
+            </div>
+        </div>
 
-            <!-- 📱 DOWNLOAD SECTION -->
-            <div class="download-section">
-                <h3 class="section-title">
+        <!-- 🎭 ACTION BUTTONS -->
+        <div class="action-buttons">
+            <div class="action-card" onclick="downloadTicket()">
+                <div class="action-icon">
                     <i class="fas fa-download"></i>
-                    Download Dokumen
-                </h3>
-                
-                <div class="download-buttons">
-                    <button class="btn btn-secondary" id="downloadInvoice">
-                        <i class="fas fa-file-pdf"></i> Download Invoice
-                    </button>
-                    
-                    <button class="btn btn-secondary" id="downloadReceipt">
-                        <i class="fas fa-receipt"></i> Download Bukti Bayar
-                    </button>
                 </div>
+                <h3>Download E-Ticket</h3>
+                <p>Unduh tiket digital untuk backup</p>
             </div>
-
-            <!-- 🏠 BACK TO DASHBOARD -->
-            <div class="back-section">
-                <button class="btn btn-success" id="backToDashboard">
-                    <i class="fas fa-tachometer-alt"></i> Kembali ke Dashboard
-                </button>
-                
-                <a href="dashboardmitra.html" class="back-link mt-20">
-                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard Mitra
-                </a>
+            
+            <div class="action-card" onclick="addToCalendar()">
+                <div class="action-icon">
+                    <i class="fas fa-calendar-plus"></i>
+                </div>
+                <h3>Tambah ke Kalender</h3>
+                <p>Setel reminder di kalender Anda</p>
+            </div>
+            
+            <div class="action-card" onclick="shareBooking()">
+                <div class="action-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3>Bagikan</h3>
+                <p>Bagikan detail booking ke teman</p>
+            </div>
+            
+            <div class="action-card" onclick="viewRestaurant()">
+                <div class="action-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>Lihat Restoran</h3>
+                <p>Lihat detail restoran & arah</p>
             </div>
         </div>
-    </div>
 
-    <!-- 🎪 FOOTER -->
-    <div class="footer">
-        <p>© 2024 RuangTemu • Semua hak dilindungi undang-undang</p>
-        <p>Butuh bantuan? <a href="mailto:support@ruangtemu.com">Hubungi Tim Support</a></p>
+        <!-- 🎯 CTA BUTTONS -->
+        <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 50px;">
+            <a href="dashboardcustomers.html" class="btn btn-primary" style="padding: 15px 30px;">
+                <i class="fas fa-home"></i> Kembali ke Dashboard
+            </a>
+            <a href="cafe.html" class="btn btn-outline" style="padding: 15px 30px;">
+                <i class="fas fa-plus"></i> Buat Booking Baru
+            </a>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 🎉 CREATE CONFETTI
-            function createConfetti() {
-                const container = document.getElementById('confettiContainer');
-                const colors = [
-                    'var(--pink-vibrant)',
-                    'var(--green-vibrant)',
-                    'var(--blue-soft)',
-                    'var(--pink-soft)',
-                    'var(--green-soft)'
-                ];
-                
-                for (let i = 0; i < 20; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = Math.random() * 100 + '%';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.width = Math.random() * 12 + 6 + 'px';
-                    confetti.style.height = Math.random() * 12 + 6 + 'px';
-                    confetti.style.animationDelay = Math.random() * 1 + 's';
-                    confetti.style.animationDuration = Math.random() * 1 + 1 + 's';
-                    container.appendChild(confetti);
-                }
-            }
-
-            // 📄 DOWNLOAD INVOICE
-            document.getElementById('downloadInvoice').addEventListener('click', function() {
-                showToast('Mengunduh invoice...', 'green');
-                
-                // Simulate download
-                setTimeout(() => {
-                    showToast('Invoice berhasil diunduh!', 'green');
-                    
-                    // In real app, this would trigger actual download
-                    const link = document.createElement('a');
-                    link.href = '#';
-                    link.download = 'Invoice_HaraCafe_Desember2024.pdf';
-                    link.click();
-                }, 1000);
-            });
-
-            // 📄 DOWNLOAD RECEIPT
-            document.getElementById('downloadReceipt').addEventListener('click', function() {
-                showToast('Mengunduh bukti bayar...', 'green');
-                
-                // Simulate download
-                setTimeout(() => {
-                    showToast('Bukti bayar berhasil diunduh!', 'green');
-                    
-                    // In real app, this would trigger actual download
-                    const link = document.createElement('a');
-                    link.href = '#';
-                    link.download = 'BuktiBayar_HaraCafe_Desember2024.pdf';
-                    link.click();
-                }, 1000);
-            });
-
-            // 🏠 BACK TO DASHBOARD
-            document.getElementById('backToDashboard').addEventListener('click', function() {
-                showToast('Mengarahkan ke dashboard...', 'pink');
-                
-                setTimeout(() => {
-                    window.location.href = 'dashboardmitra.html';
-                }, 800);
-            });
-
-            // 🎭 TOAST FUNCTION
-            function showToast(message, type = 'green') {
-                // Create toast element
-                const toast = document.createElement('div');
-                toast.className = 'toast-message';
-                toast.innerHTML = `
-                    <div style="
-                        position: fixed;
-                        bottom: 30px;
-                        right: 30px;
-                        background: ${type === 'green' ? 'var(--green-vibrant)' : 'var(--pink-vibrant)'};
-                        color: white;
-                        padding: 15px 20px;
-                        border-radius: var(--radius);
-                        box-shadow: var(--shadow-hover);
-                        display: flex;
-                        align-items: center;
-                        gap: 12px;
-                        transform: translateY(100px);
-                        opacity: 0;
-                        transition: transform 0.3s ease, opacity 0.3s ease;
-                        z-index: 9999;
-                        max-width: 350px;
-                    ">
-                        <div style="
-                            width: 36px;
-                            height: 36px;
-                            border-radius: 50%;
-                            background: rgba(255, 255, 255, 0.2);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-size: 1rem;
-                        ">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div>
-                            <div style="font-weight: 600; margin-bottom: 2px;">
-                                ${type === 'green' ? 'Berhasil!' : 'Informasi'}
-                            </div>
-                            <div style="font-size: 0.9rem; opacity: 0.9;">
-                                ${message}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                document.body.appendChild(toast);
-                
-                // Show toast
-                setTimeout(() => {
-                    toast.querySelector('div').style.transform = 'translateY(0)';
-                    toast.querySelector('div').style.opacity = '1';
-                }, 10);
-                
-                // Hide toast after 3 seconds
-                setTimeout(() => {
-                    toast.querySelector('div').style.transform = 'translateY(100px)';
-                    toast.querySelector('div').style.opacity = '0';
-                    setTimeout(() => {
-                        toast.remove();
-                    }, 300);
-                }, 3000);
-            }
-
-            // 🎉 INITIAL ANIMATIONS
-            createConfetti();
+        // 🎉 ANIMASI CONFETTI YANG DIPERBAIKI (OTOMATIS SAAT HALAMAN DIBUKA)
+        function createConfetti() {
+            const colors = ['#F784C5', '#1B602F', '#FF8AB5', '#80FFD6', '#FFB400', '#667eea'];
+            const confettiCount = 150; // Jumlah confetti lebih banyak
             
-            // Add more confetti after initial animation
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                
+                // Random position
+                confetti.style.left = Math.random() * 100 + 'vw';
+                
+                // Random color
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random size and shape
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                
+                // Random animation
+                const animationDuration = Math.random() * 3 + 2;
+                const animationDelay = Math.random() * 2;
+                
+                // Apply multiple animations for more dynamic effect
+                confetti.style.animation = 
+                    `confetti-fall ${animationDuration}s linear ${animationDelay}s forwards,
+                     confetti-swing ${Math.random() * 2 + 1}s ease-in-out ${animationDelay}s infinite`;
+                
+                // Random rotation
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                document.body.appendChild(confetti);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                }, (animationDuration + animationDelay) * 1000);
+            }
+        }
+
+        // 📥 DOWNLOAD TICKET
+        function downloadTicket() {
+            showToast('Mengunduh e-ticket...');
             setTimeout(() => {
-                createConfetti();
+                showToast('E-ticket berhasil diunduh!');
             }, 1500);
-            
-            // Show success message
-            setTimeout(() => {
-                showToast('Pembayaran tagihan berhasil diproses!', 'green');
-            }, 500);
+        }
 
-            // 📊 UPDATE LOCAL STORAGE FOR DASHBOARD
-            function updatePaymentStatus() {
-                // Simulate updating payment status in localStorage
-                const paymentData = {
-                    invoiceNumber: '#INV-2024-0125',
-                    amount: 425000,
-                    date: new Date().toISOString(),
-                    status: 'paid',
-                    month: 'Desember 2024'
-                };
-                
-                // Save to localStorage for dashboard to read
-                localStorage.setItem('lastPayment', JSON.stringify(paymentData));
-                
-                // Also update billing status in dashboard data
-                const dashboardData = JSON.parse(localStorage.getItem('dashboardData') || '{}');
-                dashboardData.billingStatus = 'paid';
-                dashboardData.lastPayment = paymentData;
-                localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
-            }
-
-            // Update payment status
-            updatePaymentStatus();
-
-            // 🎯 PRINT FUNCTIONALITY (OPTIONAL)
-            const printBtn = document.createElement('button');
-            printBtn.className = 'btn btn-outline';
-            printBtn.innerHTML = '<i class="fas fa-print"></i> Cetak Halaman';
-            printBtn.style.marginTop = '10px';
-            printBtn.onclick = function() {
-                window.print();
+        // 📅 ADD TO CALENDAR
+        function addToCalendar() {
+            const eventDetails = {
+                title: 'Reservasi Wheels Coffee Roasters',
+                description: 'Booking Code: RT-2024-1587\nMeja: #12 • 4 Orang\nLokasi: Jl. LLRE Martadinata No.65, Bandung',
+                start: '2024-12-15T19:00:00',
+                end: '2024-12-15T21:00:00',
+                location: 'Wheels Coffee Roasters, Bandung'
             };
             
-            // Add print button to download section
-            document.querySelector('.download-section .download-buttons').appendChild(printBtn);
+            // Create .ics file
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${eventDetails.title}
+DESCRIPTION:${eventDetails.description}
+DTSTART:${eventDetails.start}
+DTEND:${eventDetails.end}
+LOCATION:${eventDetails.location}
+END:VEVENT
+END:VCALENDAR`;
+            
+            const blob = new Blob([icsContent], { type: 'text/calendar' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'booking-ruangtemu.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('Ditambahkan ke kalender!');
+        }
 
-            // 📱 RESPONSIVE ADJUSTMENTS
-            function adjustForMobile() {
-                if (window.innerWidth <= 768) {
-                    document.querySelector('.confirmation-details').style.flexDirection = 'column';
-                } else {
-                    document.querySelector('.confirmation-details').style.flexDirection = 'row';
-                }
+        // 🔗 SHARE BOOKING
+        function shareBooking() {
+            const bookingData = {
+                title: 'Reservasi Wheels Coffee Roasters via RuangTemu',
+                text: 'Saya sudah booking meja di Wheels Coffee Roasters melalui RuangTemu! 🎉\nKode: RT-2024-1587\nTanggal: 15 Des 2024, 19:00\nUntuk: 4 Orang',
+                url: window.location.href
+            };
+            
+            if (navigator.share) {
+                navigator.share(bookingData)
+                    .then(() => showToast('Berhasil dibagikan!'))
+                    .catch(() => copyToClipboard());
+            } else {
+                copyToClipboard();
             }
+        }
 
-            window.addEventListener('resize', adjustForMobile);
-            adjustForMobile(); // Initial check
-
-            // 🎨 ADD VISUAL EFFECTS
-            const successIcon = document.querySelector('.success-icon');
-            if (successIcon) {
-                // Add pulse animation
-                successIcon.style.animation = 'bounce 1s ease infinite alternate';
-            }
-
-            // 🎵 ADD SUCCESS SOUND (OPTIONAL)
-            function playSuccessSound() {
-                // In real app, you could play a success sound here
-                console.log('🎵 Success sound would play here');
-            }
-
-            // Play sound after delay
-            setTimeout(playSuccessSound, 300);
-
-            // 📈 ANALYTICS TRACKING (EXAMPLE)
-            function trackPaymentSuccess() {
-                // In real app, you would send this to analytics service
-                console.log('📊 Payment success tracked:', {
-                    invoice: '#INV-2024-0125',
-                    amount: 425000,
-                    timestamp: new Date().toISOString()
+        function copyToClipboard() {
+            const text = `Reservasi Wheels Coffee Roasters via RuangTemu\nKode: RT-2024-1587\nTanggal: 15 Des 2024, 19:00\nUntuk: 4 Orang\nLink: ${window.location.href}`;
+            
+            navigator.clipboard.writeText(text)
+                .then(() => showToast('Tautan berhasil disalin!'))
+                .catch(() => {
+                    // Fallback for older browsers
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    showToast('Tautan berhasil disalin!');
                 });
-            }
+        }
 
-            trackPaymentSuccess();
+        // 🏪 VIEW RESTAURANT
+        function viewRestaurant() {
+            window.location.href = 'restaurant-detail.html';
+        }
+
+        // ✨ TOAST FUNCTION
+        function showToast(message) {
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <i class="fas fa-check-circle" style="color: var(--pink-vibrant); font-size: 1.2rem;"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Show toast
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            // Hide and remove toast
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        document.body.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // 📅 COUNTDOWN TIMER
+        function updateCountdown() {
+            const bookingTime = new Date('2024-12-15T19:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = bookingTime - now;
+            
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                
+                // You can display this somewhere on the page
+                console.log(`${days}h ${hours}j ${minutes}m menuju waktu reservasi`);
+            }
+        }
+
+        // 🎉 INITIALIZE - CONFETTI OTOMATIS SAAT HALAMAN DIBUKA
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create confetti on load
+            createConfetti();
+            
+            // Tambah confetti lagi setelah 1 detik untuk efek bertahap
+            setTimeout(() => {
+                createConfetti();
+            }, 1000);
+            
+            // Update countdown every minute
+            updateCountdown();
+            setInterval(updateCountdown, 60000);
+            
+            // Add animation to success icon
+            const successIcon = document.querySelector('.success-icon');
+            setInterval(() => {
+                successIcon.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    successIcon.style.transform = 'scale(1)';
+                }, 500);
+            }, 3000);
+            
+            // Trigger confetti ketika user mengklik halaman
+            document.addEventListener('click', function() {
+                createConfetti();
+            });
         });
     </script>
 </body>

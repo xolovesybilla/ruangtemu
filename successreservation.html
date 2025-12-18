@@ -47,7 +47,7 @@
             border-radius: 10px;
         }
 
-        /* 🧭 NAVBAR */
+        /* 🧭 NAVBAR - LOGO DIPERBAIKI */
         .main-nav {
             position: fixed;
             top: 0;
@@ -68,23 +68,24 @@
             text-decoration: none;
         }
 
-         .logo-image {
-            height: 45px; 
-            width: auto;
-            object-fit: contain;
-         }
-
+        /* PERBAIKAN LOGO: Gambar lebih presisi */
         .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            width: 42px;
+            height: 42px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--pink-vibrant), var(--green-vibrant));
+            padding: 4px;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
 
         .logo-text {
@@ -482,18 +483,49 @@
             font-size: 0.9rem;
         }
 
-        /* ✨ CONFETTI ANIMATION */
-        .confetti {
+        /* ✨ CONFETTI ANIMATION YANG DIPERBAIKI */
+        .confetti-piece {
             position: fixed;
             width: 10px;
             height: 10px;
+            opacity: 0;
             pointer-events: none;
-            z-index: 1000;
+            z-index: 9999;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        .confetti-piece:nth-child(5n) {
+            width: 16px;
+            height: 8px;
+        }
+        
+        .confetti-piece:nth-child(3n) {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .confetti-piece:nth-child(7n) {
+            width: 20px;
+            height: 6px;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confetti-swing {
+            0%, 100% {
+                transform: translateX(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateX(50px) rotate(180deg);
+            }
         }
 
         /* 📱 RESPONSIVE */
@@ -527,6 +559,11 @@
                 width: 150px;
                 height: 150px;
             }
+            
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+            }
         }
 
         /* 🎨 DECORATIVE */
@@ -538,6 +575,30 @@
             display: inline-block;
             margin-bottom: 10px;
         }
+        
+        /* STYLE TOAST */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(255, 77, 148, 0.15);
+            border-left: 4px solid var(--pink-vibrant);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -545,7 +606,7 @@
     <nav class="main-nav">
         <a href="index.html" class="logo">
             <div class="logo-icon">
-                <img src="img/logo.png" alt="Logo Website">
+                <img src="img/logo.png" alt="RuangTemu Logo">
             </div>
             <div class="logo-text">RuangTemu</div>
         </a>
@@ -858,30 +919,48 @@
         </div>
     </div>
 
-    <!-- ✨ CONFETTI -->
-    <div id="confettiContainer"></div>
-
     <script>
-        // 🎉 CREATE CONFETTI
+        // 🎉 ANIMASI CONFETTI YANG DIPERBAIKI (OTOMATIS SAAT HALAMAN DIBUKA)
         function createConfetti() {
-            const colors = [var(--pink-vibrant), var(--green-vibrant), '#FFB400', '#667eea'];
-            const container = document.getElementById('confettiContainer');
+            const colors = ['#F784C5', '#1B602F', '#FF8AB5', '#80FFD6', '#FFB400', '#667eea'];
+            const confettiCount = 150; // Jumlah confetti lebih banyak
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.width = Math.random() * 10 + 5 + 'px';
-                confetti.style.height = Math.random() * 10 + 5 + 'px';
-                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                confetti.className = 'confetti-piece';
                 
-                container.appendChild(confetti);
+                // Random position
+                confetti.style.left = Math.random() * 100 + 'vw';
+                
+                // Random color
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random size and shape
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                
+                // Random animation
+                const animationDuration = Math.random() * 3 + 2;
+                const animationDelay = Math.random() * 2;
+                
+                // Apply multiple animations for more dynamic effect
+                confetti.style.animation = 
+                    `confetti-fall ${animationDuration}s linear ${animationDelay}s forwards,
+                     confetti-swing ${Math.random() * 2 + 1}s ease-in-out ${animationDelay}s infinite`;
+                
+                // Random rotation
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                document.body.appendChild(confetti);
                 
                 // Remove after animation
                 setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                }, (animationDuration + animationDelay) * 1000);
             }
         }
 
@@ -896,11 +975,11 @@
         // 📅 ADD TO CALENDAR
         function addToCalendar() {
             const eventDetails = {
-                title: 'Reservasi The Garden Café',
-                description: 'Booking Code: RT-2024-1587\nMeja: #12 • 4 Orang\nLokasi: Jl. Sudirman No. 123, Jakarta',
+                title: 'Reservasi Wheels Coffee Roasters',
+                description: 'Booking Code: RT-2024-1587\nMeja: #12 • 4 Orang\nLokasi: Jl. LLRE Martadinata No.65, Bandung',
                 start: '2024-12-15T19:00:00',
                 end: '2024-12-15T21:00:00',
-                location: 'The Garden Café, Jakarta'
+                location: 'Wheels Coffee Roasters, Bandung'
             };
             
             // Create .ics file
@@ -931,8 +1010,8 @@ END:VCALENDAR`;
         // 🔗 SHARE BOOKING
         function shareBooking() {
             const bookingData = {
-                title: 'Reservasi The Garden Café via RuangTemu',
-                text: 'Saya sudah booking meja di The Garden Café melalui RuangTemu! 🎉\nKode: RT-2024-1587\nTanggal: 15 Des 2024, 19:00\nUntuk: 4 Orang',
+                title: 'Reservasi Wheels Coffee Roasters via RuangTemu',
+                text: 'Saya sudah booking meja di Wheels Coffee Roasters melalui RuangTemu! 🎉\nKode: RT-2024-1587\nTanggal: 15 Des 2024, 19:00\nUntuk: 4 Orang',
                 url: window.location.href
             };
             
@@ -946,7 +1025,7 @@ END:VCALENDAR`;
         }
 
         function copyToClipboard() {
-            const text = `Reservasi The Garden Café via RuangTemu\nKode: RT-2024-1587\nTanggal: 15 Des 2024, 19:00\nUntuk: 4 Orang\nLink: ${window.location.href}`;
+            const text = `Reservasi Wheels Coffee Roasters via RuangTemu\nKode: RT-2024-1587\nTanggal: 15 Des 2024, 19:00\nUntuk: 4 Orang\nLink: ${window.location.href}`;
             
             navigator.clipboard.writeText(text)
                 .then(() => showToast('Tautan berhasil disalin!'))
@@ -977,39 +1056,20 @@ END:VCALENDAR`;
                 <span>${message}</span>
             `;
             
-            // Style toast
-            toast.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: var(--white);
-                padding: 15px 25px;
-                border-radius: 12px;
-                box-shadow: var(--shadow-hover);
-                border-left: 4px solid var(--pink-vibrant);
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                z-index: 1000;
-                transform: translateY(100px);
-                opacity: 0;
-                transition: all 0.3s ease;
-            `;
-            
             document.body.appendChild(toast);
             
             // Show toast
             setTimeout(() => {
-                toast.style.transform = 'translateY(0)';
-                toast.style.opacity = '1';
+                toast.classList.add('show');
             }, 10);
             
             // Hide and remove toast
             setTimeout(() => {
-                toast.style.transform = 'translateY(100px)';
-                toast.style.opacity = '0';
+                toast.classList.remove('show');
                 setTimeout(() => {
-                    document.body.removeChild(toast);
+                    if (toast.parentNode) {
+                        document.body.removeChild(toast);
+                    }
                 }, 300);
             }, 3000);
         }
@@ -1030,19 +1090,19 @@ END:VCALENDAR`;
             }
         }
 
-        // 🎉 INITIALIZE
+        // 🎉 INITIALIZE - CONFETTI OTOMATIS SAAT HALAMAN DIBUKA
         document.addEventListener('DOMContentLoaded', function() {
             // Create confetti on load
             createConfetti();
             
+            // Tambah confetti lagi setelah 1 detik untuk efek bertahap
+            setTimeout(() => {
+                createConfetti();
+            }, 1000);
+            
             // Update countdown every minute
             updateCountdown();
             setInterval(updateCountdown, 60000);
-            
-            // Auto-hide confetti after 5 seconds
-            setTimeout(() => {
-                document.getElementById('confettiContainer').innerHTML = '';
-            }, 5000);
             
             // Add animation to success icon
             const successIcon = document.querySelector('.success-icon');
@@ -1052,42 +1112,12 @@ END:VCALENDAR`;
                     successIcon.style.transform = 'scale(1)';
                 }, 500);
             }, 3000);
+            
+            // Trigger confetti ketika user mengklik halaman
+            document.addEventListener('click', function() {
+                createConfetti();
+            });
         });
-
-        // CSS Variables fallback
-        const style = document.createElement('style');
-        style.textContent = `
-            .toast {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: #FFFFFF;
-                padding: 15px 25px;
-                border-radius: 12px;
-                box-shadow: 0 15px 40px rgba(255, 77, 148, 0.15);
-                border-left: 4px solid #FF4D94;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                z-index: 1000;
-                transform: translateY(100px);
-                opacity: 0;
-                transition: all 0.3s ease;
-            }
-            
-            .toast.show {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            
-            @keyframes fall {
-                0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-                100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
-
 </html>
-
